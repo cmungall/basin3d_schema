@@ -34,3 +34,8 @@ class TestDataModel(unittest.TestCase):
         # passing single valued instead of lists
         with self.assertRaises(Exception) as e:
             ac = AbsoluteCoordinate(horizontal_position=geo_coord)
+        # enum validation: here we introduce a deliberate subtle error,
+        # adding a space:
+        with self.assertRaises(Exception) as e:
+            MeasurementTimeseriesTVPObservation(feature_of_interest_type="WATER SHED")
+

@@ -92,6 +92,19 @@ ac = AbsoluteCoordinate(horizontal_position=geo_coord)
 
 raises an exception as a list is expected
 
+See [test_models](https://github.com/cmungall/basin3d_schema/blob/main/tests/test_model.py) in the unit tests for
+more examples
+
+### Serialization/Deserialization
+
+Pydantic objects naturally serialize/deserialize to JSON
+
+Using the LinkML runtime framework it's possible to ser/de from:
+
+- SQL Databases
+- RDF
+- TSVs (with caveats)
+
 ### Vocabularies
 
 See the [generated enums page](https://cmungall.github.io/basin3d_schema/#enumerations)
