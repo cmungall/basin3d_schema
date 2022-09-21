@@ -12,48 +12,40 @@ imports:
 
 classes:
 
-  TimeMetadataMixin:
-    description: "Metadata attributes for Observations with a time"
-    mixin: true
-    attributes:
-      aggregation_duration:
-        range: TimeFrequencyEnum
-      time_reference_position:
-        range: TimeReferenceEnum
-
   MonitoringFeature:
     is_a: SpatialSamplingFeature
     description: "A feature upon which monitoring is made. OGC Timeseries Profile OM_MonitoringFeature."
     attributes:
-      utc_offset:
-        range: integer
       related_party:
         range: Person
         multivalued: true
       description_reference:
         range: string
+      utc_offset:
+        range: integer
 
-  ObservedProperty:
-    is_a: JSONSerializable
-    description: "Defining the attributes for a single/multiple Observed PropertiesAttributes:- *datasource_variable:* id, e.g., Cs 137 air dose rate car survey campaigns- *observed_property_variable_id:* string, e.g., Cs137MVID- *sampling_medium:* enum (WATER, GAS, SOLID PHASE, OTHER, NOT APPLICABLE)- *datasource:*- *datasource_description:*"
+  SamplingFeature:
+    is_a: Feature
+    description: "A feature where sampling is conducted. OGC Observation & Measurements SF_SamplingFeature."
     attributes:
-      datasource:
-        range: DataSource
-      datasource_variable:
-        range: string
-      sampling_medium:
-        range: string
-      observed_property_variable:
-        range: ObservedPropertyVariable
-      datasource_description:
-        range: string
+      related_sampling_feature_complex:
+        range: SamplingFeature
+        multivalued: true
 
-  AltitudeCoordinate:
-    is_a: VerticalCoordinate
-    description: "An altitudinal vertical position (i.e., distance from sea level).The reference frame or system is specified. The term'altitude' is used instead of the common term 'elevation' to conform to the terminologyin Federal Information Processing Standards 70-1 and 173."
+  RelatedSamplingFeature:
+    is_a: Base
+    description: "Class that represents a related sampling feature and its role relative tothe sampling feature to which it is related. Spatial hierarchies of featuresare built by specifying related sampling features.Data model from OGC Observations and Measurements."
     attributes:
-      datum:
+      role:
         range: string
+      related_sampling_feature_type:
+        range: string
+      related_sampling_feature:
+        range: SamplingFeature
+
+  TimeValuePair:
+    description: "Tuple that represents a time value pair.  This will handle timestamp conversion`(timestamp, value)`"
+    attributes:
 
   MeasurementResultMixin:
     description: "Result Mixin: Measurement"
@@ -63,6 +55,104 @@ classes:
         range: string
       result_value:
         range: float
+
+  ObservedPropertyVariable:
+    is_a: JSONSerializable
+    description: "Defining the properties being observed (measured). See http://vocabulary.odm2.org/variablename/ for controlled vocabularyAttributes:- *basin3d_id:* string,- *full_name:* string,- *categories:* List of strings (in order of priority).- *units:* stringSee http://vocabulary.odm2.org/variabletype/ for options, although I think we should have our own list (theirs is a bit funky)."
+    attributes:
+      basin3d_id:
+        range: string
+      units:
+        range: string
+      categories:
+        range: string
+        multivalued: true
+      full_name:
+        range: string
+
+  GeographicCoordinate:
+    is_a: HorizontalCoordinate
+    description: "The latitude and longitude which define the position of a point onthe Earth's surface with respect to a reference spheroid.(https://www.fgdc.gov/csdgmgraphical/spref.htm)"
+    attributes:
+      units:
+        range: string
+
+  Person:
+    is_a: Base
+    attributes:
+      email:
+        range: string
+      last_name:
+        range: string
+      institution:
+        range: string
+      first_name:
+        range: string
+      role:
+        range: string
+
+  SpatialSamplingFeature:
+    is_a: SamplingFeature
+    description: "A spatially-defined feature where sampling is conducted. OGC Observation & Measurements SF_SpatialSamplingFeature."
+    attributes:
+      shape:
+        range: string
+      coordinates:
+        range: Coordinate
+
+  Observation:
+    is_a: Base
+    description: "OGC OM_Observation feature type. This is a parent class to which Mixinsshould be added to create observation types with metadata and result."
+    attributes:
+      feature_of_interest_type:
+        range: FeatureTypeEnum
+      result_quality:
+        range: ResultQualityEnum
+      utc_offset:
+        range: integer
+      feature_of_interest:
+        range: MonitoringFeature
+      observed_property:
+        range: ObservedProperty
+      phenomenon_time:
+        range: string
+      id:
+        range: string
+      type:
+        range: string
+
+  ObservedProperty:
+    is_a: JSONSerializable
+    description: "Defining the attributes for a single/multiple Observed PropertiesAttributes:- *datasource_variable:* id, e.g., Cs 137 air dose rate car survey campaigns- *observed_property_variable_id:* string, e.g., Cs137MVID- *sampling_medium:* enum (WATER, GAS, SOLID PHASE, OTHER, NOT APPLICABLE)- *datasource:*- *datasource_description:*"
+    attributes:
+      datasource_variable:
+        range: string
+      observed_property_variable:
+        range: ObservedPropertyVariable
+      sampling_medium:
+        range: string
+      datasource_description:
+        range: string
+      datasource:
+        range: DataSource
+
+  TimeMetadataMixin:
+    description: "Metadata attributes for Observations with a time"
+    mixin: true
+    attributes:
+      aggregation_duration:
+        range: string
+      time_reference_position:
+        range: string
+
+  MeasurementTimeseriesTVPObservation:
+    is_a: Observation
+    mixins:
+      - TimeMetadataMixin
+      - MeasurementMetadataMixin
+      - MeasurementTimeseriesTVPResultMixin
+    description: "Series of measurement (numerical) observations in TVP format grouped by time (i.e., a timeseries).Anything specified at the group level automatically applies to the individual observation."
+    attributes:
 
   AbsoluteCoordinate:
     is_a: Base
@@ -81,90 +171,24 @@ classes:
     attributes:
       representative_point:
         range: AbsoluteCoordinate
-      representative_point_type:
-        range: string
       vertical_position:
         range: DepthCoordinate
-
-  GeographicCoordinate:
-    is_a: HorizontalCoordinate
-    description: "The latitude and longitude which define the position of a point onthe Earth's surface with respect to a reference spheroid.(https://www.fgdc.gov/csdgmgraphical/spref.htm)"
-    attributes:
-      units:
+      representative_point_type:
         range: string
 
-  ObservedPropertyVariable:
-    is_a: JSONSerializable
-    description: "Defining the properties being observed (measured). See http://vocabulary.odm2.org/variablename/ for controlled vocabularyAttributes:- *basin3d_id:* string,- *full_name:* string,- *categories:* List of strings (in order of priority).- *units:* stringSee http://vocabulary.odm2.org/variabletype/ for options, although I think we should have our own list (theirs is a bit funky)."
+  DepthCoordinate:
+    is_a: VerticalCoordinate
+    description: "A depth vertical position (i.e., the height or depth from the specified reference position)The reference frame or system is specified."
     attributes:
-      units:
-        range: string
-      full_name:
-        range: string
-      basin3d_id:
-        range: string
-      categories:
-        range: string
-        multivalued: true
-
-  SpatialSamplingFeature:
-    is_a: SamplingFeature
-    description: "A spatially-defined feature where sampling is conducted. OGC Observation & Measurements SF_SpatialSamplingFeature."
-    attributes:
-      coordinates:
-        range: Coordinate
-      shape:
-        range: string
-
-  DataSource:
-    is_a: JSONSerializable
-    description: "Data Source definitionAttributes:- *id:* string (inherited)- *name:* string- *id_prefix:* string, prefix that is added to all data source ids- *location*- *credentials:*"
-    attributes:
-      name:
-        range: string
-      id:
-        range: string
-      credentials:
-        range: string ## TODO
-      id_prefix:
-        range: string
-      location:
-        range: string
 
   Coordinate:
     is_a: Base
     description: "Top level coordinate class that holds :class:`AbsoluteCoordinate` or :class:`RepresentativeCoordinate`"
     attributes:
-      absolute:
-        range: AbsoluteCoordinate
       representative:
         range: RepresentativeCoordinate
-
-  Base:
-    is_a: JSONSerializable
-    description: "Base synthesis model class. All classes that extend this are immutable."
-    attributes:
-
-  Observation:
-    is_a: Base
-    description: "OGC OM_Observation feature type. This is a parent class to which Mixinsshould be added to create observation types with metadata and result."
-    attributes:
-      feature_of_interest:
-        range: MonitoringFeature
-      id:
-        range: string
-      result_quality:
-        range: ResultQualityEnum
-      type:
-        range: string
-      feature_of_interest_type:
-        range: FeatureTypeEnum
-      phenomenon_time:
-        range: string
-      observed_property:
-        range: ObservedProperty
-      utc_offset:
-        range: integer
+      absolute:
+        range: AbsoluteCoordinate
 
   MeasurementTimeseriesTVPResultMixin:
     description: "Result Mixin: Measurement Timeseries TimeValuePair"
@@ -176,87 +200,28 @@ classes:
         range: TimeValuePair
         multivalued: true
 
-  SamplingFeature:
-    is_a: Feature
-    description: "A feature where sampling is conducted. OGC Observation & Measurements SF_SamplingFeature."
-    attributes:
-      related_sampling_feature_complex:
-        range: SamplingFeature
-        multivalued: true
-
-  DepthCoordinate:
-    is_a: VerticalCoordinate
-    description: "A depth vertical position (i.e., the height or depth from the specified reference position)The reference frame or system is specified."
-    attributes:
-
-  HorizontalCoordinate:
-    is_a: Base
-    attributes:
-      datum:
-        range: string
-      x:
-        range: float
-      y:
-        range: float
-      type:
-        range: string
-
-  Feature:
-    is_a: Base
-    description: "A general feature upon which an observation can be made. Loosely after GF_Feature (ISO)."
-    attributes:
-      description:
-        range: string
-      name:
-        range: string
-      feature_type:
-        range: string
-      observed_property_variables:
-        range: string
-        multivalued: true
-      id:
-        range: string
-
   VerticalCoordinate:
     is_a: Base
     description: "The vertical position of the feature (altitudes or depths).The reference frame or system is specified."
     attributes:
-      distance_units:
-        range: string
-      datum:
-        range: string
-      type:
-        range: string
-      resolution:
-        range: float
       encoding_method:
         range: string
       value:
         range: float
+      distance_units:
+        range: string
+      type:
+        range: string
+      datum:
+        range: string
+      resolution:
+        range: float
 
-  RelatedSamplingFeature:
-    is_a: Base
-    description: "Class that represents a related sampling feature and its role relative tothe sampling feature to which it is related. Spatial hierarchies of featuresare built by specifying related sampling features.Data model from OGC Observations and Measurements."
+  AltitudeCoordinate:
+    is_a: VerticalCoordinate
+    description: "An altitudinal vertical position (i.e., distance from sea level).The reference frame or system is specified. The term'altitude' is used instead of the common term 'elevation' to conform to the terminologyin Federal Information Processing Standards 70-1 and 173."
     attributes:
-      related_sampling_feature_type:
-        range: string
-      related_sampling_feature:
-        range: SamplingFeature
-      role:
-        range: string
-
-  Person:
-    is_a: Base
-    attributes:
-      email:
-        range: string
-      role:
-        range: string
-      first_name:
-        range: string
-      institution:
-        range: string
-      last_name:
+      datum:
         range: string
 
   MeasurementMetadataMixin:
@@ -268,10 +233,54 @@ classes:
       observed_property_variable:
         range: string
 
-  TimeValuePair:
-    description: "Tuple that represents a time value pair.  This will handle timestamp conversion`(timestamp, value)`"
+  Feature:
+    is_a: Base
+    description: "A general feature upon which an observation can be made. Loosely after GF_Feature (ISO)."
     attributes:
+      feature_type:
+        range: string
+      description:
+        range: string
+      name:
+        range: string
+      id:
+        range: string
+      observed_property_variables:
+        range: string
+        multivalued: true
 
   JSONSerializable:
     description: "Make a Data class serializable to json"
     attributes:
+
+  Base:
+    is_a: JSONSerializable
+    description: "Base synthesis model class. All classes that extend this are immutable."
+    attributes:
+
+  DataSource:
+    is_a: JSONSerializable
+    description: "Data Source definitionAttributes:- *id:* string (inherited)- *name:* string- *id_prefix:* string, prefix that is added to all data source ids- *location*- *credentials:*"
+    attributes:
+      id_prefix:
+        range: string
+      credentials:
+        range: string ## TODO
+      name:
+        range: string
+      id:
+        range: string
+      location:
+        range: string
+
+  HorizontalCoordinate:
+    is_a: Base
+    attributes:
+      type:
+        range: string
+      datum:
+        range: string
+      x:
+        range: float
+      y:
+        range: float

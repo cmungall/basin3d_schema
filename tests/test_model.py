@@ -4,7 +4,7 @@ import glob
 import unittest
 
 from basin3d_schema.datamodel.models import Observation, MonitoringFeature, Coordinate, AbsoluteCoordinate, \
-    GeographicCoordinate, FeatureTypeEnum
+    GeographicCoordinate, FeatureTypeEnum, MeasurementTimeseriesTVPObservation, TimeFrequencyEnum
 
 ROOT = os.path.join(os.path.dirname(__file__), '..')
 DATA_DIR = os.path.join(ROOT, "src", "data", "examples")
@@ -20,8 +20,9 @@ class TestDataModel(unittest.TestCase):
         ft = FeatureTypeEnum.WATERSHED
         feat = MonitoringFeature(description="test",
                                  coordinates=Coordinate(absolute=AbsoluteCoordinate(horizontal_position=[geo_coord])))
-        obs = Observation(feature_of_interest=feat,
-                          feature_of_interest_type=ft)
+        obs = MeasurementTimeseriesTVPObservation(feature_of_interest=feat,
+                                                  feature_of_interest_type=ft,
+                                                  aggregation_duration=TimeFrequencyEnum.MONTH)
         print(obs)
         print(obs.json(exclude_unset=True, indent=True))
 
