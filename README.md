@@ -1,6 +1,6 @@
 # basin3d_schema
 
-EXPERIMENTAL rendering of basin3d as linkml
+EXPERIMENTAL rendering of basin3d as [linkml](https://linkml.io/linkml/)
 
 ## Website
 
@@ -80,9 +80,59 @@ raises an exception as a list is expected
 
 ### Vocabularies
 
-See the [generated enums page](basin3d_schema/#enumerations)
+See the [generated enums page](https://cmungall.github.io/basin3d_schema/#enumerations)
 
+The generated Python looks like:
+
+```python
+class TimeFrequencyEnum(str, Enum):
+    
+    YEAR = "YEAR"
+    MONTH = "MONTH"
+    DAY = "DAY"
+    HOUR = "HOUR"
+    MINUTE = "MINUTE"
+    SECOND = "SECOND"
 ```
+
+The underlying schema is more granular:
+
+```yaml
+enums:
+  TimeFrequencyEnum:
+    permissible_values:
+      YEAR:
+        meaning: UO:0000036 ## year
+        unit:
+          ucum_code: a
+      MONTH:
+        meaning: UO:0000035 ## month
+        unit:
+          ucum_code: mo
+      DAY:
+        meaning: UO:0000033 ## day
+        unit:
+          ucum_code: d
+      HOUR:
+        meaning: UO:0000032 ## hour
+        unit:
+          ucum_code: h
+      MINUTE:
+        meaning: UO:0000031 ## minute
+        unit:
+          ucum_code: min
+      SECOND:
+        meaning: UO:0000010 ## second
+        unit:
+          ucum_code: s
+```
+
+The additional metadata gives *interoperability hooks*
+
+But using these is just like any normal Python enum
+
+```python
+Time(aggregation_duration=TimeFrequencyEnum.MONTH)
 ```
 
 ## Developer Documentation

@@ -27,5 +27,5 @@ jobs:
       run: |
         mkdir -p docs
         touch docs/.nojekyll
-        poetry run gen-doc -d docs src/basic3d_schema/schema/basic3d_schema.yaml
+        poetry run gen-doc -d docs src/basin3d_schema/schema/basin3d_schema.yaml
         poetry run mkdocs gh-deploy

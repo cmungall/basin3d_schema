@@ -17,9 +17,9 @@ classes:
     mixin: true
     attributes:
       aggregation_duration:
-        range: string
+        range: TimeFrequencyEnum
       time_reference_position:
-        range: string
+        range: TimeReferenceEnum
 
   MonitoringFeature:
     is_a: SpatialSamplingFeature
