@@ -18,26 +18,38 @@ enums:
         meaning: UO:0000036 ## year
         unit:
           ucum_code: a
+        annotations:
+          pandas: A
       MONTH:
         meaning: UO:0000035 ## month
         unit:
           ucum_code: mo
+        annotations:
+          pandas: M
       DAY:
         meaning: UO:0000033 ## day
         unit:
           ucum_code: d
+        annotations:
+          pandas: D
       HOUR:
         meaning: UO:0000032 ## hour
         unit:
           ucum_code: h
+        annotations:
+          pandas: H
       MINUTE:
         meaning: UO:0000031 ## minute
         unit:
           ucum_code: min
+        annotations:
+          pandas: M
       SECOND:
         meaning: UO:0000010 ## second
         unit:
           ucum_code: s
+        annotations:
+          pandas: S
 
   TimeReferenceEnum:
     permissible_values:
@@ -58,6 +70,7 @@ enums:
       TOTAL:
 
   ResultQualityEnum:
+    description: Enumeration for Result Quality
     permissible_values:
       CHECKED:
         description: The result has been checked for quality
@@ -67,6 +80,7 @@ enums:
         description: The result contains checked and unchecked portions
 
   FeatureTypeEnum:
+    description: Enumeration for Feature Types
     permissible_values:
       REGION:
       SUBREGION:
