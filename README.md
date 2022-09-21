@@ -6,6 +6,20 @@ EXPERIMENTAL rendering of basin3d as [linkml](https://linkml.io/linkml/)
 
 * [https://cmungall.github.io/basin3d_schema](https://cmungall.github.io/basin3d_schema)
 
+The above website is entirely generated from the source LinkML yaml files.
+
+This generates pages for classes, including:
+
+ * [Feature](https://cmungall.github.io/basin3d_schema/Feature/)
+
+Vocabularies/enums, e.g.
+
+* [StatisticEnum](https://cmungall.github.io/basin3d_schema/StatisticEnum/)
+
+Slots/fields, e.g.
+
+* [observed_property](https://cmungall.github.io/basin3d_schema/observed_property/)
+
 ## Repository Structure
 
 * [examples/](examples/) - example data
