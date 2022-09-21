@@ -1,0 +1,4 @@
+name: basin3d_schema
+author: Chris Mungall <cjmungall@lbl.gov>
+description: EXPERIMENTAL rendering of basin3d as linkml
+source_schema_path: src/basin3d_schema/schema/basin3d_schema.yaml

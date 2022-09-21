@@ -1,0 +1,83 @@
+id: https://w3id.org/cmungall/basin3d_schema/vocabulary
+name: vocabulary
+prefixes:
+  basin3d_schema: https://w3id.org/cmungall/basin3d_schema/
+  linkml: https://w3id.org/linkml/
+  UO: http://purl.obolibrary.org/obo/UO_
+  STATO: http://purl.obolibrary.org/obo/STATO_
+  ENVO: http://purl.obolibrary.org/obo/ENVO_
+default_prefix: basin3d_schema
+default_range: string
+imports:
+  - linkml:types
+
+enums:
+  TimeFrequencyEnum:
+    permissible_values:
+      YEAR:
+        meaning: UO:0000036 ## year
+        unit:
+          ucum_code: a
+      MONTH:
+        meaning: UO:0000035 ## month
+        unit:
+          ucum_code: mo
+      DAY:
+        meaning: UO:0000033 ## day
+        unit:
+          ucum_code: d
+      HOUR:
+        meaning: UO:0000032 ## hour
+        unit:
+          ucum_code: h
+      MINUTE:
+        meaning: UO:0000031 ## minute
+        unit:
+          ucum_code: min
+      SECOND:
+        meaning: UO:0000010 ## second
+        unit:
+          ucum_code: s
+
+  TimeReferenceEnum:
+    permissible_values:
+      START:
+      MIDDLE:
+      END:
+
+  StatisticEnum:
+    description: Enumeration for Statistics
+    permissible_values:
+      INSTANT:
+      MEAN:
+        meaning: STATO:0000573 ## average value
+      MIN:
+        meaning: STATO:0000150 ## minimum value
+      MAX:
+        meaning: STATO:0000151 ## maximum value
+      TOTAL:
+
+  ResultQualityEnum:
+    permissible_values:
+      CHECKED:
+        description: The result has been checked for quality
+      UNCHECKED:
+        description: The result is raw or unchecked for quality
+      PARTIALLY_CHECKED:
+        description: The result contains checked and unchecked portions
+
+  FeatureTypeEnum:
+    permissible_values:
+      REGION:
+      SUBREGION:
+      BASIN:
+        meaning: ENVO:00000291 ## drainage basin
+      SUBBASIN:
+      WATERSHED:
+        meaning: ENVO:00000292 ## watershed
+      SUBWATERSHED:
+      SITE:
+      PLOT:
+      HORIZONTAL_PATH:
+      VERTICAL_PATH:
+      POINT:

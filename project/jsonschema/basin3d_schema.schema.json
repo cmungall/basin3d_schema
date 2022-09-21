@@ -1,0 +1,577 @@
+{
+   "$defs": {
+      "AbsoluteCoordinate": {
+         "additionalProperties": false,
+         "description": "Absolute coordinate describes the geo-referenced location of a feature.Coordinates match the feature's shape. For example, a curve is a list of points.Currently collections of discrete points describing a feature are supported.",
+         "properties": {
+            "horizontal_position": {
+               "items": {
+                  "$ref": "#/$defs/GeographicCoordinate"
+               },
+               "type": "array"
+            },
+            "vertical_extent": {
+               "items": {
+                  "$ref": "#/$defs/AltitudeCoordinate"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "AbsoluteCoordinate",
+         "type": "object"
+      },
+      "AltitudeCoordinate": {
+         "additionalProperties": false,
+         "description": "An altitudinal vertical position (i.e., distance from sea level).The reference frame or system is specified. The term'altitude' is used instead of the common term 'elevation' to conform to the terminologyin Federal Information Processing Standards 70-1 and 173.",
+         "properties": {
+            "datum": {
+               "type": "string"
+            },
+            "distance_units": {
+               "type": "string"
+            },
+            "encoding_method": {
+               "type": "string"
+            },
+            "resolution": {
+               "type": "number"
+            },
+            "type": {
+               "type": "string"
+            },
+            "value": {
+               "type": "number"
+            }
+         },
+         "required": [],
+         "title": "AltitudeCoordinate",
+         "type": "object"
+      },
+      "Base": {
+         "additionalProperties": false,
+         "description": "Base synthesis model class. All classes that extend this are immutable.",
+         "properties": {},
+         "required": [],
+         "title": "Base",
+         "type": "object"
+      },
+      "Coordinate": {
+         "additionalProperties": false,
+         "description": "Top level coordinate class that holds :class:`AbsoluteCoordinate` or :class:`RepresentativeCoordinate`",
+         "properties": {
+            "absolute": {
+               "$ref": "#/$defs/AbsoluteCoordinate"
+            },
+            "representative": {
+               "$ref": "#/$defs/RepresentativeCoordinate"
+            }
+         },
+         "required": [],
+         "title": "Coordinate",
+         "type": "object"
+      },
+      "DataSource": {
+         "additionalProperties": false,
+         "description": "Data Source definitionAttributes:- *id:* string (inherited)- *name:* string- *id_prefix:* string, prefix that is added to all data source ids- *location*- *credentials:*",
+         "properties": {
+            "credentials": {
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            },
+            "id_prefix": {
+               "type": "string"
+            },
+            "location": {
+               "type": "string"
+            },
+            "name": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "DataSource",
+         "type": "object"
+      },
+      "DepthCoordinate": {
+         "additionalProperties": false,
+         "description": "A depth vertical position (i.e., the height or depth from the specified reference position)The reference frame or system is specified.",
+         "properties": {
+            "datum": {
+               "type": "string"
+            },
+            "distance_units": {
+               "type": "string"
+            },
+            "encoding_method": {
+               "type": "string"
+            },
+            "resolution": {
+               "type": "number"
+            },
+            "type": {
+               "type": "string"
+            },
+            "value": {
+               "type": "number"
+            }
+         },
+         "required": [],
+         "title": "DepthCoordinate",
+         "type": "object"
+      },
+      "Feature": {
+         "additionalProperties": false,
+         "description": "A general feature upon which an observation can be made. Loosely after GF_Feature (ISO).",
+         "properties": {
+            "description": {
+               "type": "string"
+            },
+            "feature_type": {
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            },
+            "name": {
+               "type": "string"
+            },
+            "observed_property_variables": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "Feature",
+         "type": "object"
+      },
+      "FeatureTypeEnum": {
+         "description": "",
+         "enum": [
+            "REGION",
+            "SUBREGION",
+            "BASIN",
+            "SUBBASIN",
+            "WATERSHED",
+            "SUBWATERSHED",
+            "SITE",
+            "PLOT",
+            "HORIZONTAL_PATH",
+            "VERTICAL_PATH",
+            "POINT"
+         ],
+         "title": "FeatureTypeEnum",
+         "type": "string"
+      },
+      "GeographicCoordinate": {
+         "additionalProperties": false,
+         "description": "The latitude and longitude which define the position of a point onthe Earth's surface with respect to a reference spheroid.(https://www.fgdc.gov/csdgmgraphical/spref.htm)",
+         "properties": {
+            "datum": {
+               "type": "string"
+            },
+            "type": {
+               "type": "string"
+            },
+            "units": {
+               "type": "string"
+            },
+            "x": {
+               "type": "number"
+            },
+            "y": {
+               "type": "number"
+            }
+         },
+         "required": [],
+         "title": "GeographicCoordinate",
+         "type": "object"
+      },
+      "HorizontalCoordinate": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "datum": {
+               "type": "string"
+            },
+            "type": {
+               "type": "string"
+            },
+            "x": {
+               "type": "number"
+            },
+            "y": {
+               "type": "number"
+            }
+         },
+         "required": [],
+         "title": "HorizontalCoordinate",
+         "type": "object"
+      },
+      "JSONSerializable": {
+         "additionalProperties": false,
+         "description": "Make a Data class serializable to json",
+         "properties": {},
+         "required": [],
+         "title": "JSONSerializable",
+         "type": "object"
+      },
+      "MonitoringFeature": {
+         "additionalProperties": false,
+         "description": "A feature upon which monitoring is made. OGC Timeseries Profile OM_MonitoringFeature.",
+         "properties": {
+            "coordinates": {
+               "$ref": "#/$defs/Coordinate"
+            },
+            "description": {
+               "type": "string"
+            },
+            "description_reference": {
+               "type": "string"
+            },
+            "feature_type": {
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            },
+            "name": {
+               "type": "string"
+            },
+            "observed_property_variables": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "related_party": {
+               "items": {
+                  "$ref": "#/$defs/Person"
+               },
+               "type": "array"
+            },
+            "related_sampling_feature_complex": {
+               "items": {
+                  "$ref": "#/$defs/SamplingFeature"
+               },
+               "type": "array"
+            },
+            "shape": {
+               "type": "string"
+            },
+            "utc_offset": {
+               "type": "integer"
+            }
+         },
+         "required": [],
+         "title": "MonitoringFeature",
+         "type": "object"
+      },
+      "Observation": {
+         "additionalProperties": false,
+         "description": "OGC OM_Observation feature type. This is a parent class to which Mixinsshould be added to create observation types with metadata and result.",
+         "properties": {
+            "feature_of_interest": {
+               "$ref": "#/$defs/MonitoringFeature"
+            },
+            "feature_of_interest_type": {
+               "$ref": "#/$defs/FeatureTypeEnum"
+            },
+            "id": {
+               "type": "string"
+            },
+            "observed_property": {
+               "$ref": "#/$defs/ObservedProperty"
+            },
+            "phenomenon_time": {
+               "type": "string"
+            },
+            "result_quality": {
+               "$ref": "#/$defs/ResultQualityEnum"
+            },
+            "type": {
+               "type": "string"
+            },
+            "utc_offset": {
+               "type": "integer"
+            }
+         },
+         "required": [],
+         "title": "Observation",
+         "type": "object"
+      },
+      "ObservedProperty": {
+         "additionalProperties": false,
+         "description": "Defining the attributes for a single/multiple Observed PropertiesAttributes:- *datasource_variable:* id, e.g., Cs 137 air dose rate car survey campaigns- *observed_property_variable_id:* string, e.g., Cs137MVID- *sampling_medium:* enum (WATER, GAS, SOLID PHASE, OTHER, NOT APPLICABLE)- *datasource:*- *datasource_description:*",
+         "properties": {
+            "datasource": {
+               "$ref": "#/$defs/DataSource"
+            },
+            "datasource_description": {
+               "type": "string"
+            },
+            "datasource_variable": {
+               "type": "string"
+            },
+            "observed_property_variable": {
+               "$ref": "#/$defs/ObservedPropertyVariable"
+            },
+            "sampling_medium": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "ObservedProperty",
+         "type": "object"
+      },
+      "ObservedPropertyVariable": {
+         "additionalProperties": false,
+         "description": "Defining the properties being observed (measured). See http://vocabulary.odm2.org/variablename/ for controlled vocabularyAttributes:- *basin3d_id:* string,- *full_name:* string,- *categories:* List of strings (in order of priority).- *units:* stringSee http://vocabulary.odm2.org/variabletype/ for options, although I think we should have our own list (theirs is a bit funky).",
+         "properties": {
+            "basin3d_id": {
+               "type": "string"
+            },
+            "categories": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "full_name": {
+               "type": "string"
+            },
+            "units": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "ObservedPropertyVariable",
+         "type": "object"
+      },
+      "Person": {
+         "additionalProperties": false,
+         "description": "",
+         "properties": {
+            "email": {
+               "type": "string"
+            },
+            "first_name": {
+               "type": "string"
+            },
+            "institution": {
+               "type": "string"
+            },
+            "last_name": {
+               "type": "string"
+            },
+            "role": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "Person",
+         "type": "object"
+      },
+      "RelatedSamplingFeature": {
+         "additionalProperties": false,
+         "description": "Class that represents a related sampling feature and its role relative tothe sampling feature to which it is related. Spatial hierarchies of featuresare built by specifying related sampling features.Data model from OGC Observations and Measurements.",
+         "properties": {
+            "related_sampling_feature": {
+               "$ref": "#/$defs/SamplingFeature"
+            },
+            "related_sampling_feature_type": {
+               "type": "string"
+            },
+            "role": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "RelatedSamplingFeature",
+         "type": "object"
+      },
+      "RepresentativeCoordinate": {
+         "additionalProperties": false,
+         "description": "Representative coordinates describe the location of a feature by a representative shape / location.For example, a study area may be represented by the center point.The veritical position from a reference position (e.g., height, depth) is also described in this class.Currently representative points are supported. The class is extendable to other forms of representing(e.g., diameter, area, side_length)Representative point types are also expandable as use cases require.",
+         "properties": {
+            "representative_point": {
+               "$ref": "#/$defs/AbsoluteCoordinate"
+            },
+            "representative_point_type": {
+               "type": "string"
+            },
+            "vertical_position": {
+               "$ref": "#/$defs/DepthCoordinate"
+            }
+         },
+         "required": [],
+         "title": "RepresentativeCoordinate",
+         "type": "object"
+      },
+      "ResultQualityEnum": {
+         "description": "",
+         "enum": [
+            "CHECKED",
+            "UNCHECKED",
+            "PARTIALLY_CHECKED"
+         ],
+         "title": "ResultQualityEnum",
+         "type": "string"
+      },
+      "SamplingFeature": {
+         "additionalProperties": false,
+         "description": "A feature where sampling is conducted. OGC Observation & Measurements SF_SamplingFeature.",
+         "properties": {
+            "description": {
+               "type": "string"
+            },
+            "feature_type": {
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            },
+            "name": {
+               "type": "string"
+            },
+            "observed_property_variables": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "related_sampling_feature_complex": {
+               "items": {
+                  "$ref": "#/$defs/SamplingFeature"
+               },
+               "type": "array"
+            }
+         },
+         "required": [],
+         "title": "SamplingFeature",
+         "type": "object"
+      },
+      "SpatialSamplingFeature": {
+         "additionalProperties": false,
+         "description": "A spatially-defined feature where sampling is conducted. OGC Observation & Measurements SF_SpatialSamplingFeature.",
+         "properties": {
+            "coordinates": {
+               "$ref": "#/$defs/Coordinate"
+            },
+            "description": {
+               "type": "string"
+            },
+            "feature_type": {
+               "type": "string"
+            },
+            "id": {
+               "type": "string"
+            },
+            "name": {
+               "type": "string"
+            },
+            "observed_property_variables": {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            "related_sampling_feature_complex": {
+               "items": {
+                  "$ref": "#/$defs/SamplingFeature"
+               },
+               "type": "array"
+            },
+            "shape": {
+               "type": "string"
+            }
+         },
+         "required": [],
+         "title": "SpatialSamplingFeature",
+         "type": "object"
+      },
+      "StatisticEnum": {
+         "description": "Enumeration for Statistics",
+         "enum": [
+            "INSTANT",
+            "MEAN",
+            "MIN",
+            "MAX",
+            "TOTAL"
+         ],
+         "title": "StatisticEnum",
+         "type": "string"
+      },
+      "TimeFrequencyEnum": {
+         "description": "",
+         "enum": [
+            "YEAR",
+            "MONTH",
+            "DAY",
+            "HOUR",
+            "MINUTE",
+            "SECOND"
+         ],
+         "title": "TimeFrequencyEnum",
+         "type": "string"
+      },
+      "TimeReferenceEnum": {
+         "description": "",
+         "enum": [
+            "START",
+            "MIDDLE",
+            "END"
+         ],
+         "title": "TimeReferenceEnum",
+         "type": "string"
+      },
+      "TimeValuePair": {
+         "additionalProperties": false,
+         "description": "Tuple that represents a time value pair.  This will handle timestamp conversion`(timestamp, value)`",
+         "properties": {},
+         "required": [],
+         "title": "TimeValuePair",
+         "type": "object"
+      },
+      "VerticalCoordinate": {
+         "additionalProperties": false,
+         "description": "The vertical position of the feature (altitudes or depths).The reference frame or system is specified.",
+         "properties": {
+            "datum": {
+               "type": "string"
+            },
+            "distance_units": {
+               "type": "string"
+            },
+            "encoding_method": {
+               "type": "string"
+            },
+            "resolution": {
+               "type": "number"
+            },
+            "type": {
+               "type": "string"
+            },
+            "value": {
+               "type": "number"
+            }
+         },
+         "required": [],
+         "title": "VerticalCoordinate",
+         "type": "object"
+      }
+   },
+   "$id": "https://w3id.org/cmungall/basin3d_schema",
+   "$schema": "http://json-schema.org/draft-07/schema#",
+   "additionalProperties": true,
+   "metamodel_version": "1.7.0",
+   "properties": {},
+   "required": [],
+   "title": "basin3d_schema",
+   "type": "object",
+   "version": null
+}

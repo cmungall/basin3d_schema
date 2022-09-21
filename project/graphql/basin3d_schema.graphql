@@ -1,0 +1,202 @@
+type AbsoluteCoordinate
+  {
+    verticalExtent: [AltitudeCoordinate]
+    horizontalPosition: [GeographicCoordinate]
+  }
+
+type AltitudeCoordinate
+  {
+    distanceUnits: String
+    type: String
+    resolution: Float
+    encodingMethod: String
+    value: Float
+    datum: String
+  }
+
+type Base
+  {
+  }
+
+type Coordinate
+  {
+    absolute: AbsoluteCoordinate
+    representative: RepresentativeCoordinate
+  }
+
+type DataSource
+  {
+    name: String
+    id: String
+    credentials: String
+    idPrefix: String
+    location: String
+  }
+
+type DepthCoordinate
+  {
+    distanceUnits: String
+    datum: String
+    type: String
+    resolution: Float
+    encodingMethod: String
+    value: Float
+  }
+
+type Feature
+  {
+    description: String
+    name: String
+    featureType: String
+    observedPropertyVariables: [String]
+    id: String
+  }
+
+type GeographicCoordinate
+  {
+    datum: String
+    x: Float
+    y: Float
+    type: String
+    units: String
+  }
+
+type HorizontalCoordinate
+  {
+    datum: String
+    x: Float
+    y: Float
+    type: String
+  }
+
+type JSONSerializable
+  {
+  }
+
+interface MeasurementMetadataMixin
+  {
+    statistic: String
+    observedPropertyVariable: String
+  }
+
+interface MeasurementResultMixin
+  {
+    unitOfMeasurement: String
+    resultValue: Float
+  }
+
+interface MeasurementTimeseriesTVPResultMixin
+  {
+    unitOfMeasurement: String
+    resultPoints: [TimeValuePair]
+  }
+
+type MonitoringFeature
+  {
+    description: String
+    name: String
+    featureType: String
+    observedPropertyVariables: [String]
+    id: String
+    relatedSamplingFeatureComplex: [SamplingFeature]
+    coordinates: Coordinate
+    shape: String
+    utcOffset: Integer
+    relatedParty: [Person]
+    descriptionReference: String
+  }
+
+type Observation
+  {
+    featureOfInterest: MonitoringFeature
+    id: String
+    resultQuality: ResultQualityEnum
+    type: String
+    featureOfInterestType: FeatureTypeEnum
+    phenomenonTime: String
+    observedProperty: ObservedProperty
+    utcOffset: Integer
+  }
+
+type ObservedProperty
+  {
+    datasource: DataSource
+    datasourceVariable: String
+    samplingMedium: String
+    observedPropertyVariable: ObservedPropertyVariable
+    datasourceDescription: String
+  }
+
+type ObservedPropertyVariable
+  {
+    units: String
+    fullName: String
+    basin3dId: String
+    categories: [String]
+  }
+
+type Person
+  {
+    email: String
+    role: String
+    firstName: String
+    institution: String
+    lastName: String
+  }
+
+type RelatedSamplingFeature
+  {
+    relatedSamplingFeatureType: String
+    relatedSamplingFeature: SamplingFeature
+    role: String
+  }
+
+type RepresentativeCoordinate
+  {
+    representativePoint: AbsoluteCoordinate
+    representativePointType: String
+    verticalPosition: DepthCoordinate
+  }
+
+type SamplingFeature
+  {
+    description: String
+    name: String
+    featureType: String
+    observedPropertyVariables: [String]
+    id: String
+    relatedSamplingFeatureComplex: [SamplingFeature]
+  }
+
+type SpatialSamplingFeature
+  {
+    description: String
+    name: String
+    featureType: String
+    observedPropertyVariables: [String]
+    id: String
+    relatedSamplingFeatureComplex: [SamplingFeature]
+    coordinates: Coordinate
+    shape: String
+  }
+
+interface TimeMetadataMixin
+  {
+    aggregationDuration: String
+    timeReferencePosition: String
+  }
+
+type TimeValuePair
+  {
+  }
+
+type VerticalCoordinate
+  {
+    distanceUnits: String
+    datum: String
+    type: String
+    resolution: Float
+    encodingMethod: String
+    value: Float
+  }
+

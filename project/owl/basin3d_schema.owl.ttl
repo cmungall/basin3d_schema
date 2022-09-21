@@ -1,0 +1,881 @@
+@prefix IAO: <http://purl.obolibrary.org/obo/IAO_> .
+@prefix basin3d_schema: <https://w3id.org/cmungall/basin3d_schema/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/cmungall/basin3d_schema> a owl:Ontology ;
+    rdfs:label "basin3d_schema" ;
+    IAO:0000700 basin3d_schema:JSONSerializable,
+        basin3d_schema:MeasurementMetadataMixin,
+        basin3d_schema:MeasurementResultMixin,
+        basin3d_schema:MeasurementTimeseriesTVPResultMixin,
+        basin3d_schema:TimeMetadataMixin,
+        basin3d_schema:TimeValuePair ;
+    dcterms:license "BSD-3" ;
+    dcterms:title "basin3d_schema" ;
+    rdfs:seeAlso "https://cmungall.github.io/basin3d_schema" ;
+    linkml:generation_date "2022-09-21T12:38:23" ;
+    linkml:metamodel_version "1.7.0" ;
+    linkml:source_file "basin3d_schema.yaml" ;
+    linkml:source_file_date "2022-09-21T12:00:21" ;
+    linkml:source_file_size 575 .
+
+basin3d_schema:Observation a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Observation" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:phenomenon_time ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty basin3d_schema:utc_offset ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:type ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass basin3d_schema:MonitoringFeature ;
+            owl:onProperty basin3d_schema:feature_of_interest ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass basin3d_schema:FeatureTypeEnum ;
+            owl:onProperty basin3d_schema:feature_of_interest_type ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass basin3d_schema:ObservedProperty ;
+            owl:onProperty basin3d_schema:observed_property ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass basin3d_schema:ResultQualityEnum ;
+            owl:onProperty basin3d_schema:result_quality ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:id ],
+        basin3d_schema:Base ;
+    skos:definition "OGC OM_Observation feature type. This is a parent class to which Mixinsshould be added to create observation types with metadata and result." .
+
+basin3d_schema:RelatedSamplingFeature a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "RelatedSamplingFeature" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:role ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass basin3d_schema:SamplingFeature ;
+            owl:onProperty basin3d_schema:related_sampling_feature ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:related_sampling_feature_type ],
+        basin3d_schema:Base ;
+    skos:definition "Class that represents a related sampling feature and its role relative tothe sampling feature to which it is related. Spatial hierarchies of featuresare built by specifying related sampling features.Data model from OGC Observations and Measurements." .
+
+linkml:SubsetDefinition a owl:Class ;
+    rdfs:label "subset_definition" .
+
+linkml:TypeDefinition a owl:Class ;
+    rdfs:label "type_definition" .
+
+linkml:topValue a owl:DatatypeProperty ;
+    rdfs:label "value" .
+
+basin3d_schema:Feature a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Feature" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty basin3d_schema:observed_property_variables ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:description ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:name ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:feature_type ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:id ],
+        basin3d_schema:Base ;
+    skos:definition "A general feature upon which an observation can be made. Loosely after GF_Feature (ISO)." .
+
+basin3d_schema:HorizontalCoordinate a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "HorizontalCoordinate" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Float ;
+            owl:onProperty basin3d_schema:x ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:datum ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Float ;
+            owl:onProperty basin3d_schema:y ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:type ],
+        basin3d_schema:Base .
+
+basin3d_schema:MeasurementMetadataMixin a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "MeasurementMetadataMixin" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:statistic ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:observed_property_variable ],
+        linkml:mixin ;
+    skos:definition "Metadata attributes for Observations type Measurement" .
+
+basin3d_schema:MeasurementResultMixin a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "MeasurementResultMixin" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:unit_of_measurement ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Float ;
+            owl:onProperty basin3d_schema:result_value ],
+        linkml:mixin ;
+    skos:definition "Result Mixin: Measurement" .
+
+basin3d_schema:MeasurementTimeseriesTVPResultMixin a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "MeasurementTimeseriesTVPResultMixin" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom basin3d_schema:TimeValuePair ;
+            owl:onProperty basin3d_schema:result_points ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:unit_of_measurement ],
+        linkml:mixin ;
+    skos:definition "Result Mixin: Measurement Timeseries TimeValuePair" .
+
+basin3d_schema:ObservedPropertyVariable a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "ObservedPropertyVariable" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:units ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:basin3d_id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty basin3d_schema:categories ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:full_name ],
+        basin3d_schema:JSONSerializable ;
+    skos:definition "Defining the properties being observed (measured). See http://vocabulary.odm2.org/variablename/ for controlled vocabularyAttributes:- *basin3d_id:* string,- *full_name:* string,- *categories:* List of strings (in order of priority).- *units:* stringSee http://vocabulary.odm2.org/variabletype/ for options, although I think we should have our own list (theirs is a bit funky)." .
+
+basin3d_schema:SpatialSamplingFeature a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "SpatialSamplingFeature" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:shape ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass basin3d_schema:Coordinate ;
+            owl:onProperty basin3d_schema:coordinates ],
+        basin3d_schema:SamplingFeature ;
+    skos:definition "A spatially-defined feature where sampling is conducted. OGC Observation & Measurements SF_SpatialSamplingFeature." .
+
+basin3d_schema:TimeMetadataMixin a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "TimeMetadataMixin" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:time_reference_position ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:aggregation_duration ],
+        linkml:mixin ;
+    skos:definition "Metadata attributes for Observations with a time" .
+
+basin3d_schema:absolute a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "absolute" ;
+    rdfs:range basin3d_schema:AbsoluteCoordinate .
+
+basin3d_schema:aggregation_duration a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "aggregation_duration" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:basin3d_id a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "basin3d_id" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:categories a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "categories" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:coordinates a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "coordinates" ;
+    rdfs:range basin3d_schema:Coordinate .
+
+basin3d_schema:credentials a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "credentials" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:datasource a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "datasource" ;
+    rdfs:range basin3d_schema:DataSource .
+
+basin3d_schema:datasource_description a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "datasource_description" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:datasource_variable a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "datasource_variable" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:description a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "description" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:description_reference a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "description_reference" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:distance_units a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "distance_units" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:email a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "email" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:encoding_method a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "encoding_method" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:feature_of_interest a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "feature_of_interest" ;
+    rdfs:range basin3d_schema:MonitoringFeature .
+
+basin3d_schema:feature_of_interest_type a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "feature_of_interest_type" ;
+    rdfs:range basin3d_schema:FeatureTypeEnum .
+
+basin3d_schema:feature_type a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "feature_type" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:first_name a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "first_name" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:full_name a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "full_name" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:horizontal_position a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "horizontal_position" ;
+    rdfs:range basin3d_schema:GeographicCoordinate .
+
+basin3d_schema:id_prefix a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "id_prefix" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:institution a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "institution" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:last_name a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "last_name" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:location a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "location" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:observed_property a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "observed_property" ;
+    rdfs:range basin3d_schema:ObservedProperty .
+
+basin3d_schema:observed_property_variables a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "observed_property_variables" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:phenomenon_time a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "phenomenon_time" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:related_party a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "related_party" ;
+    rdfs:range basin3d_schema:Person .
+
+basin3d_schema:related_sampling_feature a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "related_sampling_feature" ;
+    rdfs:range basin3d_schema:SamplingFeature .
+
+basin3d_schema:related_sampling_feature_complex a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "related_sampling_feature_complex" ;
+    rdfs:range basin3d_schema:SamplingFeature .
+
+basin3d_schema:related_sampling_feature_type a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "related_sampling_feature_type" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:representative a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "representative" ;
+    rdfs:range basin3d_schema:RepresentativeCoordinate .
+
+basin3d_schema:representative_point a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "representative_point" ;
+    rdfs:range basin3d_schema:AbsoluteCoordinate .
+
+basin3d_schema:representative_point_type a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "representative_point_type" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:resolution a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "resolution" ;
+    rdfs:range linkml:Float .
+
+basin3d_schema:result_points a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "result_points" ;
+    rdfs:range basin3d_schema:TimeValuePair .
+
+basin3d_schema:result_quality a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "result_quality" ;
+    rdfs:range basin3d_schema:ResultQualityEnum .
+
+basin3d_schema:result_value a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "result_value" ;
+    rdfs:range linkml:Float .
+
+basin3d_schema:sampling_medium a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "sampling_medium" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:shape a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "shape" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:statistic a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "statistic" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:time_reference_position a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "time_reference_position" ;
+    rdfs:range linkml:String .
+
+basin3d_schema:value a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "value" ;
+    rdfs:range linkml:Float .
+
+basin3d_schema:vertical_extent a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "vertical_extent" ;
+    rdfs:range basin3d_schema:AltitudeCoordinate .
+
+basin3d_schema:vertical_position a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "vertical_position" ;
+    rdfs:range basin3d_schema:DepthCoordinate .
+
+basin3d_schema:x a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "x" ;
+    rdfs:range linkml:Float .
+
+basin3d_schema:y a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "y" ;
+    rdfs:range linkml:Float .
+
+<http://purl.obolibrary.org/obo/ENVO_00000291> a owl:Class,
+        basin3d_schema:FeatureTypeEnum ;
+    rdfs:label "BASIN" .
+
+<http://purl.obolibrary.org/obo/ENVO_00000292> a owl:Class,
+        basin3d_schema:FeatureTypeEnum ;
+    rdfs:label "WATERSHED" .
+
+<http://purl.obolibrary.org/obo/STATO_0000150> a owl:Class,
+        basin3d_schema:StatisticEnum ;
+    rdfs:label "MIN" .
+
+<http://purl.obolibrary.org/obo/STATO_0000151> a owl:Class,
+        basin3d_schema:StatisticEnum ;
+    rdfs:label "MAX" .
+
+<http://purl.obolibrary.org/obo/STATO_0000573> a owl:Class,
+        basin3d_schema:StatisticEnum ;
+    rdfs:label "MEAN" .
+
+<http://purl.obolibrary.org/obo/UO_0000010> a owl:Class,
+        basin3d_schema:TimeFrequencyEnum ;
+    rdfs:label "SECOND" .
+
+<http://purl.obolibrary.org/obo/UO_0000031> a owl:Class,
+        basin3d_schema:TimeFrequencyEnum ;
+    rdfs:label "MINUTE" .
+
+<http://purl.obolibrary.org/obo/UO_0000032> a owl:Class,
+        basin3d_schema:TimeFrequencyEnum ;
+    rdfs:label "HOUR" .
+
+<http://purl.obolibrary.org/obo/UO_0000033> a owl:Class,
+        basin3d_schema:TimeFrequencyEnum ;
+    rdfs:label "DAY" .
+
+<http://purl.obolibrary.org/obo/UO_0000035> a owl:Class,
+        basin3d_schema:TimeFrequencyEnum ;
+    rdfs:label "MONTH" .
+
+<http://purl.obolibrary.org/obo/UO_0000036> a owl:Class,
+        basin3d_schema:TimeFrequencyEnum ;
+    rdfs:label "YEAR" .
+
+basin3d_schema:AltitudeCoordinate a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "AltitudeCoordinate" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:datum ],
+        basin3d_schema:VerticalCoordinate ;
+    skos:definition "An altitudinal vertical position (i.e., distance from sea level).The reference frame or system is specified. The term'altitude' is used instead of the common term 'elevation' to conform to the terminologyin Federal Information Processing Standards 70-1 and 173." .
+
+basin3d_schema:Coordinate a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Coordinate" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass basin3d_schema:RepresentativeCoordinate ;
+            owl:onProperty basin3d_schema:representative ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass basin3d_schema:AbsoluteCoordinate ;
+            owl:onProperty basin3d_schema:absolute ],
+        basin3d_schema:Base ;
+    skos:definition "Top level coordinate class that holds :class:`AbsoluteCoordinate` or :class:`RepresentativeCoordinate`" .
+
+basin3d_schema:DataSource a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "DataSource" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:credentials ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:name ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:id_prefix ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:location ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:id ],
+        basin3d_schema:JSONSerializable ;
+    skos:definition "Data Source definitionAttributes:- *id:* string (inherited)- *name:* string- *id_prefix:* string, prefix that is added to all data source ids- *location*- *credentials:*" .
+
+basin3d_schema:DepthCoordinate a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "DepthCoordinate" ;
+    rdfs:subClassOf basin3d_schema:VerticalCoordinate ;
+    skos:definition "A depth vertical position (i.e., the height or depth from the specified reference position)The reference frame or system is specified." .
+
+<https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#HORIZONTAL_PATH> a owl:Class,
+        basin3d_schema:FeatureTypeEnum ;
+    rdfs:label "HORIZONTAL_PATH" .
+
+<https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#PLOT> a owl:Class,
+        basin3d_schema:FeatureTypeEnum ;
+    rdfs:label "PLOT" .
+
+<https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#POINT> a owl:Class,
+        basin3d_schema:FeatureTypeEnum ;
+    rdfs:label "POINT" .
+
+<https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#REGION> a owl:Class,
+        basin3d_schema:FeatureTypeEnum ;
+    rdfs:label "REGION" .
+
+<https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#SITE> a owl:Class,
+        basin3d_schema:FeatureTypeEnum ;
+    rdfs:label "SITE" .
+
+<https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#SUBBASIN> a owl:Class,
+        basin3d_schema:FeatureTypeEnum ;
+    rdfs:label "SUBBASIN" .
+
+<https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#SUBREGION> a owl:Class,
+        basin3d_schema:FeatureTypeEnum ;
+    rdfs:label "SUBREGION" .
+
+<https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#SUBWATERSHED> a owl:Class,
+        basin3d_schema:FeatureTypeEnum ;
+    rdfs:label "SUBWATERSHED" .
+
+<https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#VERTICAL_PATH> a owl:Class,
+        basin3d_schema:FeatureTypeEnum ;
+    rdfs:label "VERTICAL_PATH" .
+
+basin3d_schema:GeographicCoordinate a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "GeographicCoordinate" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:units ],
+        basin3d_schema:HorizontalCoordinate ;
+    skos:definition "The latitude and longitude which define the position of a point onthe Earth's surface with respect to a reference spheroid.(https://www.fgdc.gov/csdgmgraphical/spref.htm)" .
+
+basin3d_schema:MonitoringFeature a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "MonitoringFeature" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:description_reference ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom basin3d_schema:Person ;
+            owl:onProperty basin3d_schema:related_party ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty basin3d_schema:utc_offset ],
+        basin3d_schema:SpatialSamplingFeature ;
+    skos:definition "A feature upon which monitoring is made. OGC Timeseries Profile OM_MonitoringFeature." .
+
+basin3d_schema:ObservedProperty a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "ObservedProperty" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:datasource_variable ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass basin3d_schema:DataSource ;
+            owl:onProperty basin3d_schema:datasource ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:sampling_medium ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass basin3d_schema:ObservedPropertyVariable ;
+            owl:onProperty basin3d_schema:observed_property_variable ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:datasource_description ],
+        basin3d_schema:JSONSerializable ;
+    skos:definition "Defining the attributes for a single/multiple Observed PropertiesAttributes:- *datasource_variable:* id, e.g., Cs 137 air dose rate car survey campaigns- *observed_property_variable_id:* string, e.g., Cs137MVID- *sampling_medium:* enum (WATER, GAS, SOLID PHASE, OTHER, NOT APPLICABLE)- *datasource:*- *datasource_description:*" .
+
+basin3d_schema:Person a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Person" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:last_name ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:email ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:first_name ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:institution ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:role ],
+        basin3d_schema:Base .
+
+basin3d_schema:RepresentativeCoordinate a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "RepresentativeCoordinate" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass basin3d_schema:AbsoluteCoordinate ;
+            owl:onProperty basin3d_schema:representative_point ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:representative_point_type ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass basin3d_schema:DepthCoordinate ;
+            owl:onProperty basin3d_schema:vertical_position ],
+        basin3d_schema:Base ;
+    skos:definition "Representative coordinates describe the location of a feature by a representative shape / location.For example, a study area may be represented by the center point.The veritical position from a reference position (e.g., height, depth) is also described in this class.Currently representative points are supported. The class is extendable to other forms of representing(e.g., diameter, area, side_length)Representative point types are also expandable as use cases require." .
+
+<https://w3id.org/cmungall/basin3d_schema/ResultQualityEnum#CHECKED> a owl:Class,
+        basin3d_schema:ResultQualityEnum ;
+    rdfs:label "CHECKED" .
+
+<https://w3id.org/cmungall/basin3d_schema/ResultQualityEnum#PARTIALLY_CHECKED> a owl:Class,
+        basin3d_schema:ResultQualityEnum ;
+    rdfs:label "PARTIALLY_CHECKED" .
+
+<https://w3id.org/cmungall/basin3d_schema/ResultQualityEnum#UNCHECKED> a owl:Class,
+        basin3d_schema:ResultQualityEnum ;
+    rdfs:label "UNCHECKED" .
+
+<https://w3id.org/cmungall/basin3d_schema/StatisticEnum#INSTANT> a owl:Class,
+        basin3d_schema:StatisticEnum ;
+    rdfs:label "INSTANT" .
+
+<https://w3id.org/cmungall/basin3d_schema/StatisticEnum#TOTAL> a owl:Class,
+        basin3d_schema:StatisticEnum ;
+    rdfs:label "TOTAL" .
+
+<https://w3id.org/cmungall/basin3d_schema/TimeReferenceEnum#END> a owl:Class,
+        basin3d_schema:TimeReferenceEnum ;
+    rdfs:label "END" .
+
+<https://w3id.org/cmungall/basin3d_schema/TimeReferenceEnum#MIDDLE> a owl:Class,
+        basin3d_schema:TimeReferenceEnum ;
+    rdfs:label "MIDDLE" .
+
+<https://w3id.org/cmungall/basin3d_schema/TimeReferenceEnum#START> a owl:Class,
+        basin3d_schema:TimeReferenceEnum ;
+    rdfs:label "START" .
+
+basin3d_schema:VerticalCoordinate a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "VerticalCoordinate" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:datum ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:distance_units ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Float ;
+            owl:onProperty basin3d_schema:resolution ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:type ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty basin3d_schema:encoding_method ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Float ;
+            owl:onProperty basin3d_schema:value ],
+        basin3d_schema:Base ;
+    skos:definition "The vertical position of the feature (altitudes or depths).The reference frame or system is specified." .
+
+basin3d_schema:name a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+basin3d_schema:observed_property_variable a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+basin3d_schema:role a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+basin3d_schema:unit_of_measurement a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+basin3d_schema:units a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+basin3d_schema:utc_offset a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+basin3d_schema:TimeReferenceEnum a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "TimeReferenceEnum" ;
+    owl:unionOf ( <https://w3id.org/cmungall/basin3d_schema/TimeReferenceEnum#START> <https://w3id.org/cmungall/basin3d_schema/TimeReferenceEnum#MIDDLE> <https://w3id.org/cmungall/basin3d_schema/TimeReferenceEnum#END> ) ;
+    linkml:permissible_values <https://w3id.org/cmungall/basin3d_schema/TimeReferenceEnum#END>,
+        <https://w3id.org/cmungall/basin3d_schema/TimeReferenceEnum#MIDDLE>,
+        <https://w3id.org/cmungall/basin3d_schema/TimeReferenceEnum#START> .
+
+basin3d_schema:TimeValuePair a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "TimeValuePair" ;
+    skos:definition "Tuple that represents a time value pair.  This will handle timestamp conversion`(timestamp, value)`" .
+
+basin3d_schema:datum a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+basin3d_schema:id a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+basin3d_schema:type a owl:ObjectProperty,
+        linkml:SlotDefinition .
+
+basin3d_schema:AbsoluteCoordinate a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "AbsoluteCoordinate" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom basin3d_schema:GeographicCoordinate ;
+            owl:onProperty basin3d_schema:horizontal_position ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom basin3d_schema:AltitudeCoordinate ;
+            owl:onProperty basin3d_schema:vertical_extent ],
+        basin3d_schema:Base ;
+    skos:definition "Absolute coordinate describes the geo-referenced location of a feature.Coordinates match the feature's shape. For example, a curve is a list of points.Currently collections of discrete points describing a feature are supported." .
+
+basin3d_schema:JSONSerializable a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "JSONSerializable" ;
+    skos:definition "Make a Data class serializable to json" .
+
+basin3d_schema:ResultQualityEnum a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "ResultQualityEnum" ;
+    owl:unionOf ( <https://w3id.org/cmungall/basin3d_schema/ResultQualityEnum#CHECKED> <https://w3id.org/cmungall/basin3d_schema/ResultQualityEnum#UNCHECKED> <https://w3id.org/cmungall/basin3d_schema/ResultQualityEnum#PARTIALLY_CHECKED> ) ;
+    linkml:permissible_values <https://w3id.org/cmungall/basin3d_schema/ResultQualityEnum#CHECKED>,
+        <https://w3id.org/cmungall/basin3d_schema/ResultQualityEnum#PARTIALLY_CHECKED>,
+        <https://w3id.org/cmungall/basin3d_schema/ResultQualityEnum#UNCHECKED> .
+
+basin3d_schema:SamplingFeature a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "SamplingFeature" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom basin3d_schema:SamplingFeature ;
+            owl:onProperty basin3d_schema:related_sampling_feature_complex ],
+        basin3d_schema:Feature ;
+    skos:definition "A feature where sampling is conducted. OGC Observation & Measurements SF_SamplingFeature." .
+
+basin3d_schema:StatisticEnum a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "StatisticEnum" ;
+    owl:unionOf ( <https://w3id.org/cmungall/basin3d_schema/StatisticEnum#INSTANT> <http://purl.obolibrary.org/obo/STATO_0000573> <http://purl.obolibrary.org/obo/STATO_0000150> <http://purl.obolibrary.org/obo/STATO_0000151> <https://w3id.org/cmungall/basin3d_schema/StatisticEnum#TOTAL> ) ;
+    linkml:permissible_values <http://purl.obolibrary.org/obo/STATO_0000150>,
+        <http://purl.obolibrary.org/obo/STATO_0000151>,
+        <http://purl.obolibrary.org/obo/STATO_0000573>,
+        <https://w3id.org/cmungall/basin3d_schema/StatisticEnum#INSTANT>,
+        <https://w3id.org/cmungall/basin3d_schema/StatisticEnum#TOTAL> .
+
+basin3d_schema:TimeFrequencyEnum a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "TimeFrequencyEnum" ;
+    owl:unionOf ( <http://purl.obolibrary.org/obo/UO_0000036> <http://purl.obolibrary.org/obo/UO_0000035> <http://purl.obolibrary.org/obo/UO_0000033> <http://purl.obolibrary.org/obo/UO_0000032> <http://purl.obolibrary.org/obo/UO_0000031> <http://purl.obolibrary.org/obo/UO_0000010> ) ;
+    linkml:permissible_values <http://purl.obolibrary.org/obo/UO_0000010>,
+        <http://purl.obolibrary.org/obo/UO_0000031>,
+        <http://purl.obolibrary.org/obo/UO_0000032>,
+        <http://purl.obolibrary.org/obo/UO_0000033>,
+        <http://purl.obolibrary.org/obo/UO_0000035>,
+        <http://purl.obolibrary.org/obo/UO_0000036> .
+
+basin3d_schema:Base a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Base" ;
+    rdfs:subClassOf basin3d_schema:JSONSerializable ;
+    skos:definition "Base synthesis model class. All classes that extend this are immutable." .
+
+basin3d_schema:FeatureTypeEnum a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "FeatureTypeEnum" ;
+    owl:unionOf ( <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#REGION> <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#SUBREGION> <http://purl.obolibrary.org/obo/ENVO_00000291> <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#SUBBASIN> <http://purl.obolibrary.org/obo/ENVO_00000292> <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#SUBWATERSHED> <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#SITE> <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#PLOT> <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#HORIZONTAL_PATH> <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#VERTICAL_PATH> <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#POINT> ) ;
+    linkml:permissible_values <http://purl.obolibrary.org/obo/ENVO_00000291>,
+        <http://purl.obolibrary.org/obo/ENVO_00000292>,
+        <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#HORIZONTAL_PATH>,
+        <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#PLOT>,
+        <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#POINT>,
+        <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#REGION>,
+        <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#SITE>,
+        <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#SUBBASIN>,
+        <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#SUBREGION>,
+        <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#SUBWATERSHED>,
+        <https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum#VERTICAL_PATH> .
+
+linkml:ClassDefinition a owl:Class ;
+    rdfs:label "class_definition" .
+
+linkml:SlotDefinition a owl:Class ;
+    rdfs:label "slot_definition" .
+
+

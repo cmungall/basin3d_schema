@@ -1,0 +1,8 @@
+{
+   "PATO": "http://purl.obolibrary.org/obo/PATO_",
+   "basin3d_schema": "https://w3id.org/cmungall/basin3d_schema/",
+   "biolink": "https://w3id.org/biolink/",
+   "example": "https://example.org/",
+   "linkml": "https://w3id.org/linkml/",
+   "schema": "http://schema.org/"
+}

@@ -1,0 +1,28 @@
+{
+  "template": "https://github.com/linkml/linkml-project-cookiecutter",
+  "commit": "ba64dfd835ea4f1f2016e57968b04b7e59ef625b",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "basic3d_schema",
+      "__project_slug": "basic3d_schema",
+      "github_org": "cmungall",
+      "__source_path": "src/basic3d_schema/schema/basic3d_schema.yaml",
+      "project_description": "EXPERIMENTAL rendering of basin3d as linkml",
+      "full_name": "Chris Mungall",
+      "email": "cjmungall@lbl.gov",
+      "__author": "Chris Mungall <cjmungall@lbl.gov>",
+      "license": "BSD-3",
+      "google_analytics_gtag": "G-2SYBSJVZ23",
+      "main_schema_class": "Observation",
+      "create_python_classes": "Yes",
+      "use_schemasheets": "No",
+      "google_sheet_id": "1wVoaiFg47aT9YWNeRfTZ8tYHN8s8PAuDx5i2HUcDpvQ",
+      "google_sheet_tabs": "personinfo enums",
+      "__google_sheet_module": "personinfo_enums",
+      "github_token_for_pypi_deployment": "PYPI_PASSWORD",
+      "_template": "https://github.com/linkml/linkml-project-cookiecutter"
+    }
+  },
+  "directory": null
+}

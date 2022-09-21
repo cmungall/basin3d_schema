@@ -1,0 +1,95 @@
+{
+   "_comments": "Auto generated from basin3d_schema.yaml by jsonldcontextgen.py version: 0.1.1\n    Generation date: 2022-09-21T12:38:03\n    Schema: basin3d_schema\n    metamodel version: 1.7.0\n    model version: None\n    \n    id: https://w3id.org/cmungall/basin3d_schema\n    description: EXPERIMENTAL rendering of basin3d as linkml\n    license: BSD-3\n    ",
+   "@context": {
+      "PATO": {
+         "@id": "http://purl.obolibrary.org/obo/PATO_",
+         "@prefix": true
+      },
+      "basin3d_schema": "https://w3id.org/cmungall/basin3d_schema/",
+      "biolink": "https://w3id.org/biolink/",
+      "example": "https://example.org/",
+      "linkml": "https://w3id.org/linkml/",
+      "schema": "http://schema.org/",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "@vocab": "https://w3id.org/cmungall/basin3d_schema/",
+      "horizontal_position": {
+         "@type": "@id"
+      },
+      "vertical_extent": {
+         "@type": "@id"
+      },
+      "absolute": {
+         "@type": "@id"
+      },
+      "representative": {
+         "@type": "@id"
+      },
+      "x": {
+         "@type": "xsd:float"
+      },
+      "y": {
+         "@type": "xsd:float"
+      },
+      "result_value": {
+         "@type": "xsd:float"
+      },
+      "result_points": {
+         "@type": "@id"
+      },
+      "related_party": {
+         "@type": "@id"
+      },
+      "utc_offset": {
+         "@type": "xsd:integer"
+      },
+      "feature_of_interest": {
+         "@type": "@id"
+      },
+      "feature_of_interest_type": {
+         "@context": {
+            "@vocab": "@null",
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         }
+      },
+      "observed_property": {
+         "@type": "@id"
+      },
+      "result_quality": {
+         "@context": {
+            "@vocab": "@null",
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         }
+      },
+      "datasource": {
+         "@type": "@id"
+      },
+      "observed_property_variable": {
+         "@type": "@id"
+      },
+      "related_sampling_feature": {
+         "@type": "@id"
+      },
+      "representative_point": {
+         "@type": "@id"
+      },
+      "vertical_position": {
+         "@type": "@id"
+      },
+      "related_sampling_feature_complex": {
+         "@type": "@id"
+      },
+      "coordinates": {
+         "@type": "@id"
+      },
+      "resolution": {
+         "@type": "xsd:float"
+      },
+      "value": {
+         "@type": "xsd:float"
+      }
+   }
+}

@@ -1,0 +1,308 @@
+BASE <https://w3id.org/cmungall/basin3d_schema/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX linkml: <https://w3id.org/linkml/>
+
+
+linkml:String xsd:string
+
+linkml:Integer xsd:integer
+
+linkml:Boolean xsd:boolean
+
+linkml:Float xsd:float
+
+linkml:Double xsd:double
+
+linkml:Decimal xsd:decimal
+
+linkml:Time xsd:dateTime
+
+linkml:Date xsd:date
+
+linkml:Datetime xsd:dateTime
+
+linkml:DateOrDatetime linkml:DateOrDatetime
+
+linkml:Uriorcurie IRI
+
+linkml:Uri IRI
+
+linkml:Ncname xsd:string
+
+linkml:Objectidentifier IRI
+
+linkml:Nodeidentifier NONLITERAL
+
+<AbsoluteCoordinate> CLOSED {
+    (  $<AbsoluteCoordinate_tes> (  &<Base_tes> ;
+          rdf:type [ <Base> ] ? ;
+          <vertical_extent> @<AltitudeCoordinate> * ;
+          <horizontal_position> @<GeographicCoordinate> *
+       ) ;
+       rdf:type [ <AbsoluteCoordinate> ] ?
+    )
+}
+
+<AltitudeCoordinate> CLOSED {
+    (  $<AltitudeCoordinate_tes> (  &<VerticalCoordinate_tes> ;
+          rdf:type [ <VerticalCoordinate> ] ? ;
+          <datum> @linkml:String ?
+       ) ;
+       rdf:type [ <AltitudeCoordinate> ] ?
+    )
+}
+
+<Base>  (
+    CLOSED {
+       (  $<Base_tes> (  &<JSONSerializable_tes> ;
+             rdf:type [ <JSONSerializable> ] ?
+          ) ;
+          rdf:type [ <Base> ] ?
+       )
+    } OR @<AbsoluteCoordinate> OR @<Coordinate> OR @<Feature> OR @<HorizontalCoordinate> OR @<Observation> OR @<Person> OR
+    @<RelatedSamplingFeature> OR @<RepresentativeCoordinate> OR @<VerticalCoordinate>
+)
+
+<Coordinate> CLOSED {
+    (  $<Coordinate_tes> (  &<Base_tes> ;
+          rdf:type [ <Base> ] ? ;
+          <absolute> @<AbsoluteCoordinate> ? ;
+          <representative> @<RepresentativeCoordinate> ?
+       ) ;
+       rdf:type [ <Coordinate> ] ?
+    )
+}
+
+<DataSource> CLOSED {
+    (  $<DataSource_tes> (  &<JSONSerializable_tes> ;
+          rdf:type [ <JSONSerializable> ] ? ;
+          <name> @linkml:String ? ;
+          <id> @linkml:String ? ;
+          <credentials> @linkml:String ? ;
+          <id_prefix> @linkml:String ? ;
+          <location> @linkml:String ?
+       ) ;
+       rdf:type [ <DataSource> ] ?
+    )
+}
+
+<DepthCoordinate> CLOSED {
+    (  $<DepthCoordinate_tes> (  &<VerticalCoordinate_tes> ;
+          rdf:type [ <VerticalCoordinate> ] ?
+       ) ;
+       rdf:type [ <DepthCoordinate> ] ?
+    )
+}
+
+<Feature>  (
+    CLOSED {
+       (  $<Feature_tes> (  &<Base_tes> ;
+             rdf:type [ <Base> ] ? ;
+             <description> @linkml:String ? ;
+             <name> @linkml:String ? ;
+             <feature_type> @linkml:String ? ;
+             <observed_property_variables> @linkml:String * ;
+             <id> @linkml:String ?
+          ) ;
+          rdf:type [ <Feature> ] ?
+       )
+    } OR @<SamplingFeature>
+)
+
+<GeographicCoordinate> CLOSED {
+    (  $<GeographicCoordinate_tes> (  &<HorizontalCoordinate_tes> ;
+          rdf:type [ <HorizontalCoordinate> ] ? ;
+          <units> @linkml:String ?
+       ) ;
+       rdf:type [ <GeographicCoordinate> ] ?
+    )
+}
+
+<HorizontalCoordinate>  (
+    CLOSED {
+       (  $<HorizontalCoordinate_tes> (  &<Base_tes> ;
+             rdf:type [ <Base> ] ? ;
+             <datum> @linkml:String ? ;
+             <x> @linkml:Float ? ;
+             <y> @linkml:Float ? ;
+             <type> @linkml:String ?
+          ) ;
+          rdf:type [ <HorizontalCoordinate> ] ?
+       )
+    } OR @<GeographicCoordinate>
+)
+
+<JSONSerializable>  (
+    CLOSED {
+       (  $<JSONSerializable_tes> rdf:type . * ;
+          rdf:type [ <JSONSerializable> ] ?
+       )
+    } OR @<Base> OR @<DataSource> OR @<ObservedProperty> OR @<ObservedPropertyVariable>
+)
+
+<MeasurementMetadataMixin> {
+    (  $<MeasurementMetadataMixin_tes> (  <statistic> @linkml:String ? ;
+          <observed_property_variable> @linkml:String ?
+       ) ;
+       rdf:type [ <MeasurementMetadataMixin> ] ?
+    )
+}
+
+<MeasurementResultMixin> {
+    (  $<MeasurementResultMixin_tes> (  <unit_of_measurement> @linkml:String ? ;
+          <result_value> @linkml:Float ?
+       ) ;
+       rdf:type [ <MeasurementResultMixin> ] ?
+    )
+}
+
+<MeasurementTimeseriesTVPResultMixin> {
+    (  $<MeasurementTimeseriesTVPResultMixin_tes> (  <unit_of_measurement> @linkml:String ? ;
+          <result_points> @<TimeValuePair> *
+       ) ;
+       rdf:type [ <MeasurementTimeseriesTVPResultMixin> ] ?
+    )
+}
+
+<MonitoringFeature> CLOSED {
+    (  $<MonitoringFeature_tes> (  &<SpatialSamplingFeature_tes> ;
+          rdf:type [ <SpatialSamplingFeature> ] ? ;
+          <utc_offset> @linkml:Integer ? ;
+          <related_party> @<Person> * ;
+          <description_reference> @linkml:String ?
+       ) ;
+       rdf:type [ <MonitoringFeature> ] ?
+    )
+}
+
+<Observation> CLOSED {
+    (  $<Observation_tes> (  &<Base_tes> ;
+          rdf:type [ <Base> ] ? ;
+          <feature_of_interest> @<MonitoringFeature> ? ;
+          <id> @linkml:String ? ;
+          <result_quality> @<ResultQualityEnum> ? ;
+          <type> @linkml:String ? ;
+          <feature_of_interest_type> @<FeatureTypeEnum> ? ;
+          <phenomenon_time> @linkml:String ? ;
+          <observed_property> @<ObservedProperty> ? ;
+          <utc_offset> @linkml:Integer ?
+       ) ;
+       rdf:type [ <Observation> ] ?
+    )
+}
+
+<ObservedProperty> CLOSED {
+    (  $<ObservedProperty_tes> (  &<JSONSerializable_tes> ;
+          rdf:type [ <JSONSerializable> ] ? ;
+          <datasource> @<DataSource> ? ;
+          <datasource_variable> @linkml:String ? ;
+          <sampling_medium> @linkml:String ? ;
+          <observed_property_variable> @<ObservedPropertyVariable> ? ;
+          <datasource_description> @linkml:String ?
+       ) ;
+       rdf:type [ <ObservedProperty> ] ?
+    )
+}
+
+<ObservedPropertyVariable> CLOSED {
+    (  $<ObservedPropertyVariable_tes> (  &<JSONSerializable_tes> ;
+          rdf:type [ <JSONSerializable> ] ? ;
+          <units> @linkml:String ? ;
+          <full_name> @linkml:String ? ;
+          <basin3d_id> @linkml:String ? ;
+          <categories> @linkml:String *
+       ) ;
+       rdf:type [ <ObservedPropertyVariable> ] ?
+    )
+}
+
+<Person> CLOSED {
+    (  $<Person_tes> (  &<Base_tes> ;
+          rdf:type [ <Base> ] ? ;
+          <email> @linkml:String ? ;
+          <role> @linkml:String ? ;
+          <first_name> @linkml:String ? ;
+          <institution> @linkml:String ? ;
+          <last_name> @linkml:String ?
+       ) ;
+       rdf:type [ <Person> ] ?
+    )
+}
+
+<RelatedSamplingFeature> CLOSED {
+    (  $<RelatedSamplingFeature_tes> (  &<Base_tes> ;
+          rdf:type [ <Base> ] ? ;
+          <related_sampling_feature_type> @linkml:String ? ;
+          <related_sampling_feature> @<SamplingFeature> ? ;
+          <role> @linkml:String ?
+       ) ;
+       rdf:type [ <RelatedSamplingFeature> ] ?
+    )
+}
+
+<RepresentativeCoordinate> CLOSED {
+    (  $<RepresentativeCoordinate_tes> (  &<Base_tes> ;
+          rdf:type [ <Base> ] ? ;
+          <representative_point> @<AbsoluteCoordinate> ? ;
+          <representative_point_type> @linkml:String ? ;
+          <vertical_position> @<DepthCoordinate> ?
+       ) ;
+       rdf:type [ <RepresentativeCoordinate> ] ?
+    )
+}
+
+<SamplingFeature>  (
+    CLOSED {
+       (  $<SamplingFeature_tes> (  &<Feature_tes> ;
+             rdf:type [ <Feature> ] ? ;
+             <related_sampling_feature_complex> @<SamplingFeature> *
+          ) ;
+          rdf:type [ <SamplingFeature> ] ?
+       )
+    } OR @<SpatialSamplingFeature>
+)
+
+<SpatialSamplingFeature>  (
+    CLOSED {
+       (  $<SpatialSamplingFeature_tes> (  &<SamplingFeature_tes> ;
+             rdf:type [ <SamplingFeature> ] ? ;
+             <coordinates> @<Coordinate> ? ;
+             <shape> @linkml:String ?
+          ) ;
+          rdf:type [ <SpatialSamplingFeature> ] ?
+       )
+    } OR @<MonitoringFeature>
+)
+
+<TimeMetadataMixin> {
+    (  $<TimeMetadataMixin_tes> (  <aggregation_duration> @linkml:String ? ;
+          <time_reference_position> @linkml:String ?
+       ) ;
+       rdf:type [ <TimeMetadataMixin> ] ?
+    )
+}
+
+<TimeValuePair> CLOSED {
+    (  $<TimeValuePair_tes> rdf:type . * ;
+       rdf:type [ <TimeValuePair> ] ?
+    )
+}
+
+<VerticalCoordinate>  (
+    CLOSED {
+       (  $<VerticalCoordinate_tes> (  &<Base_tes> ;
+             rdf:type [ <Base> ] ? ;
+             <distance_units> @linkml:String ? ;
+             <datum> @linkml:String ? ;
+             <type> @linkml:String ? ;
+             <resolution> @linkml:Float ? ;
+             <encoding_method> @linkml:String ? ;
+             <value> @linkml:Float ?
+          ) ;
+          rdf:type [ <VerticalCoordinate> ] ?
+       )
+    } OR @<AltitudeCoordinate> OR @<DepthCoordinate>
+)
+
+

@@ -1,0 +1,24 @@
+id: https://w3id.org/cmungall/basin3d_schema
+name: basin3d_schema
+title: basin3d_schema
+description: |-
+  EXPERIMENTAL rendering of basin3d as linkml
+license: BSD-3
+see_also:
+  - https://cmungall.github.io/basin3d_schema
+
+prefixes:
+  basin3d_schema: https://w3id.org/cmungall/basin3d_schema/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  PATO: http://purl.obolibrary.org/obo/PATO_
+  example: https://example.org/
+default_prefix: basin3d_schema
+default_range: string
+
+imports:
+  - linkml:types
+  - core
+  - vocabulary
+

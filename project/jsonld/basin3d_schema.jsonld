@@ -1,0 +1,2006 @@
+{
+  "name": "basin3d_schema",
+  "description": "EXPERIMENTAL rendering of basin3d as linkml",
+  "title": "basin3d_schema",
+  "see_also": [
+    "https://cmungall.github.io/basin3d_schema"
+  ],
+  "id": "https://w3id.org/cmungall/basin3d_schema",
+  "imports": [
+    "linkml:types",
+    "core",
+    "vocabulary"
+  ],
+  "license": "BSD-3",
+  "prefixes": [
+    {
+      "prefix_prefix": "basin3d_schema",
+      "prefix_reference": "https://w3id.org/cmungall/basin3d_schema/"
+    },
+    {
+      "prefix_prefix": "linkml",
+      "prefix_reference": "https://w3id.org/linkml/"
+    },
+    {
+      "prefix_prefix": "biolink",
+      "prefix_reference": "https://w3id.org/biolink/"
+    },
+    {
+      "prefix_prefix": "schema",
+      "prefix_reference": "http://schema.org/"
+    },
+    {
+      "prefix_prefix": "PATO",
+      "prefix_reference": "http://purl.obolibrary.org/obo/PATO_"
+    },
+    {
+      "prefix_prefix": "example",
+      "prefix_reference": "https://example.org/"
+    }
+  ],
+  "default_prefix": "basin3d_schema",
+  "default_range": "string",
+  "types": [
+    {
+      "name": "string",
+      "definition_uri": "https://w3id.org/linkml/String",
+      "description": "A character string",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "integer",
+      "definition_uri": "https://w3id.org/linkml/Integer",
+      "description": "An integer",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "int",
+      "uri": "http://www.w3.org/2001/XMLSchema#integer",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "boolean",
+      "definition_uri": "https://w3id.org/linkml/Boolean",
+      "description": "A binary (true or false) value",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "Bool",
+      "uri": "http://www.w3.org/2001/XMLSchema#boolean",
+      "repr": "bool",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "float",
+      "definition_uri": "https://w3id.org/linkml/Float",
+      "description": "A real number that conforms to the xsd:float specification",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "float",
+      "uri": "http://www.w3.org/2001/XMLSchema#float",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "double",
+      "definition_uri": "https://w3id.org/linkml/Double",
+      "description": "A real number that conforms to the xsd:double specification",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "float",
+      "uri": "http://www.w3.org/2001/XMLSchema#double",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "decimal",
+      "definition_uri": "https://w3id.org/linkml/Decimal",
+      "description": "A real number with arbitrary precision that conforms to the xsd:decimal specification",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "Decimal",
+      "uri": "http://www.w3.org/2001/XMLSchema#decimal",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "time",
+      "definition_uri": "https://w3id.org/linkml/Time",
+      "description": "A time object represents a (local) time of day, independent of any particular day",
+      "notes": [
+        "URI is dateTime because OWL reasoners do not work with straight date or time"
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "XSDTime",
+      "uri": "http://www.w3.org/2001/XMLSchema#dateTime",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "date",
+      "definition_uri": "https://w3id.org/linkml/Date",
+      "description": "a date (year, month and day) in an idealized calendar",
+      "notes": [
+        "URI is dateTime because OWL reasoners don't work with straight date or time"
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "XSDDate",
+      "uri": "http://www.w3.org/2001/XMLSchema#date",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "datetime",
+      "definition_uri": "https://w3id.org/linkml/Datetime",
+      "description": "The combination of a date and time",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "XSDDateTime",
+      "uri": "http://www.w3.org/2001/XMLSchema#dateTime",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "date_or_datetime",
+      "definition_uri": "https://w3id.org/linkml/DateOrDatetime",
+      "description": "Either a date or a datetime",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "https://w3id.org/linkml/DateOrDatetime",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "uriorcurie",
+      "definition_uri": "https://w3id.org/linkml/Uriorcurie",
+      "description": "a URI or a CURIE",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "URIorCURIE",
+      "uri": "http://www.w3.org/2001/XMLSchema#anyURI",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "uri",
+      "definition_uri": "https://w3id.org/linkml/Uri",
+      "description": "a complete URI",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "URI",
+      "uri": "http://www.w3.org/2001/XMLSchema#anyURI",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "ncname",
+      "definition_uri": "https://w3id.org/linkml/Ncname",
+      "description": "Prefix part of CURIE",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "NCName",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "objectidentifier",
+      "definition_uri": "https://w3id.org/linkml/Objectidentifier",
+      "description": "A URI or CURIE that represents an object in the model.",
+      "comments": [
+        "Used for inheritence and type checking"
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "ElementIdentifier",
+      "uri": "http://www.w3.org/ns/shex#iri",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "nodeidentifier",
+      "definition_uri": "https://w3id.org/linkml/Nodeidentifier",
+      "description": "A URI, CURIE or BNODE that represents a node in a model.",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "NodeIdentifier",
+      "uri": "http://www.w3.org/ns/shex#nonLiteral",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    }
+  ],
+  "enums": [
+    {
+      "name": "TimeFrequencyEnum",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/TimeFrequencyEnum",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/vocabulary",
+      "permissible_values": [
+        {
+          "text": "YEAR",
+          "meaning": "UO:0000036",
+          "unit": {
+            "ucum_code": "a"
+          }
+        },
+        {
+          "text": "MONTH",
+          "meaning": "UO:0000035",
+          "unit": {
+            "ucum_code": "mo"
+          }
+        },
+        {
+          "text": "DAY",
+          "meaning": "UO:0000033",
+          "unit": {
+            "ucum_code": "d"
+          }
+        },
+        {
+          "text": "HOUR",
+          "meaning": "UO:0000032",
+          "unit": {
+            "ucum_code": "h"
+          }
+        },
+        {
+          "text": "MINUTE",
+          "meaning": "UO:0000031",
+          "unit": {
+            "ucum_code": "min"
+          }
+        },
+        {
+          "text": "SECOND",
+          "meaning": "UO:0000010",
+          "unit": {
+            "ucum_code": "s"
+          }
+        }
+      ]
+    },
+    {
+      "name": "TimeReferenceEnum",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/TimeReferenceEnum",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/vocabulary",
+      "permissible_values": [
+        {
+          "text": "START"
+        },
+        {
+          "text": "MIDDLE"
+        },
+        {
+          "text": "END"
+        }
+      ]
+    },
+    {
+      "name": "StatisticEnum",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/StatisticEnum",
+      "description": "Enumeration for Statistics",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/vocabulary",
+      "permissible_values": [
+        {
+          "text": "INSTANT"
+        },
+        {
+          "text": "MEAN",
+          "meaning": "STATO:0000573"
+        },
+        {
+          "text": "MIN",
+          "meaning": "STATO:0000150"
+        },
+        {
+          "text": "MAX",
+          "meaning": "STATO:0000151"
+        },
+        {
+          "text": "TOTAL"
+        }
+      ]
+    },
+    {
+      "name": "ResultQualityEnum",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/ResultQualityEnum",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/vocabulary",
+      "permissible_values": [
+        {
+          "text": "CHECKED",
+          "description": "The result has been checked for quality"
+        },
+        {
+          "text": "UNCHECKED",
+          "description": "The result is raw or unchecked for quality"
+        },
+        {
+          "text": "PARTIALLY_CHECKED",
+          "description": "The result contains checked and unchecked portions"
+        }
+      ]
+    },
+    {
+      "name": "FeatureTypeEnum",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/FeatureTypeEnum",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/vocabulary",
+      "permissible_values": [
+        {
+          "text": "REGION"
+        },
+        {
+          "text": "SUBREGION"
+        },
+        {
+          "text": "BASIN",
+          "meaning": "ENVO:00000291"
+        },
+        {
+          "text": "SUBBASIN"
+        },
+        {
+          "text": "WATERSHED",
+          "meaning": "ENVO:00000292"
+        },
+        {
+          "text": "SUBWATERSHED"
+        },
+        {
+          "text": "SITE"
+        },
+        {
+          "text": "PLOT"
+        },
+        {
+          "text": "HORIZONTAL_PATH"
+        },
+        {
+          "text": "VERTICAL_PATH"
+        },
+        {
+          "text": "POINT"
+        }
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "timeMetadataMixin__aggregation_duration",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/aggregation_duration",
+      "alias": "aggregation_duration",
+      "owner": "TimeMetadataMixin",
+      "domain_of": [
+        "TimeMetadataMixin"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "timeMetadataMixin__time_reference_position",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/time_reference_position",
+      "alias": "time_reference_position",
+      "owner": "TimeMetadataMixin",
+      "domain_of": [
+        "TimeMetadataMixin"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "monitoringFeature__utc_offset",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/utc_offset",
+      "alias": "utc_offset",
+      "owner": "MonitoringFeature",
+      "domain_of": [
+        "MonitoringFeature"
+      ],
+      "range": "integer",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "monitoringFeature__related_party",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/related_party",
+      "multivalued": true,
+      "alias": "related_party",
+      "owner": "MonitoringFeature",
+      "domain_of": [
+        "MonitoringFeature"
+      ],
+      "range": "Person",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "monitoringFeature__description_reference",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/description_reference",
+      "alias": "description_reference",
+      "owner": "MonitoringFeature",
+      "domain_of": [
+        "MonitoringFeature"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observedProperty__datasource",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/datasource",
+      "alias": "datasource",
+      "owner": "ObservedProperty",
+      "domain_of": [
+        "ObservedProperty"
+      ],
+      "range": "DataSource",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observedProperty__datasource_variable",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/datasource_variable",
+      "alias": "datasource_variable",
+      "owner": "ObservedProperty",
+      "domain_of": [
+        "ObservedProperty"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observedProperty__sampling_medium",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/sampling_medium",
+      "alias": "sampling_medium",
+      "owner": "ObservedProperty",
+      "domain_of": [
+        "ObservedProperty"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observedProperty__observed_property_variable",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/observed_property_variable",
+      "alias": "observed_property_variable",
+      "owner": "ObservedProperty",
+      "domain_of": [
+        "ObservedProperty"
+      ],
+      "range": "ObservedPropertyVariable",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observedProperty__datasource_description",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/datasource_description",
+      "alias": "datasource_description",
+      "owner": "ObservedProperty",
+      "domain_of": [
+        "ObservedProperty"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "altitudeCoordinate__datum",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/datum",
+      "alias": "datum",
+      "owner": "AltitudeCoordinate",
+      "domain_of": [
+        "AltitudeCoordinate"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "measurementResultMixin__unit_of_measurement",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/unit_of_measurement",
+      "alias": "unit_of_measurement",
+      "owner": "MeasurementResultMixin",
+      "domain_of": [
+        "MeasurementResultMixin"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "measurementResultMixin__result_value",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/result_value",
+      "alias": "result_value",
+      "owner": "MeasurementResultMixin",
+      "domain_of": [
+        "MeasurementResultMixin"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "absoluteCoordinate__vertical_extent",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/vertical_extent",
+      "multivalued": true,
+      "alias": "vertical_extent",
+      "owner": "AbsoluteCoordinate",
+      "domain_of": [
+        "AbsoluteCoordinate"
+      ],
+      "range": "AltitudeCoordinate",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "absoluteCoordinate__horizontal_position",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/horizontal_position",
+      "multivalued": true,
+      "alias": "horizontal_position",
+      "owner": "AbsoluteCoordinate",
+      "domain_of": [
+        "AbsoluteCoordinate"
+      ],
+      "range": "GeographicCoordinate",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "representativeCoordinate__representative_point",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/representative_point",
+      "alias": "representative_point",
+      "owner": "RepresentativeCoordinate",
+      "domain_of": [
+        "RepresentativeCoordinate"
+      ],
+      "range": "AbsoluteCoordinate",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "representativeCoordinate__representative_point_type",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/representative_point_type",
+      "alias": "representative_point_type",
+      "owner": "RepresentativeCoordinate",
+      "domain_of": [
+        "RepresentativeCoordinate"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "representativeCoordinate__vertical_position",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/vertical_position",
+      "alias": "vertical_position",
+      "owner": "RepresentativeCoordinate",
+      "domain_of": [
+        "RepresentativeCoordinate"
+      ],
+      "range": "DepthCoordinate",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "geographicCoordinate__units",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/units",
+      "alias": "units",
+      "owner": "GeographicCoordinate",
+      "domain_of": [
+        "GeographicCoordinate"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observedPropertyVariable__units",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/units",
+      "alias": "units",
+      "owner": "ObservedPropertyVariable",
+      "domain_of": [
+        "ObservedPropertyVariable"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observedPropertyVariable__full_name",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/full_name",
+      "alias": "full_name",
+      "owner": "ObservedPropertyVariable",
+      "domain_of": [
+        "ObservedPropertyVariable"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observedPropertyVariable__basin3d_id",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/basin3d_id",
+      "alias": "basin3d_id",
+      "owner": "ObservedPropertyVariable",
+      "domain_of": [
+        "ObservedPropertyVariable"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observedPropertyVariable__categories",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/categories",
+      "multivalued": true,
+      "alias": "categories",
+      "owner": "ObservedPropertyVariable",
+      "domain_of": [
+        "ObservedPropertyVariable"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "spatialSamplingFeature__coordinates",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/coordinates",
+      "alias": "coordinates",
+      "owner": "SpatialSamplingFeature",
+      "domain_of": [
+        "SpatialSamplingFeature"
+      ],
+      "range": "Coordinate",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "spatialSamplingFeature__shape",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/shape",
+      "alias": "shape",
+      "owner": "SpatialSamplingFeature",
+      "domain_of": [
+        "SpatialSamplingFeature"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "dataSource__name",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/name",
+      "alias": "name",
+      "owner": "DataSource",
+      "domain_of": [
+        "DataSource"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "dataSource__id",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/id",
+      "alias": "id",
+      "owner": "DataSource",
+      "domain_of": [
+        "DataSource"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "dataSource__credentials",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/credentials",
+      "alias": "credentials",
+      "owner": "DataSource",
+      "domain_of": [
+        "DataSource"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "dataSource__id_prefix",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/id_prefix",
+      "alias": "id_prefix",
+      "owner": "DataSource",
+      "domain_of": [
+        "DataSource"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "dataSource__location",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/location",
+      "alias": "location",
+      "owner": "DataSource",
+      "domain_of": [
+        "DataSource"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "coordinate__absolute",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/absolute",
+      "alias": "absolute",
+      "owner": "Coordinate",
+      "domain_of": [
+        "Coordinate"
+      ],
+      "range": "AbsoluteCoordinate",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "coordinate__representative",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/representative",
+      "alias": "representative",
+      "owner": "Coordinate",
+      "domain_of": [
+        "Coordinate"
+      ],
+      "range": "RepresentativeCoordinate",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observation__feature_of_interest",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/feature_of_interest",
+      "alias": "feature_of_interest",
+      "owner": "Observation",
+      "domain_of": [
+        "Observation"
+      ],
+      "range": "MonitoringFeature",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observation__id",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/id",
+      "alias": "id",
+      "owner": "Observation",
+      "domain_of": [
+        "Observation"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observation__result_quality",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/result_quality",
+      "alias": "result_quality",
+      "owner": "Observation",
+      "domain_of": [
+        "Observation"
+      ],
+      "range": "ResultQualityEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observation__type",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/type",
+      "alias": "type",
+      "owner": "Observation",
+      "domain_of": [
+        "Observation"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observation__feature_of_interest_type",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/feature_of_interest_type",
+      "alias": "feature_of_interest_type",
+      "owner": "Observation",
+      "domain_of": [
+        "Observation"
+      ],
+      "range": "FeatureTypeEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observation__phenomenon_time",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/phenomenon_time",
+      "alias": "phenomenon_time",
+      "owner": "Observation",
+      "domain_of": [
+        "Observation"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observation__observed_property",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/observed_property",
+      "alias": "observed_property",
+      "owner": "Observation",
+      "domain_of": [
+        "Observation"
+      ],
+      "range": "ObservedProperty",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observation__utc_offset",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/utc_offset",
+      "alias": "utc_offset",
+      "owner": "Observation",
+      "domain_of": [
+        "Observation"
+      ],
+      "range": "integer",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "measurementTimeseriesTVPResultMixin__unit_of_measurement",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/unit_of_measurement",
+      "alias": "unit_of_measurement",
+      "owner": "MeasurementTimeseriesTVPResultMixin",
+      "domain_of": [
+        "MeasurementTimeseriesTVPResultMixin"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "measurementTimeseriesTVPResultMixin__result_points",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/result_points",
+      "multivalued": true,
+      "alias": "result_points",
+      "owner": "MeasurementTimeseriesTVPResultMixin",
+      "domain_of": [
+        "MeasurementTimeseriesTVPResultMixin"
+      ],
+      "range": "TimeValuePair",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "samplingFeature__related_sampling_feature_complex",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/related_sampling_feature_complex",
+      "multivalued": true,
+      "alias": "related_sampling_feature_complex",
+      "owner": "SamplingFeature",
+      "domain_of": [
+        "SamplingFeature"
+      ],
+      "range": "SamplingFeature",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "horizontalCoordinate__datum",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/datum",
+      "alias": "datum",
+      "owner": "HorizontalCoordinate",
+      "domain_of": [
+        "HorizontalCoordinate"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "horizontalCoordinate__x",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/x",
+      "alias": "x",
+      "owner": "HorizontalCoordinate",
+      "domain_of": [
+        "HorizontalCoordinate"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "horizontalCoordinate__y",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/y",
+      "alias": "y",
+      "owner": "HorizontalCoordinate",
+      "domain_of": [
+        "HorizontalCoordinate"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "horizontalCoordinate__type",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/type",
+      "alias": "type",
+      "owner": "HorizontalCoordinate",
+      "domain_of": [
+        "HorizontalCoordinate"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "feature__description",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/description",
+      "alias": "description",
+      "owner": "Feature",
+      "domain_of": [
+        "Feature"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "feature__name",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/name",
+      "alias": "name",
+      "owner": "Feature",
+      "domain_of": [
+        "Feature"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "feature__feature_type",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/feature_type",
+      "alias": "feature_type",
+      "owner": "Feature",
+      "domain_of": [
+        "Feature"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "feature__observed_property_variables",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/observed_property_variables",
+      "multivalued": true,
+      "alias": "observed_property_variables",
+      "owner": "Feature",
+      "domain_of": [
+        "Feature"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "feature__id",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/id",
+      "alias": "id",
+      "owner": "Feature",
+      "domain_of": [
+        "Feature"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "verticalCoordinate__distance_units",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/distance_units",
+      "alias": "distance_units",
+      "owner": "VerticalCoordinate",
+      "domain_of": [
+        "VerticalCoordinate"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "verticalCoordinate__datum",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/datum",
+      "alias": "datum",
+      "owner": "VerticalCoordinate",
+      "domain_of": [
+        "VerticalCoordinate"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "verticalCoordinate__type",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/type",
+      "alias": "type",
+      "owner": "VerticalCoordinate",
+      "domain_of": [
+        "VerticalCoordinate"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "verticalCoordinate__resolution",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/resolution",
+      "alias": "resolution",
+      "owner": "VerticalCoordinate",
+      "domain_of": [
+        "VerticalCoordinate"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "verticalCoordinate__encoding_method",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/encoding_method",
+      "alias": "encoding_method",
+      "owner": "VerticalCoordinate",
+      "domain_of": [
+        "VerticalCoordinate"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "verticalCoordinate__value",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/value",
+      "alias": "value",
+      "owner": "VerticalCoordinate",
+      "domain_of": [
+        "VerticalCoordinate"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "relatedSamplingFeature__related_sampling_feature_type",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/related_sampling_feature_type",
+      "alias": "related_sampling_feature_type",
+      "owner": "RelatedSamplingFeature",
+      "domain_of": [
+        "RelatedSamplingFeature"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "relatedSamplingFeature__related_sampling_feature",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/related_sampling_feature",
+      "alias": "related_sampling_feature",
+      "owner": "RelatedSamplingFeature",
+      "domain_of": [
+        "RelatedSamplingFeature"
+      ],
+      "range": "SamplingFeature",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "relatedSamplingFeature__role",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/role",
+      "alias": "role",
+      "owner": "RelatedSamplingFeature",
+      "domain_of": [
+        "RelatedSamplingFeature"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "person__email",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/email",
+      "alias": "email",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "person__role",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/role",
+      "alias": "role",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "person__first_name",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/first_name",
+      "alias": "first_name",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "person__institution",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/institution",
+      "alias": "institution",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "person__last_name",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/last_name",
+      "alias": "last_name",
+      "owner": "Person",
+      "domain_of": [
+        "Person"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "measurementMetadataMixin__statistic",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/statistic",
+      "alias": "statistic",
+      "owner": "MeasurementMetadataMixin",
+      "domain_of": [
+        "MeasurementMetadataMixin"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "measurementMetadataMixin__observed_property_variable",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema",
+      "slot_uri": "https://w3id.org/cmungall/basin3d_schema/observed_property_variable",
+      "alias": "observed_property_variable",
+      "owner": "MeasurementMetadataMixin",
+      "domain_of": [
+        "MeasurementMetadataMixin"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    }
+  ],
+  "classes": [
+    {
+      "name": "TimeMetadataMixin",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/TimeMetadataMixin",
+      "description": "Metadata attributes for Observations with a time",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "mixin": true,
+      "slots": [
+        "timeMetadataMixin__aggregation_duration",
+        "timeMetadataMixin__time_reference_position"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "aggregation_duration",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "time_reference_position",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/TimeMetadataMixin",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "MonitoringFeature",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/MonitoringFeature",
+      "description": "A feature upon which monitoring is made. OGC Timeseries Profile OM_MonitoringFeature.",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "SpatialSamplingFeature",
+      "slots": [
+        "feature__description",
+        "feature__name",
+        "feature__feature_type",
+        "feature__observed_property_variables",
+        "feature__id",
+        "samplingFeature__related_sampling_feature_complex",
+        "spatialSamplingFeature__coordinates",
+        "spatialSamplingFeature__shape",
+        "monitoringFeature__utc_offset",
+        "monitoringFeature__related_party",
+        "monitoringFeature__description_reference"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "utc_offset",
+          "range": "integer",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "related_party",
+          "multivalued": true,
+          "range": "Person",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "description_reference",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/MonitoringFeature",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ObservedProperty",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/ObservedProperty",
+      "description": "Defining the attributes for a single/multiple Observed PropertiesAttributes:- *datasource_variable:* id, e.g., Cs 137 air dose rate car survey campaigns- *observed_property_variable_id:* string, e.g., Cs137MVID- *sampling_medium:* enum (WATER, GAS, SOLID PHASE, OTHER, NOT APPLICABLE)- *datasource:*- *datasource_description:*",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "JSONSerializable",
+      "slots": [
+        "observedProperty__datasource",
+        "observedProperty__datasource_variable",
+        "observedProperty__sampling_medium",
+        "observedProperty__observed_property_variable",
+        "observedProperty__datasource_description"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "datasource",
+          "range": "DataSource",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "datasource_variable",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "sampling_medium",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "observed_property_variable",
+          "range": "ObservedPropertyVariable",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "datasource_description",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/ObservedProperty",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "AltitudeCoordinate",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/AltitudeCoordinate",
+      "description": "An altitudinal vertical position (i.e., distance from sea level).The reference frame or system is specified. The term'altitude' is used instead of the common term 'elevation' to conform to the terminologyin Federal Information Processing Standards 70-1 and 173.",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "VerticalCoordinate",
+      "slots": [
+        "verticalCoordinate__distance_units",
+        "verticalCoordinate__type",
+        "verticalCoordinate__resolution",
+        "verticalCoordinate__encoding_method",
+        "verticalCoordinate__value",
+        "altitudeCoordinate__datum"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "datum",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/AltitudeCoordinate",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "MeasurementResultMixin",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/MeasurementResultMixin",
+      "description": "Result Mixin: Measurement",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "mixin": true,
+      "slots": [
+        "measurementResultMixin__unit_of_measurement",
+        "measurementResultMixin__result_value"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "unit_of_measurement",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "result_value",
+          "range": "float",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/MeasurementResultMixin",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "AbsoluteCoordinate",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/AbsoluteCoordinate",
+      "description": "Absolute coordinate describes the geo-referenced location of a feature.Coordinates match the feature's shape. For example, a curve is a list of points.Currently collections of discrete points describing a feature are supported.",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "Base",
+      "slots": [
+        "absoluteCoordinate__vertical_extent",
+        "absoluteCoordinate__horizontal_position"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "vertical_extent",
+          "multivalued": true,
+          "range": "AltitudeCoordinate",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "horizontal_position",
+          "multivalued": true,
+          "range": "GeographicCoordinate",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/AbsoluteCoordinate",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "RepresentativeCoordinate",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/RepresentativeCoordinate",
+      "description": "Representative coordinates describe the location of a feature by a representative shape / location.For example, a study area may be represented by the center point.The veritical position from a reference position (e.g., height, depth) is also described in this class.Currently representative points are supported. The class is extendable to other forms of representing(e.g., diameter, area, side_length)Representative point types are also expandable as use cases require.",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "Base",
+      "slots": [
+        "representativeCoordinate__representative_point",
+        "representativeCoordinate__representative_point_type",
+        "representativeCoordinate__vertical_position"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "representative_point",
+          "range": "AbsoluteCoordinate",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "representative_point_type",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "vertical_position",
+          "range": "DepthCoordinate",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/RepresentativeCoordinate",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "GeographicCoordinate",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/GeographicCoordinate",
+      "description": "The latitude and longitude which define the position of a point onthe Earth's surface with respect to a reference spheroid.(https://www.fgdc.gov/csdgmgraphical/spref.htm)",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "HorizontalCoordinate",
+      "slots": [
+        "horizontalCoordinate__datum",
+        "horizontalCoordinate__x",
+        "horizontalCoordinate__y",
+        "horizontalCoordinate__type",
+        "geographicCoordinate__units"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "units",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/GeographicCoordinate",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ObservedPropertyVariable",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/ObservedPropertyVariable",
+      "description": "Defining the properties being observed (measured). See http://vocabulary.odm2.org/variablename/ for controlled vocabularyAttributes:- *basin3d_id:* string,- *full_name:* string,- *categories:* List of strings (in order of priority).- *units:* stringSee http://vocabulary.odm2.org/variabletype/ for options, although I think we should have our own list (theirs is a bit funky).",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "JSONSerializable",
+      "slots": [
+        "observedPropertyVariable__units",
+        "observedPropertyVariable__full_name",
+        "observedPropertyVariable__basin3d_id",
+        "observedPropertyVariable__categories"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "units",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "full_name",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "basin3d_id",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "categories",
+          "multivalued": true,
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/ObservedPropertyVariable",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SpatialSamplingFeature",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/SpatialSamplingFeature",
+      "description": "A spatially-defined feature where sampling is conducted. OGC Observation & Measurements SF_SpatialSamplingFeature.",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "SamplingFeature",
+      "slots": [
+        "feature__description",
+        "feature__name",
+        "feature__feature_type",
+        "feature__observed_property_variables",
+        "feature__id",
+        "samplingFeature__related_sampling_feature_complex",
+        "spatialSamplingFeature__coordinates",
+        "spatialSamplingFeature__shape"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "coordinates",
+          "range": "Coordinate",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "shape",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/SpatialSamplingFeature",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "DataSource",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/DataSource",
+      "description": "Data Source definitionAttributes:- *id:* string (inherited)- *name:* string- *id_prefix:* string, prefix that is added to all data source ids- *location*- *credentials:*",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "JSONSerializable",
+      "slots": [
+        "dataSource__name",
+        "dataSource__id",
+        "dataSource__credentials",
+        "dataSource__id_prefix",
+        "dataSource__location"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "name",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "id",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "credentials",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "id_prefix",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "location",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/DataSource",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Coordinate",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/Coordinate",
+      "description": "Top level coordinate class that holds :class:`AbsoluteCoordinate` or :class:`RepresentativeCoordinate`",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "Base",
+      "slots": [
+        "coordinate__absolute",
+        "coordinate__representative"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "absolute",
+          "range": "AbsoluteCoordinate",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "representative",
+          "range": "RepresentativeCoordinate",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/Coordinate",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Base",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/Base",
+      "description": "Base synthesis model class. All classes that extend this are immutable.",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "JSONSerializable",
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/Base",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Observation",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/Observation",
+      "description": "OGC OM_Observation feature type. This is a parent class to which Mixinsshould be added to create observation types with metadata and result.",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "Base",
+      "slots": [
+        "observation__feature_of_interest",
+        "observation__id",
+        "observation__result_quality",
+        "observation__type",
+        "observation__feature_of_interest_type",
+        "observation__phenomenon_time",
+        "observation__observed_property",
+        "observation__utc_offset"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "feature_of_interest",
+          "range": "MonitoringFeature",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "id",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "result_quality",
+          "range": "ResultQualityEnum",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "type",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "feature_of_interest_type",
+          "range": "FeatureTypeEnum",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "phenomenon_time",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "observed_property",
+          "range": "ObservedProperty",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "utc_offset",
+          "range": "integer",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/Observation",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "MeasurementTimeseriesTVPResultMixin",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/MeasurementTimeseriesTVPResultMixin",
+      "description": "Result Mixin: Measurement Timeseries TimeValuePair",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "mixin": true,
+      "slots": [
+        "measurementTimeseriesTVPResultMixin__unit_of_measurement",
+        "measurementTimeseriesTVPResultMixin__result_points"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "unit_of_measurement",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "result_points",
+          "multivalued": true,
+          "range": "TimeValuePair",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/MeasurementTimeseriesTVPResultMixin",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SamplingFeature",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/SamplingFeature",
+      "description": "A feature where sampling is conducted. OGC Observation & Measurements SF_SamplingFeature.",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "Feature",
+      "slots": [
+        "feature__description",
+        "feature__name",
+        "feature__feature_type",
+        "feature__observed_property_variables",
+        "feature__id",
+        "samplingFeature__related_sampling_feature_complex"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "related_sampling_feature_complex",
+          "multivalued": true,
+          "range": "SamplingFeature",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/SamplingFeature",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "DepthCoordinate",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/DepthCoordinate",
+      "description": "A depth vertical position (i.e., the height or depth from the specified reference position)The reference frame or system is specified.",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "VerticalCoordinate",
+      "slots": [
+        "verticalCoordinate__distance_units",
+        "verticalCoordinate__datum",
+        "verticalCoordinate__type",
+        "verticalCoordinate__resolution",
+        "verticalCoordinate__encoding_method",
+        "verticalCoordinate__value"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/DepthCoordinate",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "HorizontalCoordinate",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/HorizontalCoordinate",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "Base",
+      "slots": [
+        "horizontalCoordinate__datum",
+        "horizontalCoordinate__x",
+        "horizontalCoordinate__y",
+        "horizontalCoordinate__type"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "datum",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "x",
+          "range": "float",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "y",
+          "range": "float",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "type",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/HorizontalCoordinate",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Feature",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/Feature",
+      "description": "A general feature upon which an observation can be made. Loosely after GF_Feature (ISO).",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "Base",
+      "slots": [
+        "feature__description",
+        "feature__name",
+        "feature__feature_type",
+        "feature__observed_property_variables",
+        "feature__id"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "description",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "name",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "feature_type",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "observed_property_variables",
+          "multivalued": true,
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "id",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/Feature",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "VerticalCoordinate",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/VerticalCoordinate",
+      "description": "The vertical position of the feature (altitudes or depths).The reference frame or system is specified.",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "Base",
+      "slots": [
+        "verticalCoordinate__distance_units",
+        "verticalCoordinate__datum",
+        "verticalCoordinate__type",
+        "verticalCoordinate__resolution",
+        "verticalCoordinate__encoding_method",
+        "verticalCoordinate__value"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "distance_units",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "datum",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "type",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "resolution",
+          "range": "float",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "encoding_method",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "value",
+          "range": "float",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/VerticalCoordinate",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "RelatedSamplingFeature",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/RelatedSamplingFeature",
+      "description": "Class that represents a related sampling feature and its role relative tothe sampling feature to which it is related. Spatial hierarchies of featuresare built by specifying related sampling features.Data model from OGC Observations and Measurements.",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "Base",
+      "slots": [
+        "relatedSamplingFeature__related_sampling_feature_type",
+        "relatedSamplingFeature__related_sampling_feature",
+        "relatedSamplingFeature__role"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "related_sampling_feature_type",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "related_sampling_feature",
+          "range": "SamplingFeature",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "role",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/RelatedSamplingFeature",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Person",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/Person",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "is_a": "Base",
+      "slots": [
+        "person__email",
+        "person__role",
+        "person__first_name",
+        "person__institution",
+        "person__last_name"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "email",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "role",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "first_name",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "institution",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "last_name",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/Person",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "MeasurementMetadataMixin",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/MeasurementMetadataMixin",
+      "description": "Metadata attributes for Observations type Measurement",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "mixin": true,
+      "slots": [
+        "measurementMetadataMixin__statistic",
+        "measurementMetadataMixin__observed_property_variable"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "statistic",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "observed_property_variable",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/MeasurementMetadataMixin",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "TimeValuePair",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/TimeValuePair",
+      "description": "Tuple that represents a time value pair.  This will handle timestamp conversion`(timestamp, value)`",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/TimeValuePair",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "JSONSerializable",
+      "definition_uri": "https://w3id.org/cmungall/basin3d_schema/JSONSerializable",
+      "description": "Make a Data class serializable to json",
+      "from_schema": "https://w3id.org/cmungall/basin3d_schema/core",
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/cmungall/basin3d_schema/JSONSerializable",
+      "@type": "ClassDefinition"
+    }
+  ],
+  "metamodel_version": "1.7.0",
+  "source_file": "basin3d_schema.yaml",
+  "source_file_date": "2022-09-21T12:00:21",
+  "source_file_size": 575,
+  "generation_date": "2022-09-21T12:38:04",
+  "@type": "SchemaDefinition",
+  "@context": [
+    "project/jsonld/basin3d_schema.context.jsonld",
+    "https://w3id.org/linkml/types.context.jsonld",
+    "core.context.jsonld",
+    "vocabulary.context.jsonld",
+    {
+      "@base": "https://w3id.org/cmungall/basin3d_schema/"
+    }
+  ]
+}
