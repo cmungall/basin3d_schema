@@ -243,12 +243,17 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../distance_units/">distance_units</a></td>
+<td><a href="../encoding_method/">encoding_method</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 <tr>
-<td><a href="../datum/">datum</a></td>
+<td><a href="../value/">value</a></td>
+<td>0..1 <br/> <a href="xsd:float">xsd:float</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="../distance_units/">distance_units</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
@@ -258,17 +263,12 @@
 <td></td>
 </tr>
 <tr>
-<td><a href="../resolution/">resolution</a></td>
-<td>0..1 <br/> <a href="xsd:float">xsd:float</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="../encoding_method/">encoding_method</a></td>
+<td><a href="../datum/">datum</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 <tr>
-<td><a href="../value/">value</a></td>
+<td><a href="../resolution/">resolution</a></td>
 <td>0..1 <br/> <a href="xsd:float">xsd:float</a></td>
 <td></td>
 </tr>
@@ -339,44 +339,6 @@ from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
 is_a: VerticalCoordinate
 attributes:
-  distance_units:
-    name: distance_units
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    alias: distance_units
-    owner: DepthCoordinate
-    domain_of:
-    - VerticalCoordinate
-    range: string
-  datum:
-    name: datum
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    alias: datum
-    owner: DepthCoordinate
-    domain_of:
-    - AltitudeCoordinate
-    - HorizontalCoordinate
-    - VerticalCoordinate
-    range: string
-  type:
-    name: type
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    alias: type
-    owner: DepthCoordinate
-    domain_of:
-    - Observation
-    - HorizontalCoordinate
-    - VerticalCoordinate
-    range: string
-  resolution:
-    name: resolution
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    alias: resolution
-    owner: DepthCoordinate
-    domain_of:
-    - VerticalCoordinate
-    range: float
   encoding_method:
     name: encoding_method
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -391,6 +353,45 @@ attributes:
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     alias: value
+    owner: DepthCoordinate
+    domain_of:
+    - VerticalCoordinate
+    range: float
+  distance_units:
+    name: distance_units
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: distance_units
+    owner: DepthCoordinate
+    domain_of:
+    - VerticalCoordinate
+    range: string
+  type:
+    name: type
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    alias: type
+    owner: DepthCoordinate
+    domain_of:
+    - Observation
+    - VerticalCoordinate
+    - HorizontalCoordinate
+    range: string
+  datum:
+    name: datum
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: datum
+    owner: DepthCoordinate
+    domain_of:
+    - VerticalCoordinate
+    - AltitudeCoordinate
+    - HorizontalCoordinate
+    range: string
+  resolution:
+    name: resolution
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: resolution
     owner: DepthCoordinate
     domain_of:
     - VerticalCoordinate

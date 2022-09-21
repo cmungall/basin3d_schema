@@ -251,6 +251,11 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../feature_type/">feature_type</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="../description/">description</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
@@ -261,18 +266,13 @@
 <td></td>
 </tr>
 <tr>
-<td><a href="../feature_type/">feature_type</a></td>
+<td><a href="../id/">id</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 <tr>
 <td><a href="../observed_property_variables/">observed_property_variables</a></td>
 <td>0..* <br/> <a href="xsd:string">xsd:string</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="../id/">id</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 </tbody>
@@ -313,6 +313,11 @@ from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
 is_a: Base
 attributes:
+  feature_type:
+    name: feature_type
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    range: string
   description:
     name: description
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -321,21 +326,17 @@ attributes:
   name:
     name: name
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    range: string
-  feature_type:
-    name: feature_type
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
+    range: string
+  id:
+    name: id
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
     range: string
   observed_property_variables:
     name: observed_property_variables
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     multivalued: true
-    range: string
-  id:
-    name: id
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
     range: string
 
 </code></pre>
@@ -349,6 +350,15 @@ from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
 is_a: Base
 attributes:
+  feature_type:
+    name: feature_type
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: feature_type
+    owner: Feature
+    domain_of:
+    - Feature
+    range: string
   description:
     name: description
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -361,20 +371,22 @@ attributes:
   name:
     name: name
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
     alias: name
     owner: Feature
     domain_of:
-    - DataSource
     - Feature
+    - DataSource
     range: string
-  feature_type:
-    name: feature_type
+  id:
+    name: id
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    alias: feature_type
+    alias: id
     owner: Feature
     domain_of:
+    - Observation
     - Feature
+    - DataSource
     range: string
   observed_property_variables:
     name: observed_property_variables
@@ -384,16 +396,6 @@ attributes:
     alias: observed_property_variables
     owner: Feature
     domain_of:
-    - Feature
-    range: string
-  id:
-    name: id
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    alias: id
-    owner: Feature
-    domain_of:
-    - DataSource
-    - Observation
     - Feature
     range: string
 

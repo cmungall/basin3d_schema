@@ -236,17 +236,7 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../datasource/">datasource</a></td>
-<td>0..1 <br/> <a href="../DataSource/">DataSource</a></td>
-<td></td>
-</tr>
-<tr>
 <td><a href="../datasource_variable/">datasource_variable</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="../sampling_medium/">sampling_medium</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
@@ -256,8 +246,18 @@
 <td></td>
 </tr>
 <tr>
+<td><a href="../sampling_medium/">sampling_medium</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="../datasource_description/">datasource_description</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="../datasource/">datasource</a></td>
+<td>0..1 <br/> <a href="../DataSource/">DataSource</a></td>
 <td></td>
 </tr>
 </tbody>
@@ -275,6 +275,12 @@
 <tbody>
 <tr>
 <td><a href="../Observation/">Observation</a></td>
+<td><a href="../observed_property/">observed_property</a></td>
+<td>range</td>
+<td>ObservedProperty</td>
+</tr>
+<tr>
+<td><a href="../MeasurementTimeseriesTVPObservation/">MeasurementTimeseriesTVPObservation</a></td>
 <td><a href="../observed_property/">observed_property</a></td>
 <td>range</td>
 <td>ObservedProperty</td>
@@ -318,18 +324,8 @@ from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
 is_a: JSONSerializable
 attributes:
-  datasource:
-    name: datasource
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    range: DataSource
   datasource_variable:
     name: datasource_variable
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    range: string
-  sampling_medium:
-    name: sampling_medium
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     range: string
@@ -338,11 +334,21 @@ attributes:
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     range: ObservedPropertyVariable
+  sampling_medium:
+    name: sampling_medium
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    range: string
   datasource_description:
     name: datasource_description
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     range: string
+  datasource:
+    name: datasource
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    range: DataSource
 
 </code></pre>
 </details>
@@ -357,29 +363,11 @@ from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
 is_a: JSONSerializable
 attributes:
-  datasource:
-    name: datasource
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    alias: datasource
-    owner: ObservedProperty
-    domain_of:
-    - ObservedProperty
-    range: DataSource
   datasource_variable:
     name: datasource_variable
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     alias: datasource_variable
-    owner: ObservedProperty
-    domain_of:
-    - ObservedProperty
-    range: string
-  sampling_medium:
-    name: sampling_medium
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    alias: sampling_medium
     owner: ObservedProperty
     domain_of:
     - ObservedProperty
@@ -394,6 +382,15 @@ attributes:
     - ObservedProperty
     - MeasurementMetadataMixin
     range: ObservedPropertyVariable
+  sampling_medium:
+    name: sampling_medium
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: sampling_medium
+    owner: ObservedProperty
+    domain_of:
+    - ObservedProperty
+    range: string
   datasource_description:
     name: datasource_description
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -403,6 +400,15 @@ attributes:
     domain_of:
     - ObservedProperty
     range: string
+  datasource:
+    name: datasource
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: datasource
+    owner: ObservedProperty
+    domain_of:
+    - ObservedProperty
+    range: DataSource
 
 </code></pre>
 </details>

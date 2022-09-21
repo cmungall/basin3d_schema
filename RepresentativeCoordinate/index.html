@@ -242,13 +242,13 @@
 <td></td>
 </tr>
 <tr>
-<td><a href="../representative_point_type/">representative_point_type</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td><a href="../vertical_position/">vertical_position</a></td>
+<td>0..1 <br/> <a href="../DepthCoordinate/">DepthCoordinate</a></td>
 <td></td>
 </tr>
 <tr>
-<td><a href="../vertical_position/">vertical_position</a></td>
-<td>0..1 <br/> <a href="../DepthCoordinate/">DepthCoordinate</a></td>
+<td><a href="../representative_point_type/">representative_point_type</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 </tbody>
@@ -316,16 +316,16 @@ attributes:
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     range: AbsoluteCoordinate
-  representative_point_type:
-    name: representative_point_type
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    range: string
   vertical_position:
     name: vertical_position
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     range: DepthCoordinate
+  representative_point_type:
+    name: representative_point_type
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    range: string
 
 </code></pre>
 </details>
@@ -351,15 +351,6 @@ attributes:
     domain_of:
     - RepresentativeCoordinate
     range: AbsoluteCoordinate
-  representative_point_type:
-    name: representative_point_type
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    alias: representative_point_type
-    owner: RepresentativeCoordinate
-    domain_of:
-    - RepresentativeCoordinate
-    range: string
   vertical_position:
     name: vertical_position
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -369,6 +360,15 @@ attributes:
     domain_of:
     - RepresentativeCoordinate
     range: DepthCoordinate
+  representative_point_type:
+    name: representative_point_type
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: representative_point_type
+    owner: RepresentativeCoordinate
+    domain_of:
+    - RepresentativeCoordinate
+    range: string
 
 </code></pre>
 </details>

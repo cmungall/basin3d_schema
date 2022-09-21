@@ -236,13 +236,13 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../absolute/">absolute</a></td>
-<td>0..1 <br/> <a href="../AbsoluteCoordinate/">AbsoluteCoordinate</a></td>
+<td><a href="../representative/">representative</a></td>
+<td>0..1 <br/> <a href="../RepresentativeCoordinate/">RepresentativeCoordinate</a></td>
 <td></td>
 </tr>
 <tr>
-<td><a href="../representative/">representative</a></td>
-<td>0..1 <br/> <a href="../RepresentativeCoordinate/">RepresentativeCoordinate</a></td>
+<td><a href="../absolute/">absolute</a></td>
+<td>0..1 <br/> <a href="../AbsoluteCoordinate/">AbsoluteCoordinate</a></td>
 <td></td>
 </tr>
 </tbody>
@@ -307,16 +307,16 @@ from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
 is_a: Base
 attributes:
-  absolute:
-    name: absolute
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    range: AbsoluteCoordinate
   representative:
     name: representative
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     range: RepresentativeCoordinate
+  absolute:
+    name: absolute
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    range: AbsoluteCoordinate
 
 </code></pre>
 </details>
@@ -329,15 +329,6 @@ from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
 is_a: Base
 attributes:
-  absolute:
-    name: absolute
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    alias: absolute
-    owner: Coordinate
-    domain_of:
-    - Coordinate
-    range: AbsoluteCoordinate
   representative:
     name: representative
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -347,6 +338,15 @@ attributes:
     domain_of:
     - Coordinate
     range: RepresentativeCoordinate
+  absolute:
+    name: absolute
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: absolute
+    owner: Coordinate
+    domain_of:
+    - Coordinate
+    range: AbsoluteCoordinate
 
 </code></pre>
 </details>

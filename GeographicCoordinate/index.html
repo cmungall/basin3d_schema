@@ -247,6 +247,11 @@
 <td></td>
 </tr>
 <tr>
+<td><a href="../type/">type</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="../datum/">datum</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
@@ -259,11 +264,6 @@
 <tr>
 <td><a href="../y/">y</a></td>
 <td>0..1 <br/> <a href="xsd:float">xsd:float</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="../type/">type</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 </tbody>
@@ -325,7 +325,6 @@ attributes:
   units:
     name: units
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
     range: string
 
 </code></pre>
@@ -342,12 +341,21 @@ attributes:
   units:
     name: units
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
     alias: units
     owner: GeographicCoordinate
     domain_of:
-    - GeographicCoordinate
     - ObservedPropertyVariable
+    - GeographicCoordinate
+    range: string
+  type:
+    name: type
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    alias: type
+    owner: GeographicCoordinate
+    domain_of:
+    - Observation
+    - VerticalCoordinate
+    - HorizontalCoordinate
     range: string
   datum:
     name: datum
@@ -355,9 +363,9 @@ attributes:
     alias: datum
     owner: GeographicCoordinate
     domain_of:
+    - VerticalCoordinate
     - AltitudeCoordinate
     - HorizontalCoordinate
-    - VerticalCoordinate
     range: string
   x:
     name: x
@@ -377,16 +385,6 @@ attributes:
     domain_of:
     - HorizontalCoordinate
     range: float
-  type:
-    name: type
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    alias: type
-    owner: GeographicCoordinate
-    domain_of:
-    - Observation
-    - HorizontalCoordinate
-    - VerticalCoordinate
-    range: string
 
 </code></pre>
 </details>

@@ -263,18 +263,23 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../coordinates/">coordinates</a></td>
-<td>0..1 <br/> <a href="../Coordinate/">Coordinate</a></td>
-<td></td>
-</tr>
-<tr>
 <td><a href="../shape/">shape</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 <tr>
+<td><a href="../coordinates/">coordinates</a></td>
+<td>0..1 <br/> <a href="../Coordinate/">Coordinate</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="../related_sampling_feature_complex/">related_sampling_feature_complex</a></td>
 <td>0..* <br/> <a href="../SamplingFeature/">SamplingFeature</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="../feature_type/">feature_type</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 <tr>
@@ -288,18 +293,13 @@
 <td></td>
 </tr>
 <tr>
-<td><a href="../feature_type/">feature_type</a></td>
+<td><a href="../id/">id</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 <tr>
 <td><a href="../observed_property_variables/">observed_property_variables</a></td>
 <td>0..* <br/> <a href="xsd:string">xsd:string</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="../id/">id</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 </tbody>
@@ -340,16 +340,16 @@ from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
 is_a: SamplingFeature
 attributes:
-  coordinates:
-    name: coordinates
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    range: Coordinate
   shape:
     name: shape
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     range: string
+  coordinates:
+    name: coordinates
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    range: Coordinate
 
 </code></pre>
 </details>
@@ -362,15 +362,6 @@ from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
 is_a: SamplingFeature
 attributes:
-  coordinates:
-    name: coordinates
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    alias: coordinates
-    owner: SpatialSamplingFeature
-    domain_of:
-    - SpatialSamplingFeature
-    range: Coordinate
   shape:
     name: shape
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -380,6 +371,15 @@ attributes:
     domain_of:
     - SpatialSamplingFeature
     range: string
+  coordinates:
+    name: coordinates
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: coordinates
+    owner: SpatialSamplingFeature
+    domain_of:
+    - SpatialSamplingFeature
+    range: Coordinate
   related_sampling_feature_complex:
     name: related_sampling_feature_complex
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -390,6 +390,15 @@ attributes:
     domain_of:
     - SamplingFeature
     range: SamplingFeature
+  feature_type:
+    name: feature_type
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: feature_type
+    owner: SpatialSamplingFeature
+    domain_of:
+    - Feature
+    range: string
   description:
     name: description
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -402,20 +411,22 @@ attributes:
   name:
     name: name
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
     alias: name
     owner: SpatialSamplingFeature
     domain_of:
-    - DataSource
     - Feature
+    - DataSource
     range: string
-  feature_type:
-    name: feature_type
+  id:
+    name: id
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    alias: feature_type
+    alias: id
     owner: SpatialSamplingFeature
     domain_of:
+    - Observation
     - Feature
+    - DataSource
     range: string
   observed_property_variables:
     name: observed_property_variables
@@ -425,16 +436,6 @@ attributes:
     alias: observed_property_variables
     owner: SpatialSamplingFeature
     domain_of:
-    - Feature
-    range: string
-  id:
-    name: id
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    alias: id
-    owner: SpatialSamplingFeature
-    domain_of:
-    - DataSource
-    - Observation
     - Feature
     range: string
 

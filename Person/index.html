@@ -243,12 +243,7 @@
 <td></td>
 </tr>
 <tr>
-<td><a href="../role/">role</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="../first_name/">first_name</a></td>
+<td><a href="../last_name/">last_name</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
@@ -258,7 +253,12 @@
 <td></td>
 </tr>
 <tr>
-<td><a href="../last_name/">last_name</a></td>
+<td><a href="../first_name/">first_name</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="../role/">role</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
@@ -321,12 +321,8 @@ attributes:
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     range: string
-  role:
-    name: role
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    range: string
-  first_name:
-    name: first_name
+  last_name:
+    name: last_name
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     range: string
@@ -335,10 +331,14 @@ attributes:
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     range: string
-  last_name:
-    name: last_name
+  first_name:
+    name: first_name
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
+    range: string
+  role:
+    name: role
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
     range: string
 
 </code></pre>
@@ -359,20 +359,11 @@ attributes:
     domain_of:
     - Person
     range: string
-  role:
-    name: role
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    alias: role
-    owner: Person
-    domain_of:
-    - RelatedSamplingFeature
-    - Person
-    range: string
-  first_name:
-    name: first_name
+  last_name:
+    name: last_name
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
-    alias: first_name
+    alias: last_name
     owner: Person
     domain_of:
     - Person
@@ -386,13 +377,22 @@ attributes:
     domain_of:
     - Person
     range: string
-  last_name:
-    name: last_name
+  first_name:
+    name: first_name
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
-    alias: last_name
+    alias: first_name
     owner: Person
     domain_of:
+    - Person
+    range: string
+  role:
+    name: role
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    alias: role
+    owner: Person
+    domain_of:
+    - RelatedSamplingFeature
     - Person
     range: string
 

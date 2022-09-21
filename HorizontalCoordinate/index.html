@@ -248,6 +248,11 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../type/">type</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="../datum/">datum</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
@@ -260,11 +265,6 @@
 <tr>
 <td><a href="../y/">y</a></td>
 <td>0..1 <br/> <a href="xsd:float">xsd:float</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="../type/">type</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 </tbody>
@@ -303,6 +303,10 @@ from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
 is_a: Base
 attributes:
+  type:
+    name: type
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    range: string
   datum:
     name: datum
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -317,10 +321,6 @@ attributes:
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     range: float
-  type:
-    name: type
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    range: string
 
 </code></pre>
 </details>
@@ -331,15 +331,25 @@ from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
 is_a: Base
 attributes:
+  type:
+    name: type
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    alias: type
+    owner: HorizontalCoordinate
+    domain_of:
+    - Observation
+    - VerticalCoordinate
+    - HorizontalCoordinate
+    range: string
   datum:
     name: datum
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     alias: datum
     owner: HorizontalCoordinate
     domain_of:
+    - VerticalCoordinate
     - AltitudeCoordinate
     - HorizontalCoordinate
-    - VerticalCoordinate
     range: string
   x:
     name: x
@@ -359,16 +369,6 @@ attributes:
     domain_of:
     - HorizontalCoordinate
     range: float
-  type:
-    name: type
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    alias: type
-    owner: HorizontalCoordinate
-    domain_of:
-    - Observation
-    - HorizontalCoordinate
-    - VerticalCoordinate
-    range: string
 
 </code></pre>
 </details>

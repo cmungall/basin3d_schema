@@ -71,6 +71,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://cmungall.github.io/basin3d_schema/MeasurementTimeseriesTVPObservation/</loc>
+         <lastmod>2022-09-21</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://cmungall.github.io/basin3d_schema/MeasurementTimeseriesTVPResultMixin/</loc>
          <lastmod>2022-09-21</lastmod>
          <changefreq>daily</changefreq>

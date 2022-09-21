@@ -248,6 +248,16 @@
 <td></td>
 </tr>
 <tr>
+<td><a href="../encoding_method/">encoding_method</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="../value/">value</a></td>
+<td>0..1 <br/> <a href="xsd:float">xsd:float</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="../distance_units/">distance_units</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
@@ -259,16 +269,6 @@
 </tr>
 <tr>
 <td><a href="../resolution/">resolution</a></td>
-<td>0..1 <br/> <a href="xsd:float">xsd:float</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="../encoding_method/">encoding_method</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="../value/">value</a></td>
 <td>0..1 <br/> <a href="xsd:float">xsd:float</a></td>
 <td></td>
 </tr>
@@ -333,7 +333,6 @@ attributes:
   datum:
     name: datum
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
     range: string
 
 </code></pre>
@@ -352,14 +351,31 @@ attributes:
   datum:
     name: datum
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
     alias: datum
     owner: AltitudeCoordinate
     domain_of:
+    - VerticalCoordinate
     - AltitudeCoordinate
     - HorizontalCoordinate
+    range: string
+  encoding_method:
+    name: encoding_method
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: encoding_method
+    owner: AltitudeCoordinate
+    domain_of:
     - VerticalCoordinate
     range: string
+  value:
+    name: value
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: value
+    owner: AltitudeCoordinate
+    domain_of:
+    - VerticalCoordinate
+    range: float
   distance_units:
     name: distance_units
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -376,32 +392,14 @@ attributes:
     owner: AltitudeCoordinate
     domain_of:
     - Observation
-    - HorizontalCoordinate
     - VerticalCoordinate
+    - HorizontalCoordinate
     range: string
   resolution:
     name: resolution
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     alias: resolution
-    owner: AltitudeCoordinate
-    domain_of:
-    - VerticalCoordinate
-    range: float
-  encoding_method:
-    name: encoding_method
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    alias: encoding_method
-    owner: AltitudeCoordinate
-    domain_of:
-    - VerticalCoordinate
-    range: string
-  value:
-    name: value
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    alias: value
     owner: AltitudeCoordinate
     domain_of:
     - VerticalCoordinate

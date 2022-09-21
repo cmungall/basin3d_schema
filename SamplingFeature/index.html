@@ -261,6 +261,11 @@
 <td></td>
 </tr>
 <tr>
+<td><a href="../feature_type/">feature_type</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="../description/">description</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
@@ -271,18 +276,13 @@
 <td></td>
 </tr>
 <tr>
-<td><a href="../feature_type/">feature_type</a></td>
+<td><a href="../id/">id</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 <tr>
 <td><a href="../observed_property_variables/">observed_property_variables</a></td>
 <td>0..* <br/> <a href="xsd:string">xsd:string</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="../id/">id</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 </tbody>
@@ -305,12 +305,6 @@
 <td>SamplingFeature</td>
 </tr>
 <tr>
-<td><a href="../SpatialSamplingFeature/">SpatialSamplingFeature</a></td>
-<td><a href="../related_sampling_feature_complex/">related_sampling_feature_complex</a></td>
-<td>range</td>
-<td>SamplingFeature</td>
-</tr>
-<tr>
 <td><a href="./">SamplingFeature</a></td>
 <td><a href="../related_sampling_feature_complex/">related_sampling_feature_complex</a></td>
 <td>range</td>
@@ -319,6 +313,12 @@
 <tr>
 <td><a href="../RelatedSamplingFeature/">RelatedSamplingFeature</a></td>
 <td><a href="../related_sampling_feature/">related_sampling_feature</a></td>
+<td>range</td>
+<td>SamplingFeature</td>
+</tr>
+<tr>
+<td><a href="../SpatialSamplingFeature/">SpatialSamplingFeature</a></td>
+<td><a href="../related_sampling_feature_complex/">related_sampling_feature_complex</a></td>
 <td>range</td>
 <td>SamplingFeature</td>
 </tr>
@@ -387,6 +387,15 @@ attributes:
     domain_of:
     - SamplingFeature
     range: SamplingFeature
+  feature_type:
+    name: feature_type
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: feature_type
+    owner: SamplingFeature
+    domain_of:
+    - Feature
+    range: string
   description:
     name: description
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -399,20 +408,22 @@ attributes:
   name:
     name: name
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
     alias: name
     owner: SamplingFeature
     domain_of:
-    - DataSource
     - Feature
+    - DataSource
     range: string
-  feature_type:
-    name: feature_type
+  id:
+    name: id
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    alias: feature_type
+    alias: id
     owner: SamplingFeature
     domain_of:
+    - Observation
     - Feature
+    - DataSource
     range: string
   observed_property_variables:
     name: observed_property_variables
@@ -422,16 +433,6 @@ attributes:
     alias: observed_property_variables
     owner: SamplingFeature
     domain_of:
-    - Feature
-    range: string
-  id:
-    name: id
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    alias: id
-    owner: SamplingFeature
-    domain_of:
-    - DataSource
-    - Observation
     - Feature
     range: string
 

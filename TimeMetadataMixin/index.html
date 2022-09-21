@@ -207,6 +207,8 @@
 <p>URI: <a href="https://w3id.org/cmungall/basin3d_schema/TimeMetadataMixin">basin3d_schema:TimeMetadataMixin</a></p>
 <div class="mermaid"> classDiagram
     class TimeMetadataMixin
+      TimeMetadataMixin &lt;|-- MeasurementTimeseriesTVPObservation
+
       TimeMetadataMixin : aggregation_duration
       TimeMetadataMixin : time_reference_position
 
@@ -224,12 +226,12 @@
 <tbody>
 <tr>
 <td><a href="../aggregation_duration/">aggregation_duration</a></td>
-<td>0..1 <br/> <a href="../TimeFrequencyEnum/">TimeFrequencyEnum</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 <tr>
 <td><a href="../time_reference_position/">time_reference_position</a></td>
-<td>0..1 <br/> <a href="../TimeReferenceEnum/">TimeReferenceEnum</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 </tbody>
@@ -273,12 +275,12 @@ attributes:
     name: aggregation_duration
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
-    range: TimeFrequencyEnum
+    range: string
   time_reference_position:
     name: time_reference_position
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
-    range: TimeReferenceEnum
+    range: string
 
 </code></pre>
 </details>
@@ -298,7 +300,7 @@ attributes:
     owner: TimeMetadataMixin
     domain_of:
     - TimeMetadataMixin
-    range: TimeFrequencyEnum
+    range: string
   time_reference_position:
     name: time_reference_position
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -307,7 +309,7 @@ attributes:
     owner: TimeMetadataMixin
     domain_of:
     - TimeMetadataMixin
-    range: TimeReferenceEnum
+    range: string
 
 </code></pre>
 </details>

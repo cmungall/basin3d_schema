@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://cmungall.github.io/basin3d_schema/Observation/" rel="canonical"/>
+<link href="https://cmungall.github.io/basin3d_schema/MeasurementTimeseriesTVPObservation/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.3.1, mkdocs-material-8.4.2" name="generator"/>
-<title>Class: Observation - basin3d_schema</title>
+<title>Class: MeasurementTimeseriesTVPObservation - basin3d_schema</title>
 <link href="../assets/stylesheets/main.69437709.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.cbb835fc.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -21,7 +21,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-observation">
+<a class="md-skip" href="#class-measurementtimeseriestvpobservation">
           Skip to content
         </a>
 </div>
@@ -45,7 +45,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Observation
+              Class: MeasurementTimeseriesTVPObservation
             
           </span>
 </div>
@@ -201,44 +201,41 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<a class="md-content__button md-icon" href="https://github.com/cmungall/basin3d_schema/edit/master/docs/Observation.md" title="Edit this page">
+<a class="md-content__button md-icon" href="https://github.com/cmungall/basin3d_schema/edit/master/docs/MeasurementTimeseriesTVPObservation.md" title="Edit this page">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
-<h1 id="class-observation">Class: Observation</h1>
-<p><em>OGC OM_Observation feature type. This is a parent class to which Mixinsshould be added to create observation types with metadata and result.</em></p>
-<p>URI: <a href="https://w3id.org/cmungall/basin3d_schema/Observation">basin3d_schema:Observation</a></p>
+<h1 id="class-measurementtimeseriestvpobservation">Class: MeasurementTimeseriesTVPObservation</h1>
+<p><em>Series of measurement (numerical) observations in TVP format grouped by time (i.e., a timeseries).Anything specified at the group level automatically applies to the individual observation.</em></p>
+<p>URI: <a href="https://w3id.org/cmungall/basin3d_schema/MeasurementTimeseriesTVPObservation">basin3d_schema:MeasurementTimeseriesTVPObservation</a></p>
 <div class="mermaid"> classDiagram
-    class Observation
-      Base &lt;|-- Observation
-
-      Observation : feature_of_interest
-      Observation : feature_of_interest_type
-      Observation : id
-      Observation : observed_property
-      Observation : phenomenon_time
-      Observation : result_quality
-      Observation : type
-      Observation : utc_offset
-
-
+    class MeasurementTimeseriesTVPObservation
+      TimeMetadataMixin &lt;|-- MeasurementTimeseriesTVPObservation
+      MeasurementMetadataMixin &lt;|-- MeasurementTimeseriesTVPObservation
+      MeasurementTimeseriesTVPResultMixin &lt;|-- MeasurementTimeseriesTVPObservation
       Observation &lt;|-- MeasurementTimeseriesTVPObservation
 
-      Observation : feature_of_interest
-      Observation : feature_of_interest_type
-      Observation : id
-      Observation : observed_property
-      Observation : phenomenon_time
-      Observation : result_quality
-      Observation : type
-      Observation : utc_offset
+      MeasurementTimeseriesTVPObservation : aggregation_duration
+      MeasurementTimeseriesTVPObservation : feature_of_interest
+      MeasurementTimeseriesTVPObservation : feature_of_interest_type
+      MeasurementTimeseriesTVPObservation : id
+      MeasurementTimeseriesTVPObservation : observed_property
+      MeasurementTimeseriesTVPObservation : observed_property_variable
+      MeasurementTimeseriesTVPObservation : phenomenon_time
+      MeasurementTimeseriesTVPObservation : result_points
+      MeasurementTimeseriesTVPObservation : result_quality
+      MeasurementTimeseriesTVPObservation : statistic
+      MeasurementTimeseriesTVPObservation : time_reference_position
+      MeasurementTimeseriesTVPObservation : type
+      MeasurementTimeseriesTVPObservation : unit_of_measurement
+      MeasurementTimeseriesTVPObservation : utc_offset
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><a href="../JSONSerializable/">JSONSerializable</a><ul>
 <li><a href="../Base/">Base</a><ul>
-<li><strong>Observation</strong><ul>
-<li><a href="../MeasurementTimeseriesTVPObservation/">MeasurementTimeseriesTVPObservation</a> [ <a href="../TimeMetadataMixin/">TimeMetadataMixin</a> <a href="../MeasurementMetadataMixin/">MeasurementMetadataMixin</a> <a href="../MeasurementTimeseriesTVPResultMixin/">MeasurementTimeseriesTVPResultMixin</a>]</li>
+<li><a href="../Observation/">Observation</a><ul>
+<li><strong>MeasurementTimeseriesTVPObservation</strong> [ <a href="../TimeMetadataMixin/">TimeMetadataMixin</a> <a href="../MeasurementMetadataMixin/">MeasurementMetadataMixin</a> <a href="../MeasurementTimeseriesTVPResultMixin/">MeasurementTimeseriesTVPResultMixin</a>]</li>
 </ul>
 </li>
 </ul>
@@ -256,6 +253,36 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../aggregation_duration/">aggregation_duration</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="../time_reference_position/">time_reference_position</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="../statistic/">statistic</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="../observed_property_variable/">observed_property_variable</a></td>
+<td>0..1 <br/> <a href="../ObservedPropertyVariable/">ObservedPropertyVariable</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="../unit_of_measurement/">unit_of_measurement</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="../result_points/">result_points</a></td>
+<td>0..* <br/> <a href="../TimeValuePair/">TimeValuePair</a></td>
+<td></td>
+</tr>
 <tr>
 <td><a href="../feature_of_interest_type/">feature_of_interest_type</a></td>
 <td>0..1 <br/> <a href="../FeatureTypeEnum/">FeatureTypeEnum</a></td>
@@ -315,11 +342,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>['basin3d_schema:Observation']</td>
+<td>['basin3d_schema:MeasurementTimeseriesTVPObservation']</td>
 </tr>
 <tr>
 <td>native</td>
-<td>['basin3d_schema:Observation']</td>
+<td>['basin3d_schema:MeasurementTimeseriesTVPObservation']</td>
 </tr>
 </tbody>
 </table>
@@ -327,70 +354,95 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: Observation
-description: OGC OM_Observation feature type. This is a parent class to which Mixinsshould
-  be added to create observation types with metadata and result.
+<pre><code class="language-yaml">name: MeasurementTimeseriesTVPObservation
+description: Series of measurement (numerical) observations in TVP format grouped
+  by time (i.e., a timeseries).Anything specified at the group level automatically
+  applies to the individual observation.
 from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
-is_a: Base
-attributes:
-  feature_of_interest_type:
-    name: feature_of_interest_type
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    range: FeatureTypeEnum
-  result_quality:
-    name: result_quality
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    range: ResultQualityEnum
-  utc_offset:
-    name: utc_offset
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    range: integer
-  feature_of_interest:
-    name: feature_of_interest
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    range: MonitoringFeature
-  observed_property:
-    name: observed_property
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    range: ObservedProperty
-  phenomenon_time:
-    name: phenomenon_time
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    range: string
-  id:
-    name: id
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    range: string
-  type:
-    name: type
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    range: string
+is_a: Observation
+mixins:
+- TimeMetadataMixin
+- MeasurementMetadataMixin
+- MeasurementTimeseriesTVPResultMixin
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: Observation
-description: OGC OM_Observation feature type. This is a parent class to which Mixinsshould
-  be added to create observation types with metadata and result.
+<pre><code class="language-yaml">name: MeasurementTimeseriesTVPObservation
+description: Series of measurement (numerical) observations in TVP format grouped
+  by time (i.e., a timeseries).Anything specified at the group level automatically
+  applies to the individual observation.
 from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
-is_a: Base
+is_a: Observation
+mixins:
+- TimeMetadataMixin
+- MeasurementMetadataMixin
+- MeasurementTimeseriesTVPResultMixin
 attributes:
+  aggregation_duration:
+    name: aggregation_duration
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: aggregation_duration
+    owner: MeasurementTimeseriesTVPObservation
+    domain_of:
+    - TimeMetadataMixin
+    range: string
+  time_reference_position:
+    name: time_reference_position
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: time_reference_position
+    owner: MeasurementTimeseriesTVPObservation
+    domain_of:
+    - TimeMetadataMixin
+    range: string
+  statistic:
+    name: statistic
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: statistic
+    owner: MeasurementTimeseriesTVPObservation
+    domain_of:
+    - MeasurementMetadataMixin
+    range: string
+  observed_property_variable:
+    name: observed_property_variable
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    alias: observed_property_variable
+    owner: MeasurementTimeseriesTVPObservation
+    domain_of:
+    - ObservedProperty
+    - MeasurementMetadataMixin
+    range: ObservedPropertyVariable
+  unit_of_measurement:
+    name: unit_of_measurement
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    alias: unit_of_measurement
+    owner: MeasurementTimeseriesTVPObservation
+    domain_of:
+    - MeasurementResultMixin
+    - MeasurementTimeseriesTVPResultMixin
+    range: string
+  result_points:
+    name: result_points
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    multivalued: true
+    alias: result_points
+    owner: MeasurementTimeseriesTVPObservation
+    domain_of:
+    - MeasurementTimeseriesTVPResultMixin
+    range: TimeValuePair
   feature_of_interest_type:
     name: feature_of_interest_type
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     alias: feature_of_interest_type
-    owner: Observation
+    owner: MeasurementTimeseriesTVPObservation
     domain_of:
     - Observation
     range: FeatureTypeEnum
@@ -399,7 +451,7 @@ attributes:
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     alias: result_quality
-    owner: Observation
+    owner: MeasurementTimeseriesTVPObservation
     domain_of:
     - Observation
     range: ResultQualityEnum
@@ -407,7 +459,7 @@ attributes:
     name: utc_offset
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     alias: utc_offset
-    owner: Observation
+    owner: MeasurementTimeseriesTVPObservation
     domain_of:
     - MonitoringFeature
     - Observation
@@ -417,7 +469,7 @@ attributes:
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     alias: feature_of_interest
-    owner: Observation
+    owner: MeasurementTimeseriesTVPObservation
     domain_of:
     - Observation
     range: MonitoringFeature
@@ -426,7 +478,7 @@ attributes:
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     alias: observed_property
-    owner: Observation
+    owner: MeasurementTimeseriesTVPObservation
     domain_of:
     - Observation
     range: ObservedProperty
@@ -435,7 +487,7 @@ attributes:
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     alias: phenomenon_time
-    owner: Observation
+    owner: MeasurementTimeseriesTVPObservation
     domain_of:
     - Observation
     range: string
@@ -444,7 +496,7 @@ attributes:
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     alias: id
-    owner: Observation
+    owner: MeasurementTimeseriesTVPObservation
     domain_of:
     - Observation
     - Feature
@@ -455,7 +507,7 @@ attributes:
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     alias: type
-    owner: Observation
+    owner: MeasurementTimeseriesTVPObservation
     domain_of:
     - Observation
     - VerticalCoordinate

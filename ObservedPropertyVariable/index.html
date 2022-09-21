@@ -235,23 +235,23 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../units/">units</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="../full_name/">full_name</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td></td>
-</tr>
-<tr>
 <td><a href="../basin3d_id/">basin3d_id</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="../units/">units</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 <tr>
 <td><a href="../categories/">categories</a></td>
 <td>0..* <br/> <a href="xsd:string">xsd:string</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="../full_name/">full_name</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 </tbody>
@@ -269,6 +269,12 @@
 <tbody>
 <tr>
 <td><a href="../ObservedProperty/">ObservedProperty</a></td>
+<td><a href="../observed_property_variable/">observed_property_variable</a></td>
+<td>range</td>
+<td>ObservedPropertyVariable</td>
+</tr>
+<tr>
+<td><a href="../MeasurementTimeseriesTVPObservation/">MeasurementTimeseriesTVPObservation</a></td>
 <td><a href="../observed_property_variable/">observed_property_variable</a></td>
 <td>range</td>
 <td>ObservedPropertyVariable</td>
@@ -318,17 +324,13 @@ from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
 is_a: JSONSerializable
 attributes:
-  units:
-    name: units
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    range: string
-  full_name:
-    name: full_name
+  basin3d_id:
+    name: basin3d_id
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     range: string
-  basin3d_id:
-    name: basin3d_id
+  units:
+    name: units
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     range: string
@@ -337,6 +339,11 @@ attributes:
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     multivalued: true
+    range: string
+  full_name:
+    name: full_name
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
     range: string
 
 </code></pre>
@@ -352,24 +359,6 @@ from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
 is_a: JSONSerializable
 attributes:
-  units:
-    name: units
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    alias: units
-    owner: ObservedPropertyVariable
-    domain_of:
-    - GeographicCoordinate
-    - ObservedPropertyVariable
-    range: string
-  full_name:
-    name: full_name
-    from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
-    alias: full_name
-    owner: ObservedPropertyVariable
-    domain_of:
-    - ObservedPropertyVariable
-    range: string
   basin3d_id:
     name: basin3d_id
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -379,12 +368,31 @@ attributes:
     domain_of:
     - ObservedPropertyVariable
     range: string
+  units:
+    name: units
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: units
+    owner: ObservedPropertyVariable
+    domain_of:
+    - ObservedPropertyVariable
+    - GeographicCoordinate
+    range: string
   categories:
     name: categories
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
     rank: 1000
     multivalued: true
     alias: categories
+    owner: ObservedPropertyVariable
+    domain_of:
+    - ObservedPropertyVariable
+    range: string
+  full_name:
+    name: full_name
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: full_name
     owner: ObservedPropertyVariable
     domain_of:
     - ObservedPropertyVariable
