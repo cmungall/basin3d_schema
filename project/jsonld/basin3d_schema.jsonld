@@ -2426,7 +2426,7 @@
   "source_file": "basin3d_schema.yaml",
   "source_file_date": "2022-09-21T12:00:21",
   "source_file_size": 575,
-  "generation_date": "2022-09-21T19:51:19",
+  "generation_date": "2022-09-21T19:57:44",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/basin3d_schema.context.jsonld",

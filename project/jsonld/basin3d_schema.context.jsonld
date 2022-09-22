@@ -1,5 +1,5 @@
 {
-   "_comments": "Auto generated from basin3d_schema.yaml by jsonldcontextgen.py version: 0.1.1\n    Generation date: 2022-09-21T19:51:18\n    Schema: basin3d_schema\n    metamodel version: 1.7.0\n    model version: None\n    \n    id: https://w3id.org/cmungall/basin3d_schema\n    description: EXPERIMENTAL rendering of basin3d as linkml\n    license: BSD-3\n    ",
+   "_comments": "Auto generated from basin3d_schema.yaml by jsonldcontextgen.py version: 0.1.1\n    Generation date: 2022-09-21T19:57:43\n    Schema: basin3d_schema\n    metamodel version: 1.7.0\n    model version: None\n    \n    id: https://w3id.org/cmungall/basin3d_schema\n    description: EXPERIMENTAL rendering of basin3d as linkml\n    license: BSD-3\n    ",
    "@context": {
       "PATO": {
          "@id": "http://purl.obolibrary.org/obo/PATO_",
