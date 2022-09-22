@@ -261,6 +261,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#comments" class="md-nav__link">
+    Comments
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#identifier-and-mapping-information" class="md-nav__link">
     Identifier and Mapping Information
   </a>
@@ -312,7 +319,17 @@
 <h2 id="properties">Properties</h2>
 <ul>
 <li>Range: <a href="xsd:float">xsd:float</a></li>
-<li>Multivalued: None</li>
+<li>
+<p>Multivalued: None</p>
+</li>
+<li>
+<p>Aliases:</p>
+</li>
+<li>longitude</li>
+</ul>
+<h2 id="comments">Comments</h2>
+<ul>
+<li>in models.py this is a float but tuples appear to be allowed</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -323,7 +340,11 @@
 <details>
 
 <pre><code class="language-yaml">name: x
+comments:
+- in models.py this is a float but tuples appear to be allowed
 from_schema: https://w3id.org/cmungall/basin3d_schema/core
+aliases:
+- longitude
 rank: 1000
 alias: x
 domain_of:

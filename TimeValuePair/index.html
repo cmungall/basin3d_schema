@@ -152,6 +152,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#todos">
+    TODOs
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#identifier-and-mapping-information">
     Identifier and Mapping Information
   </a>
@@ -204,6 +209,8 @@
 <p>URI: <a href="https://w3id.org/cmungall/basin3d_schema/TimeValuePair">basin3d_schema:TimeValuePair</a></p>
 <div class="mermaid"> classDiagram
     class TimeValuePair
+      TimeValuePair : timestamp
+      TimeValuePair : value
 
 </div>
 <!-- no inheritance hierarchy -->
@@ -218,8 +225,13 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../timestamp/">timestamp</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
-<td></td>
+</tr>
+<tr>
+<td><a href="../value/">value</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td></td>
 </tr>
 </tbody>
@@ -249,6 +261,10 @@
 </tr>
 </tbody>
 </table>
+<h2 id="todos">TODOs</h2>
+<ul>
+<li>LinkML does not dorectly represent tuples</li>
+</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
@@ -280,8 +296,19 @@
 <pre><code class="language-yaml">name: TimeValuePair
 description: Tuple that represents a time value pair.  This will handle timestamp
   conversion`(timestamp, value)`
+todos:
+- LinkML does not dorectly represent tuples
 from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
+attributes:
+  timestamp:
+    name: timestamp
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+  value:
+    name: value
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
 
 </code></pre>
 </details>
@@ -290,8 +317,30 @@ rank: 1000
 <pre><code class="language-yaml">name: TimeValuePair
 description: Tuple that represents a time value pair.  This will handle timestamp
   conversion`(timestamp, value)`
+todos:
+- LinkML does not dorectly represent tuples
 from_schema: https://w3id.org/cmungall/basin3d_schema/core
 rank: 1000
+attributes:
+  timestamp:
+    name: timestamp
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: timestamp
+    owner: TimeValuePair
+    domain_of:
+    - TimeValuePair
+    range: string
+  value:
+    name: value
+    from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    rank: 1000
+    alias: value
+    owner: TimeValuePair
+    domain_of:
+    - TimeValuePair
+    - VerticalCoordinate
+    range: string
 
 </code></pre>
 </details>

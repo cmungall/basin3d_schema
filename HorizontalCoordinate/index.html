@@ -205,7 +205,7 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
 <h1 id="class-horizontalcoordinate">Class: HorizontalCoordinate</h1>
-<p>URI: <a href="https://w3id.org/cmungall/basin3d_schema/HorizontalCoordinate">basin3d_schema:HorizontalCoordinate</a></p>
+<p>URI: <a href="sorepscd:HorizontalCoordinate">sorepscd:HorizontalCoordinate</a></p>
 <div class="mermaid"> classDiagram
     class HorizontalCoordinate
       Base &lt;|-- HorizontalCoordinate
@@ -249,7 +249,7 @@
 <tbody>
 <tr>
 <td><a href="../type/">type</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>0..1 <br/> <a href="../ObservationDatumEnum/">ObservationDatumEnum</a></td>
 <td></td>
 </tr>
 <tr>
@@ -286,7 +286,7 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>['basin3d_schema:HorizontalCoordinate']</td>
+<td>['sorepscd:HorizontalCoordinate']</td>
 </tr>
 <tr>
 <td>native</td>
@@ -306,21 +306,30 @@ attributes:
   type:
     name: type
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    range: string
+    range: HorizontalCoordinateTypeEnum
   datum:
     name: datum
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    range: string
+    range: HorizontalCoordinateDatumEnum
   x:
     name: x
+    comments:
+    - in models.py this is a float but tuples appear to be allowed
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    aliases:
+    - longitude
     rank: 1000
     range: float
   y:
     name: y
+    comments:
+    - in models.py this is a float but tuples appear to be allowed
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    aliases:
+    - latitude
     rank: 1000
     range: float
+class_uri: sorepscd:HorizontalCoordinate
 
 </code></pre>
 </details>
@@ -340,7 +349,7 @@ attributes:
     - Observation
     - VerticalCoordinate
     - HorizontalCoordinate
-    range: string
+    range: ObservationDatumEnum
   datum:
     name: datum
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -353,7 +362,11 @@ attributes:
     range: string
   x:
     name: x
+    comments:
+    - in models.py this is a float but tuples appear to be allowed
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    aliases:
+    - longitude
     rank: 1000
     alias: x
     owner: HorizontalCoordinate
@@ -362,13 +375,18 @@ attributes:
     range: float
   y:
     name: y
+    comments:
+    - in models.py this is a float but tuples appear to be allowed
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    aliases:
+    - latitude
     rank: 1000
     alias: y
     owner: HorizontalCoordinate
     domain_of:
     - HorizontalCoordinate
     range: float
+class_uri: sorepscd:HorizontalCoordinate
 
 </code></pre>
 </details>

@@ -248,7 +248,7 @@
 </tr>
 <tr>
 <td><a href="../type/">type</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>0..1 <br/> <a href="../ObservationDatumEnum/">ObservationDatumEnum</a></td>
 <td></td>
 </tr>
 <tr>
@@ -356,7 +356,7 @@ attributes:
     - Observation
     - VerticalCoordinate
     - HorizontalCoordinate
-    range: string
+    range: ObservationDatumEnum
   datum:
     name: datum
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -369,7 +369,11 @@ attributes:
     range: string
   x:
     name: x
+    comments:
+    - in models.py this is a float but tuples appear to be allowed
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    aliases:
+    - longitude
     rank: 1000
     alias: x
     owner: GeographicCoordinate
@@ -378,7 +382,11 @@ attributes:
     range: float
   y:
     name: y
+    comments:
+    - in models.py this is a float but tuples appear to be allowed
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
+    aliases:
+    - latitude
     rank: 1000
     alias: y
     owner: GeographicCoordinate

@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://cmungall.github.io/basin3d_schema/email/">
+        <link rel="canonical" href="https://cmungall.github.io/basin3d_schema/RepresentativePointEnum/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.4.2">
     
     
       
-        <title>Slot: email - basin3d_schema</title>
+        <title>RepresentativePointEnum - basin3d_schema</title>
       
     
     
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-email" class="md-skip">
+        <a href="#representativepointenum" class="md-skip">
           Skip to content
         </a>
       
@@ -95,7 +95,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: email
+              RepresentativePointEnum
             
           </span>
         </div>
@@ -254,8 +254,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
+  <a href="#permissible-values" class="md-nav__link">
+    Permissible Values
   </a>
   
 </li>
@@ -281,8 +281,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#linkml-specification" class="md-nav__link">
-    LinkML Specification
+  <a href="#schema" class="md-nav__link">
+    Schema
   </a>
   
 </li>
@@ -299,37 +299,85 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/cmungall/basin3d_schema/edit/master/docs/email.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/cmungall/basin3d_schema/edit/master/docs/RepresentativePointEnum.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-<h1 id="slot-email">Slot: email</h1>
-<p>URI: <a href="http://schema.org/email">http://schema.org/email</a></p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="properties">Properties</h2>
-<ul>
-<li>Range: <a href="xsd:string">xsd:string</a></li>
-<li>Multivalued: None</li>
-</ul>
+<h1 id="representativepointenum">RepresentativePointEnum</h1>
+<p>None</p>
+<p>URI: RepresentativePointEnum</p>
+<h2 id="permissible-values">Permissible Values</h2>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CENTER_LOCAL_SURFACE</td>
+<td>None</td>
+<td>Placement of the representative point is the center of a local surface</td>
+<td></td>
+</tr>
+<tr>
+<td>UPPER_LEFT_CORNER</td>
+<td>None</td>
+<td>Placement of the representative point is the upper left corner (northwest)</td>
+<td></td>
+</tr>
+<tr>
+<td>UPPER_RIGHT_CORNER</td>
+<td>None</td>
+<td>Placement of the representative point is the upper right corner (northeast)</td>
+<td></td>
+</tr>
+<tr>
+<td>LOWER_LEFT_CORNER</td>
+<td>None</td>
+<td>Placement of the representative point is the lower left corner (southhwest)</td>
+<td></td>
+</tr>
+<tr>
+<td>LOWER_RIGHT_CORNER</td>
+<td>None</td>
+<td>Placement of the representative point is the lower right corner (northeast)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmungall/basin3d_schema/core</li>
+<li>from schema: https://w3id.org/cmungall/basin3d_schema/vocabulary</li>
 </ul>
-<h2 id="linkml-specification">LinkML Specification</h2>
+<h2 id="schema">Schema</h2>
 <details>
 
-<pre><code class="language-yaml">name: email
-from_schema: https://w3id.org/cmungall/basin3d_schema/core
+<pre><code class="language-yaml">name: RepresentativePointEnum
+from_schema: https://w3id.org/cmungall/basin3d_schema/vocabulary
 rank: 1000
-slot_uri: schema:email
-alias: email
-domain_of:
-- Person
-range: string
+permissible_values:
+  CENTER_LOCAL_SURFACE:
+    text: CENTER_LOCAL_SURFACE
+    description: Placement of the representative point is the center of a local surface
+  UPPER_LEFT_CORNER:
+    text: UPPER_LEFT_CORNER
+    description: Placement of the representative point is the upper left corner (northwest)
+  UPPER_RIGHT_CORNER:
+    text: UPPER_RIGHT_CORNER
+    description: Placement of the representative point is the upper right corner (northeast)
+  LOWER_LEFT_CORNER:
+    text: LOWER_LEFT_CORNER
+    description: Placement of the representative point is the lower left corner (southhwest)
+  LOWER_RIGHT_CORNER:
+    text: LOWER_RIGHT_CORNER
+    description: Placement of the representative point is the lower right corner (northeast)
 
 </code></pre>
 

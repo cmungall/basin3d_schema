@@ -255,12 +255,12 @@
 <tbody>
 <tr>
 <td><a href="../aggregation_duration/">aggregation_duration</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>0..1 <br/> <a href="../TimeFrequencyEnum/">TimeFrequencyEnum</a></td>
 <td></td>
 </tr>
 <tr>
 <td><a href="../time_reference_position/">time_reference_position</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>0..1 <br/> <a href="../TimeMetadataMixinReferenceEnum/">TimeMetadataMixinReferenceEnum</a></td>
 <td></td>
 </tr>
 <tr>
@@ -320,7 +320,7 @@
 </tr>
 <tr>
 <td><a href="../type/">type</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>0..1 <br/> <a href="../ObservationDatumEnum/">ObservationDatumEnum</a></td>
 <td></td>
 </tr>
 </tbody>
@@ -390,7 +390,7 @@ attributes:
     owner: MeasurementTimeseriesTVPObservation
     domain_of:
     - TimeMetadataMixin
-    range: string
+    range: TimeFrequencyEnum
   time_reference_position:
     name: time_reference_position
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -399,7 +399,7 @@ attributes:
     owner: MeasurementTimeseriesTVPObservation
     domain_of:
     - TimeMetadataMixin
-    range: string
+    range: TimeMetadataMixinReferenceEnum
   statistic:
     name: statistic
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -512,7 +512,7 @@ attributes:
     - Observation
     - VerticalCoordinate
     - HorizontalCoordinate
-    range: string
+    range: ObservationDatumEnum
 
 </code></pre>
 </details>

@@ -249,7 +249,7 @@
 </tr>
 <tr>
 <td><a href="../encoding_method/">encoding_method</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>0..1 <br/> <a href="../VerticalCoordinateEncodingEnum/">VerticalCoordinateEncodingEnum</a></td>
 <td></td>
 </tr>
 <tr>
@@ -259,12 +259,12 @@
 </tr>
 <tr>
 <td><a href="../distance_units/">distance_units</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>0..1 <br/> <a href="../VerticalCoordinateDistanceEnum/">VerticalCoordinateDistanceEnum</a></td>
 <td></td>
 </tr>
 <tr>
 <td><a href="../type/">type</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>0..1 <br/> <a href="../ObservationDatumEnum/">ObservationDatumEnum</a></td>
 <td></td>
 </tr>
 <tr>
@@ -333,7 +333,7 @@ attributes:
   datum:
     name: datum
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    range: string
+    range: AltitudeCoordinateDatumEnum
 
 </code></pre>
 </details>
@@ -366,14 +366,14 @@ attributes:
     owner: AltitudeCoordinate
     domain_of:
     - VerticalCoordinate
-    range: string
+    range: VerticalCoordinateEncodingEnum
   value:
     name: value
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
-    rank: 1000
     alias: value
     owner: AltitudeCoordinate
     domain_of:
+    - TimeValuePair
     - VerticalCoordinate
     range: float
   distance_units:
@@ -384,7 +384,7 @@ attributes:
     owner: AltitudeCoordinate
     domain_of:
     - VerticalCoordinate
-    range: string
+    range: VerticalCoordinateDistanceEnum
   type:
     name: type
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
@@ -394,7 +394,7 @@ attributes:
     - Observation
     - VerticalCoordinate
     - HorizontalCoordinate
-    range: string
+    range: ObservationDatumEnum
   resolution:
     name: resolution
     from_schema: https://w3id.org/cmungall/basin3d_schema/core
