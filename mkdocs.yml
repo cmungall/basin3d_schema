@@ -14,6 +14,6 @@ plugins:
 nav:
 #  - Home: home.md
   - Index: index.md
-  - About: about.md
+  - README: README.md
 site_url: https://cmungall.github.io/basin3d_schema
 repo_url: https://github.com/cmungall/basin3d_schema
