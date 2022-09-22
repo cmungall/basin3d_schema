@@ -6,6 +6,8 @@ prefixes:
   UO: http://purl.obolibrary.org/obo/UO_
   STATO: http://purl.obolibrary.org/obo/STATO_
   ENVO: http://purl.obolibrary.org/obo/ENVO_
+  qudt: http://qudt.org/schema/qudt/
+  quantityKind: https://qudt.org/vocab/quantitykind/
 default_prefix: basin3d_schema
 default_range: string
 imports:
@@ -51,6 +53,122 @@ enums:
         annotations:
           pandas: S
 
+  CoordinateUnitEnum:
+    permissible_values:
+      ScalarDegreeUnit:
+        description: Grouping for enums that are scalars
+      CompoundDegreeUnit:
+        description: Grouping for enums that are non-scalar
+      UNITS_DEC_DEGREES:
+        is_a: ScalarDegreeUnit
+        title: Decimal degrees
+        #structured_aliases:
+        #  - literal_form: DD
+        unit:
+          has_quantity_kind: quantityKind:Angle
+          ucum_code: deg
+          exact_mappings:
+            - qudt:DEG
+      UNITS_DEC_MINUTES:
+        is_a: ScalarDegreeUnit
+        title: Decimal minutes
+        #structured_aliases:
+        #  - literal_form: DM
+        unit:
+          has_quantity_kind: quantityKind:Angle
+          exact_mappings:
+            - qudt:ARCMIN
+      UNITS_DEC_SECONDS:
+        is_a: ScalarDegreeUnit
+        title: Decimal seconds
+        #structured_aliases:
+        #  - literal_form: DS
+        unit:
+          has_quantity_kind: quantityKind:Angle
+          exact_mappings:
+            - qudt:ARCSEC
+      UNITS_DEGREES_DEC_MINUTES:
+        is_a: CompoundDegreeUnit
+        title: Degrees and decimal minutes
+        #structured_aliases:
+        #  - literal_form: DDM
+      UNITS_DEGREES_MIN_DEC_SECS:
+        is_a: CompoundDegreeUnit
+        title: Degrees, minutes, and decimal seconds
+        #structured_aliases:
+        #  - literal_form: DMDS
+      UNITS_RADIANS:
+        is_a: ScalarDegreeUnit
+        title: Radians
+        unit:
+          ucum_code: rad
+          exact_mappings:
+            - qudt:RAD
+      UNITS_GRADS:
+        is_a: ScalarDegreeUnit
+        title: Grads
+        unit:
+          exact_mappings:
+            - qudt:GRAD
+
+  VerticalCoordinateTypeEnum:
+    permissible_values:
+      ## TYPE_ALTITUDE
+      ALTITUDE:
+        description: The distance above or below sea level (elevation)
+      ## TYPE_DEPTH
+      DEPTH:
+        description: The distance above (height) or below (depth) of the local surface
+  VerticalCoordinateDistanceEnum:
+    permissible_values:
+      ## DISTANCE_UNITS_METERS
+      meters:
+        description: Distance in meters
+      ## DISTANCE_UNITS_FEET
+      feet:
+        description: Distance in feet
+  VerticalCoordinateEncodingEnum:
+    permissible_values:
+      ## ENCODING_EXPLICIT
+      EXPLICIT:
+        description: Explicit coordinate included with horizontal coordinates
+      ## ENCODING_IMPLICIT
+      IMPLICIT:
+        description: Implicit coordinate
+      ## ENCODING_ATTRIBUTE
+      ATTRIBUTE:
+        description: Attribute values
+
+  HorizontalCoordinateTypeEnum:
+    permissible_values:
+      ## TYPE_GEOGRAPHIC
+      GEOGRAPHIC:
+        description: The quantities of latitude and longitude which define the position of apoint on the Earth's surface with respect to a reference spheroid.
+      ## TYPE_PLANAR_GRID
+      PLANAR_GRID:
+        description: T plane-rectangular coordinate system usually based on, andmathematically adjusted to, a map projection so that geographicpositions can be readily transformed to and from plane coordinates.
+      ## TYPE_PLANAR_LOCAL
+      PLANAR_LOCAL:
+        description: Any right-handed planar coordinate system of which the z-axiscoincides with a plumb line through the origin that locally is aligned with the surface of the Earth.
+      ## TYPE_PLANAR_MAP_PROJECTION
+      PLANAR_MAP_PROJECTION:
+        description: The systematic representation of all or part of the surface of the Earth on a plane or developable surface.
+      ## TYPE_LOCAL
+      LOCAL:
+        description: A description of any coordinate system that is not aligned with the surface of the Earth.
+  HorizontalCoordinateDatumEnum:
+    permissible_values:
+      ## DATUM_WGS84
+      WGS84:
+        description: World Geodetic System 1984 (WGS84)
+      ## DATUM_NAD83
+      NAD83:
+        description: North American Datum of 1983 (NAD 83)
+      ## DATUM_NAD27
+      NAD27:
+        description: North American Datum 1927 (NAD27)
+
+
   TimeReferenceEnum:
     permissible_values:
       START:
@@ -95,3 +213,53 @@ enums:
       HORIZONTAL_PATH:
       VERTICAL_PATH:
       POINT:
+
+  DepthCoordinateDatumEnum:
+    permissible_values:
+      LS:
+        title: Local Surface
+        description: Local Surface
+      MSL:
+        title: Mean Sea Level
+        description: Mean sea level
+
+  AltitudeCoordinateDatumEnum:
+    permissible_values:
+      NGVD29:
+        description: National Geodetic Vertical Datum of 1929
+      NAVD88:
+        description: North American Vertical Datum of 1988
+
+  RepresentativePointEnum:
+    permissible_values:
+
+      CENTER_LOCAL_SURFACE:
+        description: Placement of the representative point is the center of a local surface
+
+      UPPER_LEFT_CORNER:
+        description: Placement of the representative point is the upper left corner (northwest)
+
+      UPPER_RIGHT_CORNER:
+        description: Placement of the representative point is the upper right corner (northeast)
+
+      LOWER_LEFT_CORNER:
+        description: Placement of the representative point is the lower left corner (southhwest)
+
+      LOWER_RIGHT_CORNER:
+        description: Placement of the representative point is the lower right corner (northeast)
+
+  ObservationDatumEnum:
+    permissible_values:
+      MEASUREMENT_TVP_TIMESERIES:
+        description: Measurement Time Value Pair Timeseries
+      MEASUREMENT:
+        description: A measurement
+
+  TimeMetadataMixinReferenceEnum:
+    permissible_values:
+      START:
+        description: Observations aggregated by yearObservations aggregated by monthObservations aggregated by dayObservations aggregated by hourObservations aggregated by minuteObservations aggregated by secondObservation taken at the start
+      MIDDLE:
+        description: Observation taken in the middle
+      END:
+        description: Observation taken at the end

@@ -47,7 +47,7 @@ pip install basin3d_schema
 Creating objects via generated Pydantic model:
 
 ```python
-from basin3d_schema.datamodel.models import Observation, MonitoringFeature, Coordinate, AbsoluteCoordinate, \
+from basin3d_schema.datamodel.core import Observation, MonitoringFeature, Coordinate, AbsoluteCoordinate,
     GeographicCoordinate
 
 geo_coord = GeographicCoordinate(x=-5, y=20)
@@ -90,7 +90,14 @@ E.g:
 ac = AbsoluteCoordinate(horizontal_position=geo_coord)
 ```
 
-raises an exception as a list is expected
+raises an exception as a list is expected:
+
+```python
+pydantic.error_wrappers.ValidationError: 1 validation error for AbsoluteCoordinate
+horizontal_position
+  value is not a valid list (type=type_error.list)
+
+```
 
 See [test_models](https://github.com/cmungall/basin3d_schema/blob/main/tests/test_model.py) in the unit tests for
 more examples

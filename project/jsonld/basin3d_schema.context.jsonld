@@ -1,5 +1,5 @@
 {
-   "_comments": "Auto generated from basin3d_schema.yaml by jsonldcontextgen.py version: 0.1.1\n    Generation date: 2022-09-21T12:38:03\n    Schema: basin3d_schema\n    metamodel version: 1.7.0\n    model version: None\n    \n    id: https://w3id.org/cmungall/basin3d_schema\n    description: EXPERIMENTAL rendering of basin3d as linkml\n    license: BSD-3\n    ",
+   "_comments": "Auto generated from basin3d_schema.yaml by jsonldcontextgen.py version: 0.1.1\n    Generation date: 2022-09-21T19:51:18\n    Schema: basin3d_schema\n    metamodel version: 1.7.0\n    model version: None\n    \n    id: https://w3id.org/cmungall/basin3d_schema\n    description: EXPERIMENTAL rendering of basin3d as linkml\n    license: BSD-3\n    ",
    "@context": {
       "PATO": {
          "@id": "http://purl.obolibrary.org/obo/PATO_",
@@ -11,6 +11,8 @@
       "linkml": "https://w3id.org/linkml/",
       "schema": "http://schema.org/",
       "skos": "http://www.w3.org/2004/02/skos/core#",
+      "sorep": "http://sweetontology.net/repr/",
+      "sorepscd": "http://sweetontology.net/reprSpaceCoordinate/",
       "@vocab": "https://w3id.org/cmungall/basin3d_schema/",
       "horizontal_position": {
          "@type": "@id"
@@ -18,11 +20,27 @@
       "vertical_extent": {
          "@type": "@id"
       },
+      "datum": {
+         "@context": {
+            "@vocab": "@null",
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         }
+      },
       "absolute": {
          "@type": "@id"
       },
       "representative": {
          "@type": "@id"
+      },
+      "type": {
+         "@context": {
+            "@vocab": "@null",
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         }
       },
       "x": {
          "@type": "xsd:float"
@@ -70,11 +88,22 @@
       "observed_property_variable": {
          "@type": "@id"
       },
+      "email": {
+         "@id": "schema:email"
+      },
       "related_sampling_feature": {
          "@type": "@id"
       },
       "representative_point": {
          "@type": "@id"
+      },
+      "representative_point_type": {
+         "@context": {
+            "@vocab": "@null",
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         }
       },
       "vertical_position": {
          "@type": "@id"
@@ -85,11 +114,52 @@
       "coordinates": {
          "@type": "@id"
       },
+      "aggregation_duration": {
+         "@context": {
+            "@vocab": "@null",
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         }
+      },
+      "time_reference_position": {
+         "@context": {
+            "@vocab": "@null",
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         }
+      },
+      "distance_units": {
+         "@context": {
+            "@vocab": "@null",
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         }
+      },
+      "encoding_method": {
+         "@context": {
+            "@vocab": "@null",
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         }
+      },
       "resolution": {
          "@type": "xsd:float"
       },
       "value": {
          "@type": "xsd:float"
+      },
+      "Coordinate": {
+         "@id": "sorep:Coordinate"
+      },
+      "HorizontalCoordinate": {
+         "@id": "sorepscd:HorizontalCoordinate"
+      },
+      "VerticalCoordinate": {
+         "@id": "sorepscd:VerticalCoordinate"
       }
    }
 }

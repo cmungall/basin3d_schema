@@ -91,7 +91,7 @@ gen-project: $(PYMODEL) compile-sheets
 	$(RUN) gen-project -d $(DEST) $(SOURCE_SCHEMA_PATH)
 
 gen-py:
-	$(RUN) gen-pydantic $(SOURCE_SCHEMA_PATH) > $(PYMODEL)/models.py
+	$(RUN) gen-pydantic $(SOURCE_SCHEMA_PATH) > $(PYMODEL)/core.py
 
 test: test-schema test-python
 test-schema:

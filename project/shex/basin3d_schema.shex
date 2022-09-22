@@ -2,6 +2,9 @@ BASE <https://w3id.org/cmungall/basin3d_schema/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX schema: <http://schema.org/>
+PREFIX sorep: <http://sweetontology.net/repr/>
+PREFIX sorepscd: <http://sweetontology.net/reprSpaceCoordinate/>
 
 
 linkml:String xsd:string
@@ -46,8 +49,8 @@ linkml:Nodeidentifier NONLITERAL
 
 <AltitudeCoordinate> CLOSED {
     (  $<AltitudeCoordinate_tes> (  &<VerticalCoordinate_tes> ;
-          rdf:type [ <VerticalCoordinate> ] ? ;
-          <datum> @linkml:String ?
+          rdf:type [ sorepscd:VerticalCoordinate ] ? ;
+          <datum> @<AltitudeCoordinateDatumEnum> ?
        ) ;
        rdf:type [ <AltitudeCoordinate> ] ?
     )
@@ -67,20 +70,20 @@ linkml:Nodeidentifier NONLITERAL
 <Coordinate> CLOSED {
     (  $<Coordinate_tes> (  &<Base_tes> ;
           rdf:type [ <Base> ] ? ;
-          <absolute> @<AbsoluteCoordinate> ? ;
-          <representative> @<RepresentativeCoordinate> ?
+          <representative> @<RepresentativeCoordinate> ? ;
+          <absolute> @<AbsoluteCoordinate> ?
        ) ;
-       rdf:type [ <Coordinate> ] ?
+       rdf:type [ sorep:Coordinate ] ?
     )
 }
 
 <DataSource> CLOSED {
     (  $<DataSource_tes> (  &<JSONSerializable_tes> ;
           rdf:type [ <JSONSerializable> ] ? ;
+          <id_prefix> @linkml:String ? ;
+          <credentials> @linkml:String ? ;
           <name> @linkml:String ? ;
           <id> @linkml:String ? ;
-          <credentials> @linkml:String ? ;
-          <id_prefix> @linkml:String ? ;
           <location> @linkml:String ?
        ) ;
        rdf:type [ <DataSource> ] ?
@@ -89,7 +92,8 @@ linkml:Nodeidentifier NONLITERAL
 
 <DepthCoordinate> CLOSED {
     (  $<DepthCoordinate_tes> (  &<VerticalCoordinate_tes> ;
-          rdf:type [ <VerticalCoordinate> ] ?
+          rdf:type [ sorepscd:VerticalCoordinate ] ? ;
+          <datum> @<DepthCoordinateDatumEnum> ?
        ) ;
        rdf:type [ <DepthCoordinate> ] ?
     )
@@ -99,11 +103,11 @@ linkml:Nodeidentifier NONLITERAL
     CLOSED {
        (  $<Feature_tes> (  &<Base_tes> ;
              rdf:type [ <Base> ] ? ;
+             <feature_type> @linkml:String ? ;
              <description> @linkml:String ? ;
              <name> @linkml:String ? ;
-             <feature_type> @linkml:String ? ;
-             <observed_property_variables> @linkml:String * ;
-             <id> @linkml:String ?
+             <id> @linkml:String ? ;
+             <observed_property_variables> @linkml:String *
           ) ;
           rdf:type [ <Feature> ] ?
        )
@@ -112,7 +116,7 @@ linkml:Nodeidentifier NONLITERAL
 
 <GeographicCoordinate> CLOSED {
     (  $<GeographicCoordinate_tes> (  &<HorizontalCoordinate_tes> ;
-          rdf:type [ <HorizontalCoordinate> ] ? ;
+          rdf:type [ sorepscd:HorizontalCoordinate ] ? ;
           <units> @linkml:String ?
        ) ;
        rdf:type [ <GeographicCoordinate> ] ?
@@ -123,12 +127,12 @@ linkml:Nodeidentifier NONLITERAL
     CLOSED {
        (  $<HorizontalCoordinate_tes> (  &<Base_tes> ;
              rdf:type [ <Base> ] ? ;
-             <datum> @linkml:String ? ;
+             <type> @<HorizontalCoordinateTypeEnum> ? ;
+             <datum> @<HorizontalCoordinateDatumEnum> ? ;
              <x> @linkml:Float ? ;
-             <y> @linkml:Float ? ;
-             <type> @linkml:String ?
+             <y> @linkml:Float ?
           ) ;
-          rdf:type [ <HorizontalCoordinate> ] ?
+          rdf:type [ sorepscd:HorizontalCoordinate ] ?
        )
     } OR @<GeographicCoordinate>
 )
@@ -157,6 +161,26 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
+<MeasurementTimeseriesTVPObservation> CLOSED {
+    (  $<MeasurementTimeseriesTVPObservation_tes> (  &<Observation_tes> ;
+          rdf:type [ <Observation> ] ? ;
+          &<TimeMetadataMixin_tes> ;
+          rdf:type [ <TimeMetadataMixin> ] ? ;
+          &<MeasurementMetadataMixin_tes> ;
+          rdf:type [ <MeasurementMetadataMixin> ] ? ;
+          &<MeasurementTimeseriesTVPResultMixin_tes> ;
+          rdf:type [ <MeasurementTimeseriesTVPResultMixin> ] ? ;
+          <aggregation_duration> @<TimeFrequencyEnum> ? ;
+          <time_reference_position> @<TimeMetadataMixinReferenceEnum> ? ;
+          <statistic> @linkml:String ? ;
+          <observed_property_variable> @linkml:String ? ;
+          <unit_of_measurement> @linkml:String ? ;
+          <result_points> @<TimeValuePair> *
+       ) ;
+       rdf:type [ <MeasurementTimeseriesTVPObservation> ] ?
+    )
+}
+
 <MeasurementTimeseriesTVPResultMixin> {
     (  $<MeasurementTimeseriesTVPResultMixin_tes> (  <unit_of_measurement> @linkml:String ? ;
           <result_points> @<TimeValuePair> *
@@ -168,38 +192,40 @@ linkml:Nodeidentifier NONLITERAL
 <MonitoringFeature> CLOSED {
     (  $<MonitoringFeature_tes> (  &<SpatialSamplingFeature_tes> ;
           rdf:type [ <SpatialSamplingFeature> ] ? ;
-          <utc_offset> @linkml:Integer ? ;
           <related_party> @<Person> * ;
-          <description_reference> @linkml:String ?
+          <description_reference> @linkml:String ? ;
+          <utc_offset> @linkml:Integer ?
        ) ;
        rdf:type [ <MonitoringFeature> ] ?
     )
 }
 
-<Observation> CLOSED {
-    (  $<Observation_tes> (  &<Base_tes> ;
-          rdf:type [ <Base> ] ? ;
-          <feature_of_interest> @<MonitoringFeature> ? ;
-          <id> @linkml:String ? ;
-          <result_quality> @<ResultQualityEnum> ? ;
-          <type> @linkml:String ? ;
-          <feature_of_interest_type> @<FeatureTypeEnum> ? ;
-          <phenomenon_time> @linkml:String ? ;
-          <observed_property> @<ObservedProperty> ? ;
-          <utc_offset> @linkml:Integer ?
-       ) ;
-       rdf:type [ <Observation> ] ?
-    )
-}
+<Observation>  (
+    CLOSED {
+       (  $<Observation_tes> (  &<Base_tes> ;
+             rdf:type [ <Base> ] ? ;
+             <feature_of_interest_type> @<FeatureTypeEnum> ? ;
+             <result_quality> @<ResultQualityEnum> ? ;
+             <utc_offset> @linkml:Integer ? ;
+             <feature_of_interest> @<MonitoringFeature> ? ;
+             <observed_property> @<ObservedProperty> ? ;
+             <phenomenon_time> @linkml:String ? ;
+             <id> @linkml:String ? ;
+             <type> @<ObservationDatumEnum> ?
+          ) ;
+          rdf:type [ <Observation> ] ?
+       )
+    } OR @<MeasurementTimeseriesTVPObservation>
+)
 
 <ObservedProperty> CLOSED {
     (  $<ObservedProperty_tes> (  &<JSONSerializable_tes> ;
           rdf:type [ <JSONSerializable> ] ? ;
-          <datasource> @<DataSource> ? ;
           <datasource_variable> @linkml:String ? ;
-          <sampling_medium> @linkml:String ? ;
           <observed_property_variable> @<ObservedPropertyVariable> ? ;
-          <datasource_description> @linkml:String ?
+          <sampling_medium> @linkml:String ? ;
+          <datasource_description> @linkml:String ? ;
+          <datasource> @<DataSource> ?
        ) ;
        rdf:type [ <ObservedProperty> ] ?
     )
@@ -208,10 +234,10 @@ linkml:Nodeidentifier NONLITERAL
 <ObservedPropertyVariable> CLOSED {
     (  $<ObservedPropertyVariable_tes> (  &<JSONSerializable_tes> ;
           rdf:type [ <JSONSerializable> ] ? ;
-          <units> @linkml:String ? ;
-          <full_name> @linkml:String ? ;
           <basin3d_id> @linkml:String ? ;
-          <categories> @linkml:String *
+          <units> @linkml:String ? ;
+          <categories> @linkml:String * ;
+          <full_name> @linkml:String ?
        ) ;
        rdf:type [ <ObservedPropertyVariable> ] ?
     )
@@ -220,11 +246,11 @@ linkml:Nodeidentifier NONLITERAL
 <Person> CLOSED {
     (  $<Person_tes> (  &<Base_tes> ;
           rdf:type [ <Base> ] ? ;
-          <email> @linkml:String ? ;
-          <role> @linkml:String ? ;
-          <first_name> @linkml:String ? ;
+          schema:email @linkml:String ? ;
+          <last_name> @linkml:String ? ;
           <institution> @linkml:String ? ;
-          <last_name> @linkml:String ?
+          <first_name> @linkml:String ? ;
+          <role> @linkml:String ?
        ) ;
        rdf:type [ <Person> ] ?
     )
@@ -233,9 +259,9 @@ linkml:Nodeidentifier NONLITERAL
 <RelatedSamplingFeature> CLOSED {
     (  $<RelatedSamplingFeature_tes> (  &<Base_tes> ;
           rdf:type [ <Base> ] ? ;
+          <role> @linkml:String ? ;
           <related_sampling_feature_type> @linkml:String ? ;
-          <related_sampling_feature> @<SamplingFeature> ? ;
-          <role> @linkml:String ?
+          <related_sampling_feature> @<SamplingFeature> ?
        ) ;
        rdf:type [ <RelatedSamplingFeature> ] ?
     )
@@ -245,8 +271,8 @@ linkml:Nodeidentifier NONLITERAL
     (  $<RepresentativeCoordinate_tes> (  &<Base_tes> ;
           rdf:type [ <Base> ] ? ;
           <representative_point> @<AbsoluteCoordinate> ? ;
-          <representative_point_type> @linkml:String ? ;
-          <vertical_position> @<DepthCoordinate> ?
+          <vertical_position> @<DepthCoordinate> ? ;
+          <representative_point_type> @<RepresentativePointEnum> ?
        ) ;
        rdf:type [ <RepresentativeCoordinate> ] ?
     )
@@ -267,8 +293,8 @@ linkml:Nodeidentifier NONLITERAL
     CLOSED {
        (  $<SpatialSamplingFeature_tes> (  &<SamplingFeature_tes> ;
              rdf:type [ <SamplingFeature> ] ? ;
-             <coordinates> @<Coordinate> ? ;
-             <shape> @linkml:String ?
+             <shape> @linkml:String ? ;
+             <coordinates> @<Coordinate> ?
           ) ;
           rdf:type [ <SpatialSamplingFeature> ] ?
        )
@@ -276,15 +302,17 @@ linkml:Nodeidentifier NONLITERAL
 )
 
 <TimeMetadataMixin> {
-    (  $<TimeMetadataMixin_tes> (  <aggregation_duration> @linkml:String ? ;
-          <time_reference_position> @linkml:String ?
+    (  $<TimeMetadataMixin_tes> (  <aggregation_duration> @<TimeFrequencyEnum> ? ;
+          <time_reference_position> @<TimeMetadataMixinReferenceEnum> ?
        ) ;
        rdf:type [ <TimeMetadataMixin> ] ?
     )
 }
 
 <TimeValuePair> CLOSED {
-    (  $<TimeValuePair_tes> rdf:type . * ;
+    (  $<TimeValuePair_tes> (  <timestamp> @linkml:String ? ;
+          <value> @linkml:String ?
+       ) ;
        rdf:type [ <TimeValuePair> ] ?
     )
 }
@@ -293,14 +321,14 @@ linkml:Nodeidentifier NONLITERAL
     CLOSED {
        (  $<VerticalCoordinate_tes> (  &<Base_tes> ;
              rdf:type [ <Base> ] ? ;
-             <distance_units> @linkml:String ? ;
+             <encoding_method> @<VerticalCoordinateEncodingEnum> ? ;
+             <value> @linkml:Float ? ;
+             <distance_units> @<VerticalCoordinateDistanceEnum> ? ;
+             <type> @<VerticalCoordinateTypeEnum> ? ;
              <datum> @linkml:String ? ;
-             <type> @linkml:String ? ;
-             <resolution> @linkml:Float ? ;
-             <encoding_method> @linkml:String ? ;
-             <value> @linkml:Float ?
+             <resolution> @linkml:Float ?
           ) ;
-          rdf:type [ <VerticalCoordinate> ] ?
+          rdf:type [ sorepscd:VerticalCoordinate ] ?
        )
     } OR @<AltitudeCoordinate> OR @<DepthCoordinate>
 )

@@ -7,158 +7,182 @@ message AbsoluteCoordinate
 // An altitudinal vertical position (i.e., distance from sea level).The reference frame or system is specified. The term'altitude' is used instead of the common term 'elevation' to conform to the terminologyin Federal Information Processing Standards 70-1 and 173.
 message AltitudeCoordinate
  {
-  string distanceUnits = 0
-  string type = 0
-  float resolution = 0
-  string encodingMethod = 0
+  verticalCoordinateEncodingEnum encodingMethod = 0
   float value = 0
-  string datum = 0
+  verticalCoordinateDistanceEnum distanceUnits = 0
+  verticalCoordinateTypeEnum type = 0
+  float resolution = 0
+  altitudeCoordinateDatumEnum datum = 0
  }
 // Top level coordinate class that holds :class:`AbsoluteCoordinate` or :class:`RepresentativeCoordinate`
 message Coordinate
  {
-  absoluteCoordinate absolute = 0
   representativeCoordinate representative = 0
+  absoluteCoordinate absolute = 0
  }
 // Data Source definitionAttributes:- *id:* string (inherited)- *name:* string- *id_prefix:* string, prefix that is added to all data source ids- *location*- *credentials:*
 message DataSource
  {
+  string idPrefix = 0
+  string credentials = 0
   string name = 0
   string id = 0
-  string credentials = 0
-  string idPrefix = 0
   string location = 0
  }
 // A depth vertical position (i.e., the height or depth from the specified reference position)The reference frame or system is specified.
 message DepthCoordinate
  {
-  string distanceUnits = 0
-  string datum = 0
-  string type = 0
-  float resolution = 0
-  string encodingMethod = 0
+  verticalCoordinateEncodingEnum encodingMethod = 0
   float value = 0
+  verticalCoordinateDistanceEnum distanceUnits = 0
+  verticalCoordinateTypeEnum type = 0
+  float resolution = 0
+  depthCoordinateDatumEnum datum = 0
  }
 // A general feature upon which an observation can be made. Loosely after GF_Feature (ISO).
 message Feature
  {
+  string featureType = 0
   string description = 0
   string name = 0
-  string featureType = 0
- repeated  string observedPropertyVariables = 0
   string id = 0
+ repeated  string observedPropertyVariables = 0
  }
 // The latitude and longitude which define the position of a point onthe Earth's surface with respect to a reference spheroid.(https://www.fgdc.gov/csdgmgraphical/spref.htm)
 message GeographicCoordinate
  {
-  string datum = 0
+  horizontalCoordinateTypeEnum type = 0
+  horizontalCoordinateDatumEnum datum = 0
   float x = 0
   float y = 0
-  string type = 0
   string units = 0
  }
 message HorizontalCoordinate
  {
-  string datum = 0
+  horizontalCoordinateTypeEnum type = 0
+  horizontalCoordinateDatumEnum datum = 0
   float x = 0
   float y = 0
-  string type = 0
+ }
+// Series of measurement (numerical) observations in TVP format grouped by time (i.e., a timeseries).Anything specified at the group level automatically applies to the individual observation.
+message MeasurementTimeseriesTVPObservation
+ {
+  featureTypeEnum featureOfInterestType = 0
+  resultQualityEnum resultQuality = 0
+  integer utcOffset = 0
+  monitoringFeature featureOfInterest = 0
+  observedProperty observedProperty = 0
+  string phenomenonTime = 0
+  string id = 0
+  observationDatumEnum type = 0
+  timeFrequencyEnum aggregationDuration = 0
+  timeMetadataMixinReferenceEnum timeReferencePosition = 0
+  string statistic = 0
+  string observedPropertyVariable = 0
+  string unitOfMeasurement = 0
+ repeated  timeValuePair resultPoints = 0
  }
 // A feature upon which monitoring is made. OGC Timeseries Profile OM_MonitoringFeature.
 message MonitoringFeature
  {
+  string featureType = 0
   string description = 0
   string name = 0
-  string featureType = 0
- repeated  string observedPropertyVariables = 0
   string id = 0
+ repeated  string observedPropertyVariables = 0
  repeated  samplingFeature relatedSamplingFeatureComplex = 0
-  coordinate coordinates = 0
   string shape = 0
-  integer utcOffset = 0
+  coordinate coordinates = 0
  repeated  person relatedParty = 0
   string descriptionReference = 0
+  integer utcOffset = 0
  }
 // OGC OM_Observation feature type. This is a parent class to which Mixinsshould be added to create observation types with metadata and result.
 message Observation
  {
-  monitoringFeature featureOfInterest = 0
-  string id = 0
-  resultQualityEnum resultQuality = 0
-  string type = 0
   featureTypeEnum featureOfInterestType = 0
-  string phenomenonTime = 0
-  observedProperty observedProperty = 0
+  resultQualityEnum resultQuality = 0
   integer utcOffset = 0
+  monitoringFeature featureOfInterest = 0
+  observedProperty observedProperty = 0
+  string phenomenonTime = 0
+  string id = 0
+  observationDatumEnum type = 0
  }
 // Defining the attributes for a single/multiple Observed PropertiesAttributes:- *datasource_variable:* id, e.g., Cs 137 air dose rate car survey campaigns- *observed_property_variable_id:* string, e.g., Cs137MVID- *sampling_medium:* enum (WATER, GAS, SOLID PHASE, OTHER, NOT APPLICABLE)- *datasource:*- *datasource_description:*
 message ObservedProperty
  {
-  dataSource datasource = 0
   string datasourceVariable = 0
-  string samplingMedium = 0
   observedPropertyVariable observedPropertyVariable = 0
+  string samplingMedium = 0
   string datasourceDescription = 0
+  dataSource datasource = 0
  }
 // Defining the properties being observed (measured). See http://vocabulary.odm2.org/variablename/ for controlled vocabularyAttributes:- *basin3d_id:* string,- *full_name:* string,- *categories:* List of strings (in order of priority).- *units:* stringSee http://vocabulary.odm2.org/variabletype/ for options, although I think we should have our own list (theirs is a bit funky).
 message ObservedPropertyVariable
  {
-  string units = 0
-  string fullName = 0
   string basin3dId = 0
+  string units = 0
  repeated  string categories = 0
+  string fullName = 0
  }
 message Person
  {
   string email = 0
-  string role = 0
-  string firstName = 0
-  string institution = 0
   string lastName = 0
+  string institution = 0
+  string firstName = 0
+  string role = 0
  }
 // Class that represents a related sampling feature and its role relative tothe sampling feature to which it is related. Spatial hierarchies of featuresare built by specifying related sampling features.Data model from OGC Observations and Measurements.
 message RelatedSamplingFeature
  {
+  string role = 0
   string relatedSamplingFeatureType = 0
   samplingFeature relatedSamplingFeature = 0
-  string role = 0
  }
 // Representative coordinates describe the location of a feature by a representative shape / location.For example, a study area may be represented by the center point.The veritical position from a reference position (e.g., height, depth) is also described in this class.Currently representative points are supported. The class is extendable to other forms of representing(e.g., diameter, area, side_length)Representative point types are also expandable as use cases require.
 message RepresentativeCoordinate
  {
   absoluteCoordinate representativePoint = 0
-  string representativePointType = 0
   depthCoordinate verticalPosition = 0
+  representativePointEnum representativePointType = 0
  }
 // A feature where sampling is conducted. OGC Observation & Measurements SF_SamplingFeature.
 message SamplingFeature
  {
+  string featureType = 0
   string description = 0
   string name = 0
-  string featureType = 0
- repeated  string observedPropertyVariables = 0
   string id = 0
+ repeated  string observedPropertyVariables = 0
  repeated  samplingFeature relatedSamplingFeatureComplex = 0
  }
 // A spatially-defined feature where sampling is conducted. OGC Observation & Measurements SF_SpatialSamplingFeature.
 message SpatialSamplingFeature
  {
+  string featureType = 0
   string description = 0
   string name = 0
-  string featureType = 0
- repeated  string observedPropertyVariables = 0
   string id = 0
+ repeated  string observedPropertyVariables = 0
  repeated  samplingFeature relatedSamplingFeatureComplex = 0
-  coordinate coordinates = 0
   string shape = 0
+  coordinate coordinates = 0
+ }
+// Tuple that represents a time value pair.  This will handle timestamp conversion`(timestamp, value)`
+message TimeValuePair
+ {
+  string timestamp = 0
+  string value = 0
  }
 // The vertical position of the feature (altitudes or depths).The reference frame or system is specified.
 message VerticalCoordinate
  {
-  string distanceUnits = 0
-  string datum = 0
-  string type = 0
-  float resolution = 0
-  string encodingMethod = 0
+  verticalCoordinateEncodingEnum encodingMethod = 0
   float value = 0
+  verticalCoordinateDistanceEnum distanceUnits = 0
+  verticalCoordinateTypeEnum type = 0
+  string datum = 0
+  float resolution = 0
  }

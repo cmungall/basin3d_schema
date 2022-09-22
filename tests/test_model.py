@@ -3,8 +3,9 @@ import os
 import glob
 import unittest
 
-from basin3d_schema.datamodel.models import Observation, MonitoringFeature, Coordinate, AbsoluteCoordinate, \
-    GeographicCoordinate, FeatureTypeEnum, MeasurementTimeseriesTVPObservation, TimeFrequencyEnum
+from basin3d_schema.datamodel.core import Observation, MonitoringFeature, Coordinate, AbsoluteCoordinate, \
+    GeographicCoordinate, FeatureTypeEnum, MeasurementTimeseriesTVPObservation, TimeFrequencyEnum, HorizontalCoordinate, \
+    HorizontalCoordinateDatumEnum, HorizontalCoordinateTypeEnum
 
 ROOT = os.path.join(os.path.dirname(__file__), '..')
 DATA_DIR = os.path.join(ROOT, "src", "data", "examples")
@@ -15,16 +16,20 @@ class TestDataModel(unittest.TestCase):
     """Test datamodel."""
 
     def test_model(self):
-        """Observation test."""
-        geo_coord = GeographicCoordinate(x=-5, y=20)
+        """Create test objects, serialize, and deserialize"""
+        geo_coord = GeographicCoordinate(x=-5, y=20,
+                                         datum=HorizontalCoordinateDatumEnum.WGS84,
+                                         type=HorizontalCoordinateTypeEnum.GEOGRAPHIC)
         ft = FeatureTypeEnum.WATERSHED
         feat = MonitoringFeature(description="test",
                                  coordinates=Coordinate(absolute=AbsoluteCoordinate(horizontal_position=[geo_coord])))
         obs = MeasurementTimeseriesTVPObservation(feature_of_interest=feat,
                                                   feature_of_interest_type=ft,
                                                   aggregation_duration=TimeFrequencyEnum.MONTH)
-        print(obs)
-        print(obs.json(exclude_unset=True, indent=True))
+        jstr = obs.json(exclude_unset=True, indent=True)
+        print(jstr)
+        obs2 = MeasurementTimeseriesTVPObservation.parse_raw(jstr)
+        self.assertEqual(obs, obs2)
 
     def test_validation(self):
         geo_coord = GeographicCoordinate(x=-5, y=20)
@@ -38,4 +43,7 @@ class TestDataModel(unittest.TestCase):
         # adding a space:
         with self.assertRaises(Exception) as e:
             MeasurementTimeseriesTVPObservation(feature_of_interest_type="WATER SHED")
+        # enum validation: using the wrong enum
+        with self.assertRaises(Exception) as e:
+            x = HorizontalCoordinate(type=HorizontalCoordinateDatumEnum.WGS84)
 

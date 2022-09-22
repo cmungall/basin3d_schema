@@ -1,1 +1,1 @@
-from basin3d_schema.datamodel.models import *
+from basin3d_schema.datamodel.core import *

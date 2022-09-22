@@ -30,6 +30,60 @@ class TimeFrequencyEnum(str, Enum):
     
     
 
+class CoordinateUnitEnum(str, Enum):
+    
+    ScalarDegreeUnit = "ScalarDegreeUnit"
+    CompoundDegreeUnit = "CompoundDegreeUnit"
+    UNITS_DEC_DEGREES = "UNITS_DEC_DEGREES"
+    UNITS_DEC_MINUTES = "UNITS_DEC_MINUTES"
+    UNITS_DEC_SECONDS = "UNITS_DEC_SECONDS"
+    UNITS_DEGREES_DEC_MINUTES = "UNITS_DEGREES_DEC_MINUTES"
+    UNITS_DEGREES_MIN_DEC_SECS = "UNITS_DEGREES_MIN_DEC_SECS"
+    UNITS_RADIANS = "UNITS_RADIANS"
+    UNITS_GRADS = "UNITS_GRADS"
+    
+    
+
+class VerticalCoordinateTypeEnum(str, Enum):
+    
+    ALTITUDE = "ALTITUDE"
+    DEPTH = "DEPTH"
+    
+    
+
+class VerticalCoordinateDistanceEnum(str, Enum):
+    
+    meters = "meters"
+    feet = "feet"
+    
+    
+
+class VerticalCoordinateEncodingEnum(str, Enum):
+    
+    EXPLICIT = "EXPLICIT"
+    IMPLICIT = "IMPLICIT"
+    ATTRIBUTE = "ATTRIBUTE"
+    
+    
+
+class HorizontalCoordinateTypeEnum(str, Enum):
+    
+    GEOGRAPHIC = "GEOGRAPHIC"
+    PLANAR_GRID = "PLANAR_GRID"
+    PLANAR_LOCAL = "PLANAR_LOCAL"
+    PLANAR_MAP_PROJECTION = "PLANAR_MAP_PROJECTION"
+    LOCAL = "LOCAL"
+    
+    
+
+class HorizontalCoordinateDatumEnum(str, Enum):
+    
+    WGS84 = "WGS84"
+    NAD83 = "NAD83"
+    NAD27 = "NAD27"
+    
+    
+
 class TimeReferenceEnum(str, Enum):
     
     START = "START"
@@ -72,11 +126,51 @@ class FeatureTypeEnum(str, Enum):
     
     
 
+class DepthCoordinateDatumEnum(str, Enum):
+    
+    LS = "LS"
+    MSL = "MSL"
+    
+    
+
+class AltitudeCoordinateDatumEnum(str, Enum):
+    
+    NGVD29 = "NGVD29"
+    NAVD88 = "NAVD88"
+    
+    
+
+class RepresentativePointEnum(str, Enum):
+    
+    CENTER_LOCAL_SURFACE = "CENTER_LOCAL_SURFACE"
+    UPPER_LEFT_CORNER = "UPPER_LEFT_CORNER"
+    UPPER_RIGHT_CORNER = "UPPER_RIGHT_CORNER"
+    LOWER_LEFT_CORNER = "LOWER_LEFT_CORNER"
+    LOWER_RIGHT_CORNER = "LOWER_RIGHT_CORNER"
+    
+    
+
+class ObservationDatumEnum(str, Enum):
+    
+    MEASUREMENT_TVP_TIMESERIES = "MEASUREMENT_TVP_TIMESERIES"
+    MEASUREMENT = "MEASUREMENT"
+    
+    
+
+class TimeMetadataMixinReferenceEnum(str, Enum):
+    
+    START = "START"
+    MIDDLE = "MIDDLE"
+    END = "END"
+    
+    
+
 class TimeValuePair(ConfiguredBaseModel):
     """
     Tuple that represents a time value pair.  This will handle timestamp conversion`(timestamp, value)`
     """
-    None
+    timestamp: Optional[str] = Field(None)
+    value: Optional[str] = Field(None)
     
 
 
@@ -93,8 +187,8 @@ class TimeMetadataMixin(ConfiguredBaseModel):
     """
     Metadata attributes for Observations with a time
     """
-    aggregation_duration: Optional[str] = Field(None)
-    time_reference_position: Optional[str] = Field(None)
+    aggregation_duration: Optional[TimeFrequencyEnum] = Field(None)
+    time_reference_position: Optional[TimeMetadataMixinReferenceEnum] = Field(None)
     
 
 
@@ -112,7 +206,7 @@ class MeasurementMetadataMixin(ConfiguredBaseModel):
     Metadata attributes for Observations type Measurement
     """
     statistic: Optional[str] = Field(None)
-    observed_property_variable: Optional[ObservedPropertyVariable] = Field(None)
+    observed_property_variable: Optional[str] = Field(None)
     
 
 
@@ -186,7 +280,7 @@ class Observation(Base):
     observed_property: Optional[ObservedProperty] = Field(None)
     phenomenon_time: Optional[str] = Field(None)
     id: Optional[str] = Field(None)
-    type: Optional[str] = Field(None)
+    type: Optional[ObservationDatumEnum] = Field(None)
     
 
 
@@ -194,10 +288,10 @@ class MeasurementTimeseriesTVPObservation(Observation, MeasurementMetadataMixin,
     """
     Series of measurement (numerical) observations in TVP format grouped by time (i.e., a timeseries).Anything specified at the group level automatically applies to the individual observation.
     """
-    aggregation_duration: Optional[str] = Field(None)
-    time_reference_position: Optional[str] = Field(None)
+    aggregation_duration: Optional[TimeFrequencyEnum] = Field(None)
+    time_reference_position: Optional[TimeMetadataMixinReferenceEnum] = Field(None)
     statistic: Optional[str] = Field(None)
-    observed_property_variable: Optional[ObservedPropertyVariable] = Field(None)
+    observed_property_variable: Optional[str] = Field(None)
     unit_of_measurement: Optional[str] = Field(None)
     result_points: Optional[List[TimeValuePair]] = Field(default_factory=list)
     feature_of_interest_type: Optional[FeatureTypeEnum] = Field(None)
@@ -207,7 +301,7 @@ class MeasurementTimeseriesTVPObservation(Observation, MeasurementMetadataMixin,
     observed_property: Optional[ObservedProperty] = Field(None)
     phenomenon_time: Optional[str] = Field(None)
     id: Optional[str] = Field(None)
-    type: Optional[str] = Field(None)
+    type: Optional[ObservationDatumEnum] = Field(None)
     
 
 
@@ -226,7 +320,7 @@ class RepresentativeCoordinate(Base):
     """
     representative_point: Optional[AbsoluteCoordinate] = Field(None)
     vertical_position: Optional[DepthCoordinate] = Field(None)
-    representative_point_type: Optional[str] = Field(None)
+    representative_point_type: Optional[RepresentativePointEnum] = Field(None)
     
 
 
@@ -243,10 +337,10 @@ class VerticalCoordinate(Base):
     """
     The vertical position of the feature (altitudes or depths).The reference frame or system is specified.
     """
-    encoding_method: Optional[str] = Field(None)
+    encoding_method: Optional[VerticalCoordinateEncodingEnum] = Field(None)
     value: Optional[float] = Field(None)
-    distance_units: Optional[str] = Field(None)
-    type: Optional[str] = Field(None)
+    distance_units: Optional[VerticalCoordinateDistanceEnum] = Field(None)
+    type: Optional[VerticalCoordinateTypeEnum] = Field(None)
     datum: Optional[str] = Field(None)
     resolution: Optional[float] = Field(None)
     
@@ -256,11 +350,11 @@ class DepthCoordinate(VerticalCoordinate):
     """
     A depth vertical position (i.e., the height or depth from the specified reference position)The reference frame or system is specified.
     """
-    encoding_method: Optional[str] = Field(None)
+    encoding_method: Optional[VerticalCoordinateEncodingEnum] = Field(None)
     value: Optional[float] = Field(None)
-    distance_units: Optional[str] = Field(None)
-    type: Optional[str] = Field(None)
-    datum: Optional[str] = Field(None)
+    distance_units: Optional[VerticalCoordinateDistanceEnum] = Field(None)
+    type: Optional[VerticalCoordinateTypeEnum] = Field(None)
+    datum: Optional[DepthCoordinateDatumEnum] = Field(None)
     resolution: Optional[float] = Field(None)
     
 
@@ -269,11 +363,11 @@ class AltitudeCoordinate(VerticalCoordinate):
     """
     An altitudinal vertical position (i.e., distance from sea level).The reference frame or system is specified. The term'altitude' is used instead of the common term 'elevation' to conform to the terminologyin Federal Information Processing Standards 70-1 and 173.
     """
-    datum: Optional[str] = Field(None)
-    encoding_method: Optional[str] = Field(None)
+    datum: Optional[AltitudeCoordinateDatumEnum] = Field(None)
+    encoding_method: Optional[VerticalCoordinateEncodingEnum] = Field(None)
     value: Optional[float] = Field(None)
-    distance_units: Optional[str] = Field(None)
-    type: Optional[str] = Field(None)
+    distance_units: Optional[VerticalCoordinateDistanceEnum] = Field(None)
+    type: Optional[VerticalCoordinateTypeEnum] = Field(None)
     resolution: Optional[float] = Field(None)
     
 
@@ -350,8 +444,8 @@ class DataSource(JSONSerializable):
 
 class HorizontalCoordinate(Base):
     
-    type: Optional[str] = Field(None)
-    datum: Optional[str] = Field(None)
+    type: Optional[HorizontalCoordinateTypeEnum] = Field(None)
+    datum: Optional[HorizontalCoordinateDatumEnum] = Field(None)
     x: Optional[float] = Field(None)
     y: Optional[float] = Field(None)
     
@@ -362,8 +456,8 @@ class GeographicCoordinate(HorizontalCoordinate):
     The latitude and longitude which define the position of a point onthe Earth's surface with respect to a reference spheroid.(https://www.fgdc.gov/csdgmgraphical/spref.htm)
     """
     units: Optional[str] = Field(None)
-    type: Optional[str] = Field(None)
-    datum: Optional[str] = Field(None)
+    type: Optional[HorizontalCoordinateTypeEnum] = Field(None)
+    datum: Optional[HorizontalCoordinateDatumEnum] = Field(None)
     x: Optional[float] = Field(None)
     y: Optional[float] = Field(None)
     

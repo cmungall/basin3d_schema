@@ -6,12 +6,12 @@ type AbsoluteCoordinate
 
 type AltitudeCoordinate
   {
-    distanceUnits: String
-    type: String
-    resolution: Float
-    encodingMethod: String
+    encodingMethod: VerticalCoordinateEncodingEnum
     value: Float
-    datum: String
+    distanceUnits: VerticalCoordinateDistanceEnum
+    type: VerticalCoordinateTypeEnum
+    resolution: Float
+    datum: AltitudeCoordinateDatumEnum
   }
 
 type Base
@@ -20,53 +20,53 @@ type Base
 
 type Coordinate
   {
-    absolute: AbsoluteCoordinate
     representative: RepresentativeCoordinate
+    absolute: AbsoluteCoordinate
   }
 
 type DataSource
   {
+    idPrefix: String
+    credentials: String
     name: String
     id: String
-    credentials: String
-    idPrefix: String
     location: String
   }
 
 type DepthCoordinate
   {
-    distanceUnits: String
-    datum: String
-    type: String
-    resolution: Float
-    encodingMethod: String
+    encodingMethod: VerticalCoordinateEncodingEnum
     value: Float
+    distanceUnits: VerticalCoordinateDistanceEnum
+    type: VerticalCoordinateTypeEnum
+    resolution: Float
+    datum: DepthCoordinateDatumEnum
   }
 
 type Feature
   {
+    featureType: String
     description: String
     name: String
-    featureType: String
-    observedPropertyVariables: [String]
     id: String
+    observedPropertyVariables: [String]
   }
 
 type GeographicCoordinate
   {
-    datum: String
+    type: HorizontalCoordinateTypeEnum
+    datum: HorizontalCoordinateDatumEnum
     x: Float
     y: Float
-    type: String
     units: String
   }
 
 type HorizontalCoordinate
   {
-    datum: String
+    type: HorizontalCoordinateTypeEnum
+    datum: HorizontalCoordinateDatumEnum
     x: Float
     y: Float
-    type: String
   }
 
 type JSONSerializable
@@ -85,6 +85,24 @@ interface MeasurementResultMixin
     resultValue: Float
   }
 
+type MeasurementTimeseriesTVPObservation implements TimeMetadataMixin, MeasurementMetadataMixin, MeasurementTimeseriesTVPResultMixin
+  {
+    featureOfInterestType: FeatureTypeEnum
+    resultQuality: ResultQualityEnum
+    utcOffset: Integer
+    featureOfInterest: MonitoringFeature
+    observedProperty: ObservedProperty
+    phenomenonTime: String
+    id: String
+    type: ObservationDatumEnum
+    aggregationDuration: TimeFrequencyEnum
+    timeReferencePosition: TimeMetadataMixinReferenceEnum
+    statistic: String
+    observedPropertyVariable: String
+    unitOfMeasurement: String
+    resultPoints: [TimeValuePair]
+  }
+
 interface MeasurementTimeseriesTVPResultMixin
   {
     unitOfMeasurement: String
@@ -93,110 +111,112 @@ interface MeasurementTimeseriesTVPResultMixin
 
 type MonitoringFeature
   {
+    featureType: String
     description: String
     name: String
-    featureType: String
-    observedPropertyVariables: [String]
     id: String
+    observedPropertyVariables: [String]
     relatedSamplingFeatureComplex: [SamplingFeature]
-    coordinates: Coordinate
     shape: String
-    utcOffset: Integer
+    coordinates: Coordinate
     relatedParty: [Person]
     descriptionReference: String
+    utcOffset: Integer
   }
 
 type Observation
   {
-    featureOfInterest: MonitoringFeature
-    id: String
-    resultQuality: ResultQualityEnum
-    type: String
     featureOfInterestType: FeatureTypeEnum
-    phenomenonTime: String
-    observedProperty: ObservedProperty
+    resultQuality: ResultQualityEnum
     utcOffset: Integer
+    featureOfInterest: MonitoringFeature
+    observedProperty: ObservedProperty
+    phenomenonTime: String
+    id: String
+    type: ObservationDatumEnum
   }
 
 type ObservedProperty
   {
-    datasource: DataSource
     datasourceVariable: String
-    samplingMedium: String
     observedPropertyVariable: ObservedPropertyVariable
+    samplingMedium: String
     datasourceDescription: String
+    datasource: DataSource
   }
 
 type ObservedPropertyVariable
   {
-    units: String
-    fullName: String
     basin3dId: String
+    units: String
     categories: [String]
+    fullName: String
   }
 
 type Person
   {
     email: String
-    role: String
-    firstName: String
-    institution: String
     lastName: String
+    institution: String
+    firstName: String
+    role: String
   }
 
 type RelatedSamplingFeature
   {
+    role: String
     relatedSamplingFeatureType: String
     relatedSamplingFeature: SamplingFeature
-    role: String
   }
 
 type RepresentativeCoordinate
   {
     representativePoint: AbsoluteCoordinate
-    representativePointType: String
     verticalPosition: DepthCoordinate
+    representativePointType: RepresentativePointEnum
   }
 
 type SamplingFeature
   {
+    featureType: String
     description: String
     name: String
-    featureType: String
-    observedPropertyVariables: [String]
     id: String
+    observedPropertyVariables: [String]
     relatedSamplingFeatureComplex: [SamplingFeature]
   }
 
 type SpatialSamplingFeature
   {
+    featureType: String
     description: String
     name: String
-    featureType: String
-    observedPropertyVariables: [String]
     id: String
+    observedPropertyVariables: [String]
     relatedSamplingFeatureComplex: [SamplingFeature]
-    coordinates: Coordinate
     shape: String
+    coordinates: Coordinate
   }
 
 interface TimeMetadataMixin
   {
-    aggregationDuration: String
-    timeReferencePosition: String
+    aggregationDuration: TimeFrequencyEnum
+    timeReferencePosition: TimeMetadataMixinReferenceEnum
   }
 
 type TimeValuePair
   {
+    timestamp: String
+    value: String
   }
 
 type VerticalCoordinate
   {
-    distanceUnits: String
-    datum: String
-    type: String
-    resolution: Float
-    encodingMethod: String
+    encodingMethod: VerticalCoordinateEncodingEnum
     value: Float
+    distanceUnits: VerticalCoordinateDistanceEnum
+    type: VerticalCoordinateTypeEnum
+    datum: String
+    resolution: Float
   }
 

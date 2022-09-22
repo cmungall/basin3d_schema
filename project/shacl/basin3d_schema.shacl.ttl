@@ -1,5 +1,6 @@
 @prefix basin3d_schema: <https://w3id.org/cmungall/basin3d_schema/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -14,37 +15,20 @@ basin3d_schema:Feature a sh:NodeShape ;
     sh:description "A general feature upon which an observation can be made. Loosely after GF_Feature (ISO)." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path basin3d_schema:description ],
-        [ sh:order 3 ;
-            sh:path basin3d_schema:observed_property_variables ],
-        [ sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path basin3d_schema:feature_type ],
-        [ sh:maxCount 1 ;
-            sh:order 4 ;
+            sh:order 3 ;
             sh:path basin3d_schema:id ],
         [ sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path basin3d_schema:name ] ;
-    sh:targetClass basin3d_schema:Feature .
-
-basin3d_schema:HorizontalCoordinate a sh:NodeShape ;
-    sh:closed true ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path basin3d_schema:datum ],
-        [ sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path basin3d_schema:type ],
-        [ sh:maxCount 1 ;
             sh:order 2 ;
-            sh:path basin3d_schema:y ],
+            sh:path basin3d_schema:name ],
+        [ sh:order 4 ;
+            sh:path basin3d_schema:observed_property_variables ],
+        [ sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path basin3d_schema:feature_type ],
         [ sh:maxCount 1 ;
             sh:order 1 ;
-            sh:path basin3d_schema:x ] ;
-    sh:targetClass basin3d_schema:HorizontalCoordinate .
+            sh:path basin3d_schema:description ] ;
+    sh:targetClass basin3d_schema:Feature .
 
 basin3d_schema:JSONSerializable a sh:NodeShape ;
     sh:closed true ;
@@ -57,13 +41,11 @@ basin3d_schema:MeasurementMetadataMixin a sh:NodeShape ;
     sh:description "Metadata attributes for Observations type Measurement" ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path basin3d_schema:statistic ],
-        [ sh:class basin3d_schema:ObservedPropertyVariable ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:BlankNode ;
             sh:order 1 ;
-            sh:path basin3d_schema:observed_property_variable ] ;
+            sh:path basin3d_schema:observed_property_variable ],
+        [ sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path basin3d_schema:statistic ] ;
     sh:targetClass basin3d_schema:MeasurementMetadataMixin .
 
 basin3d_schema:MeasurementResultMixin a sh:NodeShape ;
@@ -77,6 +59,64 @@ basin3d_schema:MeasurementResultMixin a sh:NodeShape ;
             sh:order 0 ;
             sh:path basin3d_schema:unit_of_measurement ] ;
     sh:targetClass basin3d_schema:MeasurementResultMixin .
+
+basin3d_schema:MeasurementTimeseriesTVPObservation a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Series of measurement (numerical) observations in TVP format grouped by time (i.e., a timeseries).Anything specified at the group level automatically applies to the individual observation." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class basin3d_schema:ObservedProperty ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 10 ;
+            sh:path basin3d_schema:observed_property ],
+        [ sh:in ( "CHECKED" "UNCHECKED" "PARTIALLY_CHECKED" ) ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path basin3d_schema:result_quality ],
+        [ sh:class basin3d_schema:MonitoringFeature ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 9 ;
+            sh:path basin3d_schema:feature_of_interest ],
+        [ sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path basin3d_schema:utc_offset ],
+        [ sh:in ( <http://purl.obolibrary.org/obo/UO_0000036> <http://purl.obolibrary.org/obo/UO_0000035> <http://purl.obolibrary.org/obo/UO_0000033> <http://purl.obolibrary.org/obo/UO_0000032> <http://purl.obolibrary.org/obo/UO_0000031> <http://purl.obolibrary.org/obo/UO_0000010> ) ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path basin3d_schema:aggregation_duration ],
+        [ sh:in ( "MEASUREMENT_TVP_TIMESERIES" "MEASUREMENT" ) ;
+            sh:maxCount 1 ;
+            sh:order 13 ;
+            sh:path basin3d_schema:type ],
+        [ sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path basin3d_schema:unit_of_measurement ],
+        [ sh:maxCount 1 ;
+            sh:order 12 ;
+            sh:path basin3d_schema:id ],
+        [ sh:class basin3d_schema:TimeValuePair ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 5 ;
+            sh:path basin3d_schema:result_points ],
+        [ sh:maxCount 1 ;
+            sh:order 11 ;
+            sh:path basin3d_schema:phenomenon_time ],
+        [ sh:in ( "START" "MIDDLE" "END" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path basin3d_schema:time_reference_position ],
+        [ sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path basin3d_schema:statistic ],
+        [ sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path basin3d_schema:observed_property_variable ],
+        [ sh:in ( "REGION" "SUBREGION" <http://purl.obolibrary.org/obo/ENVO_00000291> "SUBBASIN" <http://purl.obolibrary.org/obo/ENVO_00000292> "SUBWATERSHED" "SITE" "PLOT" "HORIZONTAL_PATH" "VERTICAL_PATH" "POINT" ) ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path basin3d_schema:feature_of_interest_type ] ;
+    sh:targetClass basin3d_schema:MeasurementTimeseriesTVPObservation .
 
 basin3d_schema:MeasurementTimeseriesTVPResultMixin a sh:NodeShape ;
     sh:closed true ;
@@ -95,145 +135,174 @@ basin3d_schema:Observation a sh:NodeShape ;
     sh:closed true ;
     sh:description "OGC OM_Observation feature type. This is a parent class to which Mixinsshould be added to create observation types with metadata and result." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path basin3d_schema:id ],
-        [ sh:class basin3d_schema:MonitoringFeature ;
+    sh:property [ sh:in ( "REGION" "SUBREGION" <http://purl.obolibrary.org/obo/ENVO_00000291> "SUBBASIN" <http://purl.obolibrary.org/obo/ENVO_00000292> "SUBWATERSHED" "SITE" "PLOT" "HORIZONTAL_PATH" "VERTICAL_PATH" "POINT" ) ;
             sh:maxCount 1 ;
-            sh:nodeKind sh:BlankNode ;
             sh:order 0 ;
-            sh:path basin3d_schema:feature_of_interest ],
-        [ sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path basin3d_schema:type ],
-        [ sh:in ( "REGION" "SUBREGION" <http://purl.obolibrary.org/obo/ENVO_00000291> "SUBBASIN" <http://purl.obolibrary.org/obo/ENVO_00000292> "SUBWATERSHED" "SITE" "PLOT" "HORIZONTAL_PATH" "VERTICAL_PATH" "POINT" ) ;
-            sh:maxCount 1 ;
-            sh:order 4 ;
             sh:path basin3d_schema:feature_of_interest_type ],
-        [ sh:class basin3d_schema:ObservedProperty ;
+        [ sh:in ( "MEASUREMENT_TVP_TIMESERIES" "MEASUREMENT" ) ;
             sh:maxCount 1 ;
-            sh:nodeKind sh:BlankNode ;
+            sh:order 7 ;
+            sh:path basin3d_schema:type ],
+        [ sh:maxCount 1 ;
             sh:order 6 ;
-            sh:path basin3d_schema:observed_property ],
-        [ sh:in ( "CHECKED" "UNCHECKED" "PARTIALLY_CHECKED" ) ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path basin3d_schema:result_quality ],
+            sh:path basin3d_schema:id ],
         [ sh:maxCount 1 ;
             sh:order 5 ;
             sh:path basin3d_schema:phenomenon_time ],
+        [ sh:class basin3d_schema:MonitoringFeature ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 3 ;
+            sh:path basin3d_schema:feature_of_interest ],
+        [ sh:in ( "CHECKED" "UNCHECKED" "PARTIALLY_CHECKED" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path basin3d_schema:result_quality ],
         [ sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path basin3d_schema:utc_offset ] ;
+            sh:order 2 ;
+            sh:path basin3d_schema:utc_offset ],
+        [ sh:class basin3d_schema:ObservedProperty ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 4 ;
+            sh:path basin3d_schema:observed_property ] ;
     sh:targetClass basin3d_schema:Observation .
 
 basin3d_schema:RelatedSamplingFeature a sh:NodeShape ;
     sh:closed true ;
     sh:description "Class that represents a related sampling feature and its role relative tothe sampling feature to which it is related. Spatial hierarchies of featuresare built by specifying related sampling features.Data model from OGC Observations and Measurements." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path basin3d_schema:role ],
-        [ sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path basin3d_schema:related_sampling_feature_type ],
-        [ sh:class basin3d_schema:SamplingFeature ;
+    sh:property [ sh:class basin3d_schema:SamplingFeature ;
             sh:maxCount 1 ;
             sh:nodeKind sh:BlankNode ;
+            sh:order 2 ;
+            sh:path basin3d_schema:related_sampling_feature ],
+        [ sh:maxCount 1 ;
             sh:order 1 ;
-            sh:path basin3d_schema:related_sampling_feature ] ;
+            sh:path basin3d_schema:related_sampling_feature_type ],
+        [ sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path basin3d_schema:role ] ;
     sh:targetClass basin3d_schema:RelatedSamplingFeature .
 
 basin3d_schema:SpatialSamplingFeature a sh:NodeShape ;
     sh:closed true ;
     sh:description "A spatially-defined feature where sampling is conducted. OGC Observation & Measurements SF_SpatialSamplingFeature." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class basin3d_schema:Coordinate ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:BlankNode ;
+    sh:property [ sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path basin3d_schema:feature_type ],
+        [ sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path basin3d_schema:id ],
+        [ sh:maxCount 1 ;
             sh:order 0 ;
-            sh:path basin3d_schema:coordinates ],
+            sh:path basin3d_schema:shape ],
         [ sh:maxCount 1 ;
             sh:order 5 ;
-            sh:path basin3d_schema:feature_type ],
+            sh:path basin3d_schema:name ],
+        [ sh:class <sorep:Coordinate> ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 1 ;
+            sh:path basin3d_schema:coordinates ],
+        [ sh:order 7 ;
+            sh:path basin3d_schema:observed_property_variables ],
+        [ sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path basin3d_schema:description ],
         [ sh:class basin3d_schema:SamplingFeature ;
             sh:nodeKind sh:BlankNode ;
             sh:order 2 ;
-            sh:path basin3d_schema:related_sampling_feature_complex ],
-        [ sh:order 6 ;
-            sh:path basin3d_schema:observed_property_variables ],
-        [ sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path basin3d_schema:shape ],
-        [ sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path basin3d_schema:name ],
-        [ sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path basin3d_schema:id ],
-        [ sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path basin3d_schema:description ] ;
+            sh:path basin3d_schema:related_sampling_feature_complex ] ;
     sh:targetClass basin3d_schema:SpatialSamplingFeature .
 
 basin3d_schema:TimeMetadataMixin a sh:NodeShape ;
     sh:closed true ;
     sh:description "Metadata attributes for Observations with a time" ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:maxCount 1 ;
+    sh:property [ sh:in ( <http://purl.obolibrary.org/obo/UO_0000036> <http://purl.obolibrary.org/obo/UO_0000035> <http://purl.obolibrary.org/obo/UO_0000033> <http://purl.obolibrary.org/obo/UO_0000032> <http://purl.obolibrary.org/obo/UO_0000031> <http://purl.obolibrary.org/obo/UO_0000010> ) ;
+            sh:maxCount 1 ;
             sh:order 0 ;
             sh:path basin3d_schema:aggregation_duration ],
-        [ sh:maxCount 1 ;
+        [ sh:in ( "START" "MIDDLE" "END" ) ;
+            sh:maxCount 1 ;
             sh:order 1 ;
             sh:path basin3d_schema:time_reference_position ] ;
     sh:targetClass basin3d_schema:TimeMetadataMixin .
 
-basin3d_schema:VerticalCoordinate a sh:NodeShape ;
+<sorepscd:HorizontalCoordinate> a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:in ( "GEOGRAPHIC" "PLANAR_GRID" "PLANAR_LOCAL" "PLANAR_MAP_PROJECTION" "LOCAL" ) ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path basin3d_schema:type ],
+        [ sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path basin3d_schema:x ],
+        [ sh:in ( "WGS84" "NAD83" "NAD27" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path basin3d_schema:datum ],
+        [ sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path basin3d_schema:y ] ;
+    sh:targetClass <sorepscd:HorizontalCoordinate> .
+
+<sorepscd:VerticalCoordinate> a sh:NodeShape ;
     sh:closed true ;
     sh:description "The vertical position of the feature (altitudes or depths).The reference frame or system is specified." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path basin3d_schema:distance_units ],
-        [ sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path basin3d_schema:encoding_method ],
-        [ sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path basin3d_schema:value ],
+        [ sh:in ( "meters" "feet" ) ;
+            sh:maxCount 1 ;
             sh:order 2 ;
+            sh:path basin3d_schema:distance_units ],
+        [ sh:in ( "ALTITUDE" "DEPTH" ) ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
             sh:path basin3d_schema:type ],
         [ sh:maxCount 1 ;
-            sh:order 3 ;
+            sh:order 5 ;
             sh:path basin3d_schema:resolution ],
         [ sh:maxCount 1 ;
-            sh:order 1 ;
+            sh:order 4 ;
             sh:path basin3d_schema:datum ],
-        [ sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path basin3d_schema:value ] ;
-    sh:targetClass basin3d_schema:VerticalCoordinate .
+        [ sh:in ( "EXPLICIT" "IMPLICIT" "ATTRIBUTE" ) ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path basin3d_schema:encoding_method ] ;
+    sh:targetClass <sorepscd:VerticalCoordinate> .
 
 basin3d_schema:AltitudeCoordinate a sh:NodeShape ;
     sh:closed true ;
     sh:description "An altitudinal vertical position (i.e., distance from sea level).The reference frame or system is specified. The term'altitude' is used instead of the common term 'elevation' to conform to the terminologyin Federal Information Processing Standards 70-1 and 173." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path basin3d_schema:encoding_method ],
-        [ sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path basin3d_schema:resolution ],
-        [ sh:maxCount 1 ;
             sh:order 2 ;
-            sh:path basin3d_schema:type ],
-        [ sh:maxCount 1 ;
-            sh:order 1 ;
+            sh:path basin3d_schema:value ],
+        [ sh:in ( "meters" "feet" ) ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
             sh:path basin3d_schema:distance_units ],
+        [ sh:in ( "ALTITUDE" "DEPTH" ) ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path basin3d_schema:type ],
+        [ sh:in ( "EXPLICIT" "IMPLICIT" "ATTRIBUTE" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path basin3d_schema:encoding_method ],
+        [ sh:in ( "NGVD29" "NAVD88" ) ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path basin3d_schema:datum ],
         [ sh:maxCount 1 ;
             sh:order 5 ;
-            sh:path basin3d_schema:value ],
-        [ sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path basin3d_schema:datum ] ;
+            sh:path basin3d_schema:resolution ] ;
     sh:targetClass basin3d_schema:AltitudeCoordinate .
 
 basin3d_schema:DataSource a sh:NodeShape ;
@@ -241,19 +310,19 @@ basin3d_schema:DataSource a sh:NodeShape ;
     sh:description "Data Source definitionAttributes:- *id:* string (inherited)- *name:* string- *id_prefix:* string, prefix that is added to all data source ids- *location*- *credentials:*" ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path basin3d_schema:id_prefix ],
-        [ sh:maxCount 1 ;
             sh:order 1 ;
-            sh:path basin3d_schema:id ],
-        [ sh:maxCount 1 ;
-            sh:order 2 ;
             sh:path basin3d_schema:credentials ],
         [ sh:maxCount 1 ;
             sh:order 4 ;
             sh:path basin3d_schema:location ],
         [ sh:maxCount 1 ;
             sh:order 0 ;
+            sh:path basin3d_schema:id_prefix ],
+        [ sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path basin3d_schema:id ],
+        [ sh:maxCount 1 ;
+            sh:order 2 ;
             sh:path basin3d_schema:name ] ;
     sh:targetClass basin3d_schema:DataSource .
 
@@ -261,24 +330,28 @@ basin3d_schema:DepthCoordinate a sh:NodeShape ;
     sh:closed true ;
     sh:description "A depth vertical position (i.e., the height or depth from the specified reference position)The reference frame or system is specified." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path basin3d_schema:resolution ],
-        [ sh:maxCount 1 ;
-            sh:order 1 ;
+    sh:property [ sh:in ( "EXPLICIT" "IMPLICIT" "ATTRIBUTE" ) ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path basin3d_schema:encoding_method ],
+        [ sh:in ( "LS" "MSL" ) ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
             sh:path basin3d_schema:datum ],
         [ sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path basin3d_schema:encoding_method ],
-        [ sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path basin3d_schema:value ],
+        [ sh:in ( "meters" "feet" ) ;
+            sh:maxCount 1 ;
             sh:order 2 ;
+            sh:path basin3d_schema:distance_units ],
+        [ sh:in ( "ALTITUDE" "DEPTH" ) ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
             sh:path basin3d_schema:type ],
         [ sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path basin3d_schema:distance_units ],
-        [ sh:maxCount 1 ;
             sh:order 5 ;
-            sh:path basin3d_schema:value ] ;
+            sh:path basin3d_schema:resolution ] ;
     sh:targetClass basin3d_schema:DepthCoordinate .
 
 basin3d_schema:GeographicCoordinate a sh:NodeShape ;
@@ -286,107 +359,59 @@ basin3d_schema:GeographicCoordinate a sh:NodeShape ;
     sh:description "The latitude and longitude which define the position of a point onthe Earth's surface with respect to a reference spheroid.(https://www.fgdc.gov/csdgmgraphical/spref.htm)" ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path basin3d_schema:units ],
-        [ sh:maxCount 1 ;
-            sh:order 2 ;
+            sh:order 3 ;
             sh:path basin3d_schema:x ],
         [ sh:maxCount 1 ;
             sh:order 4 ;
-            sh:path basin3d_schema:type ],
+            sh:path basin3d_schema:y ],
         [ sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path basin3d_schema:units ],
+        [ sh:in ( "GEOGRAPHIC" "PLANAR_GRID" "PLANAR_LOCAL" "PLANAR_MAP_PROJECTION" "LOCAL" ) ;
+            sh:maxCount 1 ;
             sh:order 1 ;
-            sh:path basin3d_schema:datum ],
-        [ sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path basin3d_schema:y ] ;
+            sh:path basin3d_schema:type ],
+        [ sh:in ( "WGS84" "NAD83" "NAD27" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path basin3d_schema:datum ] ;
     sh:targetClass basin3d_schema:GeographicCoordinate .
 
-basin3d_schema:MonitoringFeature a sh:NodeShape ;
+basin3d_schema:ObservedPropertyVariable a sh:NodeShape ;
     sh:closed true ;
-    sh:description "A feature upon which monitoring is made. OGC Timeseries Profile OM_MonitoringFeature." ;
+    sh:description "Defining the properties being observed (measured). See http://vocabulary.odm2.org/variablename/ for controlled vocabularyAttributes:- *basin3d_id:* string,- *full_name:* string,- *categories:* List of strings (in order of priority).- *units:* stringSee http://vocabulary.odm2.org/variabletype/ for options, although I think we should have our own list (theirs is a bit funky)." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path basin3d_schema:description_reference ],
+    sh:property [ sh:order 2 ;
+            sh:path basin3d_schema:categories ],
+        [ sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path basin3d_schema:full_name ],
         [ sh:maxCount 1 ;
             sh:order 0 ;
-            sh:path basin3d_schema:utc_offset ],
+            sh:path basin3d_schema:basin3d_id ],
         [ sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path basin3d_schema:feature_type ],
-        [ sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path basin3d_schema:description ],
-        [ sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path basin3d_schema:name ],
-        [ sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path basin3d_schema:shape ],
-        [ sh:class basin3d_schema:Coordinate ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:BlankNode ;
-            sh:order 3 ;
-            sh:path basin3d_schema:coordinates ],
-        [ sh:order 9 ;
-            sh:path basin3d_schema:observed_property_variables ],
-        [ sh:class basin3d_schema:SamplingFeature ;
-            sh:nodeKind sh:BlankNode ;
-            sh:order 5 ;
-            sh:path basin3d_schema:related_sampling_feature_complex ],
-        [ sh:class basin3d_schema:Person ;
-            sh:nodeKind sh:BlankNode ;
             sh:order 1 ;
-            sh:path basin3d_schema:related_party ],
-        [ sh:maxCount 1 ;
-            sh:order 10 ;
-            sh:path basin3d_schema:id ] ;
-    sh:targetClass basin3d_schema:MonitoringFeature .
-
-basin3d_schema:ObservedProperty a sh:NodeShape ;
-    sh:closed true ;
-    sh:description "Defining the attributes for a single/multiple Observed PropertiesAttributes:- *datasource_variable:* id, e.g., Cs 137 air dose rate car survey campaigns- *observed_property_variable_id:* string, e.g., Cs137MVID- *sampling_medium:* enum (WATER, GAS, SOLID PHASE, OTHER, NOT APPLICABLE)- *datasource:*- *datasource_description:*" ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path basin3d_schema:datasource_variable ],
-        [ sh:class basin3d_schema:DataSource ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:BlankNode ;
-            sh:order 0 ;
-            sh:path basin3d_schema:datasource ],
-        [ sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path basin3d_schema:sampling_medium ],
-        [ sh:class basin3d_schema:ObservedPropertyVariable ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:BlankNode ;
-            sh:order 3 ;
-            sh:path basin3d_schema:observed_property_variable ],
-        [ sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path basin3d_schema:datasource_description ] ;
-    sh:targetClass basin3d_schema:ObservedProperty .
+            sh:path basin3d_schema:units ] ;
+    sh:targetClass basin3d_schema:ObservedPropertyVariable .
 
 basin3d_schema:Person a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:maxCount 1 ;
             sh:order 2 ;
-            sh:path basin3d_schema:first_name ],
+            sh:path basin3d_schema:institution ],
         [ sh:maxCount 1 ;
             sh:order 0 ;
-            sh:path basin3d_schema:email ],
-        [ sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path basin3d_schema:role ],
-        [ sh:maxCount 1 ;
-            sh:order 4 ;
-            sh:path basin3d_schema:last_name ],
+            sh:path schema:email ],
         [ sh:maxCount 1 ;
             sh:order 3 ;
-            sh:path basin3d_schema:institution ] ;
+            sh:path basin3d_schema:first_name ],
+        [ sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path basin3d_schema:role ],
+        [ sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path basin3d_schema:last_name ] ;
     sh:targetClass basin3d_schema:Person .
 
 basin3d_schema:RepresentativeCoordinate a sh:NodeShape ;
@@ -396,23 +421,18 @@ basin3d_schema:RepresentativeCoordinate a sh:NodeShape ;
     sh:property [ sh:class basin3d_schema:DepthCoordinate ;
             sh:maxCount 1 ;
             sh:nodeKind sh:BlankNode ;
-            sh:order 2 ;
-            sh:path basin3d_schema:vertical_position ],
-        [ sh:maxCount 1 ;
             sh:order 1 ;
-            sh:path basin3d_schema:representative_point_type ],
+            sh:path basin3d_schema:vertical_position ],
         [ sh:class basin3d_schema:AbsoluteCoordinate ;
             sh:maxCount 1 ;
             sh:nodeKind sh:BlankNode ;
             sh:order 0 ;
-            sh:path basin3d_schema:representative_point ] ;
+            sh:path basin3d_schema:representative_point ],
+        [ sh:in ( "CENTER_LOCAL_SURFACE" "UPPER_LEFT_CORNER" "UPPER_RIGHT_CORNER" "LOWER_LEFT_CORNER" "LOWER_RIGHT_CORNER" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path basin3d_schema:representative_point_type ] ;
     sh:targetClass basin3d_schema:RepresentativeCoordinate .
-
-basin3d_schema:TimeValuePair a sh:NodeShape ;
-    sh:closed true ;
-    sh:description "Tuple that represents a time value pair.  This will handle timestamp conversion`(timestamp, value)`" ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:targetClass basin3d_schema:TimeValuePair .
 
 basin3d_schema:AbsoluteCoordinate a sh:NodeShape ;
     sh:closed true ;
@@ -428,60 +448,122 @@ basin3d_schema:AbsoluteCoordinate a sh:NodeShape ;
             sh:path basin3d_schema:horizontal_position ] ;
     sh:targetClass basin3d_schema:AbsoluteCoordinate .
 
-basin3d_schema:Coordinate a sh:NodeShape ;
+basin3d_schema:MonitoringFeature a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A feature upon which monitoring is made. OGC Timeseries Profile OM_MonitoringFeature." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path basin3d_schema:feature_type ],
+        [ sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path basin3d_schema:description ],
+        [ sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path basin3d_schema:utc_offset ],
+        [ sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path basin3d_schema:id ],
+        [ sh:class basin3d_schema:SamplingFeature ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 5 ;
+            sh:path basin3d_schema:related_sampling_feature_complex ],
+        [ sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path basin3d_schema:name ],
+        [ sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path basin3d_schema:shape ],
+        [ sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path basin3d_schema:description_reference ],
+        [ sh:class <sorep:Coordinate> ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 4 ;
+            sh:path basin3d_schema:coordinates ],
+        [ sh:order 10 ;
+            sh:path basin3d_schema:observed_property_variables ],
+        [ sh:class basin3d_schema:Person ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path basin3d_schema:related_party ] ;
+    sh:targetClass basin3d_schema:MonitoringFeature .
+
+basin3d_schema:ObservedProperty a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Defining the attributes for a single/multiple Observed PropertiesAttributes:- *datasource_variable:* id, e.g., Cs 137 air dose rate car survey campaigns- *observed_property_variable_id:* string, e.g., Cs137MVID- *sampling_medium:* enum (WATER, GAS, SOLID PHASE, OTHER, NOT APPLICABLE)- *datasource:*- *datasource_description:*" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path basin3d_schema:datasource_description ],
+        [ sh:class basin3d_schema:DataSource ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 4 ;
+            sh:path basin3d_schema:datasource ],
+        [ sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path basin3d_schema:datasource_variable ],
+        [ sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path basin3d_schema:sampling_medium ],
+        [ sh:class basin3d_schema:ObservedPropertyVariable ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 1 ;
+            sh:path basin3d_schema:observed_property_variable ] ;
+    sh:targetClass basin3d_schema:ObservedProperty .
+
+basin3d_schema:TimeValuePair a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Tuple that represents a time value pair.  This will handle timestamp conversion`(timestamp, value)`" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path basin3d_schema:value ],
+        [ sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path basin3d_schema:timestamp ] ;
+    sh:targetClass basin3d_schema:TimeValuePair .
+
+<sorep:Coordinate> a sh:NodeShape ;
     sh:closed true ;
     sh:description "Top level coordinate class that holds :class:`AbsoluteCoordinate` or :class:`RepresentativeCoordinate`" ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:class basin3d_schema:AbsoluteCoordinate ;
             sh:maxCount 1 ;
             sh:nodeKind sh:BlankNode ;
-            sh:order 0 ;
+            sh:order 1 ;
             sh:path basin3d_schema:absolute ],
         [ sh:class basin3d_schema:RepresentativeCoordinate ;
             sh:maxCount 1 ;
             sh:nodeKind sh:BlankNode ;
-            sh:order 1 ;
-            sh:path basin3d_schema:representative ] ;
-    sh:targetClass basin3d_schema:Coordinate .
-
-basin3d_schema:ObservedPropertyVariable a sh:NodeShape ;
-    sh:closed true ;
-    sh:description "Defining the properties being observed (measured). See http://vocabulary.odm2.org/variablename/ for controlled vocabularyAttributes:- *basin3d_id:* string,- *full_name:* string,- *categories:* List of strings (in order of priority).- *units:* stringSee http://vocabulary.odm2.org/variabletype/ for options, although I think we should have our own list (theirs is a bit funky)." ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:maxCount 1 ;
             sh:order 0 ;
-            sh:path basin3d_schema:units ],
-        [ sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path basin3d_schema:full_name ],
-        [ sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path basin3d_schema:basin3d_id ],
-        [ sh:order 3 ;
-            sh:path basin3d_schema:categories ] ;
-    sh:targetClass basin3d_schema:ObservedPropertyVariable .
+            sh:path basin3d_schema:representative ] ;
+    sh:targetClass <sorep:Coordinate> .
 
 basin3d_schema:SamplingFeature a sh:NodeShape ;
     sh:closed true ;
     sh:description "A feature where sampling is conducted. OGC Observation & Measurements SF_SamplingFeature." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class basin3d_schema:SamplingFeature ;
+    sh:property [ sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path basin3d_schema:feature_type ],
+        [ sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path basin3d_schema:id ],
+        [ sh:class basin3d_schema:SamplingFeature ;
             sh:nodeKind sh:BlankNode ;
             sh:order 0 ;
             sh:path basin3d_schema:related_sampling_feature_complex ],
         [ sh:maxCount 1 ;
-            sh:order 1 ;
+            sh:order 2 ;
             sh:path basin3d_schema:description ],
-        [ sh:order 4 ;
+        [ sh:order 5 ;
             sh:path basin3d_schema:observed_property_variables ],
         [ sh:maxCount 1 ;
             sh:order 3 ;
-            sh:path basin3d_schema:feature_type ],
-        [ sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path basin3d_schema:id ],
-        [ sh:maxCount 1 ;
-            sh:order 2 ;
             sh:path basin3d_schema:name ] ;
     sh:targetClass basin3d_schema:SamplingFeature .
 

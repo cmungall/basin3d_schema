@@ -26,19 +26,19 @@
          "description": "An altitudinal vertical position (i.e., distance from sea level).The reference frame or system is specified. The term'altitude' is used instead of the common term 'elevation' to conform to the terminologyin Federal Information Processing Standards 70-1 and 173.",
          "properties": {
             "datum": {
-               "type": "string"
+               "$ref": "#/$defs/AltitudeCoordinateDatumEnum"
             },
             "distance_units": {
-               "type": "string"
+               "$ref": "#/$defs/VerticalCoordinateDistanceEnum"
             },
             "encoding_method": {
-               "type": "string"
+               "$ref": "#/$defs/VerticalCoordinateEncodingEnum"
             },
             "resolution": {
                "type": "number"
             },
             "type": {
-               "type": "string"
+               "$ref": "#/$defs/VerticalCoordinateTypeEnum"
             },
             "value": {
                "type": "number"
@@ -47,6 +47,15 @@
          "required": [],
          "title": "AltitudeCoordinate",
          "type": "object"
+      },
+      "AltitudeCoordinateDatumEnum": {
+         "description": "",
+         "enum": [
+            "NGVD29",
+            "NAVD88"
+         ],
+         "title": "AltitudeCoordinateDatumEnum",
+         "type": "string"
       },
       "Base": {
          "additionalProperties": false,
@@ -70,6 +79,22 @@
          "required": [],
          "title": "Coordinate",
          "type": "object"
+      },
+      "CoordinateUnitEnum": {
+         "description": "",
+         "enum": [
+            "ScalarDegreeUnit",
+            "CompoundDegreeUnit",
+            "UNITS_DEC_DEGREES",
+            "UNITS_DEC_MINUTES",
+            "UNITS_DEC_SECONDS",
+            "UNITS_DEGREES_DEC_MINUTES",
+            "UNITS_DEGREES_MIN_DEC_SECS",
+            "UNITS_RADIANS",
+            "UNITS_GRADS"
+         ],
+         "title": "CoordinateUnitEnum",
+         "type": "string"
       },
       "DataSource": {
          "additionalProperties": false,
@@ -100,19 +125,19 @@
          "description": "A depth vertical position (i.e., the height or depth from the specified reference position)The reference frame or system is specified.",
          "properties": {
             "datum": {
-               "type": "string"
+               "$ref": "#/$defs/DepthCoordinateDatumEnum"
             },
             "distance_units": {
-               "type": "string"
+               "$ref": "#/$defs/VerticalCoordinateDistanceEnum"
             },
             "encoding_method": {
-               "type": "string"
+               "$ref": "#/$defs/VerticalCoordinateEncodingEnum"
             },
             "resolution": {
                "type": "number"
             },
             "type": {
-               "type": "string"
+               "$ref": "#/$defs/VerticalCoordinateTypeEnum"
             },
             "value": {
                "type": "number"
@@ -121,6 +146,15 @@
          "required": [],
          "title": "DepthCoordinate",
          "type": "object"
+      },
+      "DepthCoordinateDatumEnum": {
+         "description": "",
+         "enum": [
+            "LS",
+            "MSL"
+         ],
+         "title": "DepthCoordinateDatumEnum",
+         "type": "string"
       },
       "Feature": {
          "additionalProperties": false,
@@ -150,7 +184,7 @@
          "type": "object"
       },
       "FeatureTypeEnum": {
-         "description": "",
+         "description": "Enumeration for Feature Types",
          "enum": [
             "REGION",
             "SUBREGION",
@@ -172,10 +206,10 @@
          "description": "The latitude and longitude which define the position of a point onthe Earth's surface with respect to a reference spheroid.(https://www.fgdc.gov/csdgmgraphical/spref.htm)",
          "properties": {
             "datum": {
-               "type": "string"
+               "$ref": "#/$defs/HorizontalCoordinateDatumEnum"
             },
             "type": {
-               "type": "string"
+               "$ref": "#/$defs/HorizontalCoordinateTypeEnum"
             },
             "units": {
                "type": "string"
@@ -196,10 +230,10 @@
          "description": "",
          "properties": {
             "datum": {
-               "type": "string"
+               "$ref": "#/$defs/HorizontalCoordinateDatumEnum"
             },
             "type": {
-               "type": "string"
+               "$ref": "#/$defs/HorizontalCoordinateTypeEnum"
             },
             "x": {
                "type": "number"
@@ -212,12 +246,88 @@
          "title": "HorizontalCoordinate",
          "type": "object"
       },
+      "HorizontalCoordinateDatumEnum": {
+         "description": "",
+         "enum": [
+            "WGS84",
+            "NAD83",
+            "NAD27"
+         ],
+         "title": "HorizontalCoordinateDatumEnum",
+         "type": "string"
+      },
+      "HorizontalCoordinateTypeEnum": {
+         "description": "",
+         "enum": [
+            "GEOGRAPHIC",
+            "PLANAR_GRID",
+            "PLANAR_LOCAL",
+            "PLANAR_MAP_PROJECTION",
+            "LOCAL"
+         ],
+         "title": "HorizontalCoordinateTypeEnum",
+         "type": "string"
+      },
       "JSONSerializable": {
          "additionalProperties": false,
          "description": "Make a Data class serializable to json",
          "properties": {},
          "required": [],
          "title": "JSONSerializable",
+         "type": "object"
+      },
+      "MeasurementTimeseriesTVPObservation": {
+         "additionalProperties": false,
+         "description": "Series of measurement (numerical) observations in TVP format grouped by time (i.e., a timeseries).Anything specified at the group level automatically applies to the individual observation.",
+         "properties": {
+            "aggregation_duration": {
+               "$ref": "#/$defs/TimeFrequencyEnum"
+            },
+            "feature_of_interest": {
+               "$ref": "#/$defs/MonitoringFeature"
+            },
+            "feature_of_interest_type": {
+               "$ref": "#/$defs/FeatureTypeEnum"
+            },
+            "id": {
+               "type": "string"
+            },
+            "observed_property": {
+               "$ref": "#/$defs/ObservedProperty"
+            },
+            "observed_property_variable": {
+               "type": "string"
+            },
+            "phenomenon_time": {
+               "type": "string"
+            },
+            "result_points": {
+               "items": {
+                  "$ref": "#/$defs/TimeValuePair"
+               },
+               "type": "array"
+            },
+            "result_quality": {
+               "$ref": "#/$defs/ResultQualityEnum"
+            },
+            "statistic": {
+               "type": "string"
+            },
+            "time_reference_position": {
+               "$ref": "#/$defs/TimeMetadataMixinReferenceEnum"
+            },
+            "type": {
+               "$ref": "#/$defs/ObservationDatumEnum"
+            },
+            "unit_of_measurement": {
+               "type": "string"
+            },
+            "utc_offset": {
+               "type": "integer"
+            }
+         },
+         "required": [],
+         "title": "MeasurementTimeseriesTVPObservation",
          "type": "object"
       },
       "MonitoringFeature": {
@@ -294,7 +404,7 @@
                "$ref": "#/$defs/ResultQualityEnum"
             },
             "type": {
-               "type": "string"
+               "$ref": "#/$defs/ObservationDatumEnum"
             },
             "utc_offset": {
                "type": "integer"
@@ -303,6 +413,15 @@
          "required": [],
          "title": "Observation",
          "type": "object"
+      },
+      "ObservationDatumEnum": {
+         "description": "",
+         "enum": [
+            "MEASUREMENT_TVP_TIMESERIES",
+            "MEASUREMENT"
+         ],
+         "title": "ObservationDatumEnum",
+         "type": "string"
       },
       "ObservedProperty": {
          "additionalProperties": false,
@@ -402,7 +521,7 @@
                "$ref": "#/$defs/AbsoluteCoordinate"
             },
             "representative_point_type": {
-               "type": "string"
+               "$ref": "#/$defs/RepresentativePointEnum"
             },
             "vertical_position": {
                "$ref": "#/$defs/DepthCoordinate"
@@ -412,8 +531,20 @@
          "title": "RepresentativeCoordinate",
          "type": "object"
       },
-      "ResultQualityEnum": {
+      "RepresentativePointEnum": {
          "description": "",
+         "enum": [
+            "CENTER_LOCAL_SURFACE",
+            "UPPER_LEFT_CORNER",
+            "UPPER_RIGHT_CORNER",
+            "LOWER_LEFT_CORNER",
+            "LOWER_RIGHT_CORNER"
+         ],
+         "title": "RepresentativePointEnum",
+         "type": "string"
+      },
+      "ResultQualityEnum": {
+         "description": "Enumeration for Result Quality",
          "enum": [
             "CHECKED",
             "UNCHECKED",
@@ -519,6 +650,16 @@
          "title": "TimeFrequencyEnum",
          "type": "string"
       },
+      "TimeMetadataMixinReferenceEnum": {
+         "description": "",
+         "enum": [
+            "START",
+            "MIDDLE",
+            "END"
+         ],
+         "title": "TimeMetadataMixinReferenceEnum",
+         "type": "string"
+      },
       "TimeReferenceEnum": {
          "description": "",
          "enum": [
@@ -532,7 +673,14 @@
       "TimeValuePair": {
          "additionalProperties": false,
          "description": "Tuple that represents a time value pair.  This will handle timestamp conversion`(timestamp, value)`",
-         "properties": {},
+         "properties": {
+            "timestamp": {
+               "type": "string"
+            },
+            "value": {
+               "type": "string"
+            }
+         },
          "required": [],
          "title": "TimeValuePair",
          "type": "object"
@@ -545,16 +693,16 @@
                "type": "string"
             },
             "distance_units": {
-               "type": "string"
+               "$ref": "#/$defs/VerticalCoordinateDistanceEnum"
             },
             "encoding_method": {
-               "type": "string"
+               "$ref": "#/$defs/VerticalCoordinateEncodingEnum"
             },
             "resolution": {
                "type": "number"
             },
             "type": {
-               "type": "string"
+               "$ref": "#/$defs/VerticalCoordinateTypeEnum"
             },
             "value": {
                "type": "number"
@@ -563,6 +711,34 @@
          "required": [],
          "title": "VerticalCoordinate",
          "type": "object"
+      },
+      "VerticalCoordinateDistanceEnum": {
+         "description": "",
+         "enum": [
+            "meters",
+            "feet"
+         ],
+         "title": "VerticalCoordinateDistanceEnum",
+         "type": "string"
+      },
+      "VerticalCoordinateEncodingEnum": {
+         "description": "",
+         "enum": [
+            "EXPLICIT",
+            "IMPLICIT",
+            "ATTRIBUTE"
+         ],
+         "title": "VerticalCoordinateEncodingEnum",
+         "type": "string"
+      },
+      "VerticalCoordinateTypeEnum": {
+         "description": "",
+         "enum": [
+            "ALTITUDE",
+            "DEPTH"
+         ],
+         "title": "VerticalCoordinateTypeEnum",
+         "type": "string"
       }
    },
    "$id": "https://w3id.org/cmungall/basin3d_schema",

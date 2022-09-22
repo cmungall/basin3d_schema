@@ -4,5 +4,16 @@
    "biolink": "https://w3id.org/biolink/",
    "example": "https://example.org/",
    "linkml": "https://w3id.org/linkml/",
-   "schema": "http://schema.org/"
+   "schema": "http://schema.org/",
+   "sorep": "http://sweetontology.net/repr/",
+   "sorepscd": "http://sweetontology.net/reprSpaceCoordinate/",
+   "Coordinate": {
+      "@id": "sorep:Coordinate"
+   },
+   "HorizontalCoordinate": {
+      "@id": "sorepscd:HorizontalCoordinate"
+   },
+   "VerticalCoordinate": {
+      "@id": "sorepscd:VerticalCoordinate"
+   }
 }

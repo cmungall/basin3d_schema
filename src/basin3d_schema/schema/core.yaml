@@ -3,11 +3,13 @@ name: core
 prefixes:
   basin3d_schema: https://w3id.org/cmungall/basin3d_schema/
   linkml: https://w3id.org/linkml/
+  sorep: http://sweetontology.net/repr/
+  sorepscd: http://sweetontology.net/reprSpaceCoordinate/
+  schema: http://schema.org/
 default_prefix: basin3d_schema
 default_range: string
 imports:
   - linkml:types
-
   - vocabulary
 
 classes:
@@ -46,6 +48,10 @@ classes:
   TimeValuePair:
     description: "Tuple that represents a time value pair.  This will handle timestamp conversion`(timestamp, value)`"
     attributes:
+      timestamp:
+      value:
+    todos:
+      - LinkML does not dorectly represent tuples
 
   MeasurementResultMixin:
     description: "Result Mixin: Measurement"
@@ -81,6 +87,7 @@ classes:
     is_a: Base
     attributes:
       email:
+        slot_uri: schema:email
         range: string
       last_name:
         range: string
@@ -119,7 +126,7 @@ classes:
       id:
         range: string
       type:
-        range: string
+        range: ObservationDatumEnum
 
   ObservedProperty:
     is_a: JSONSerializable
@@ -141,9 +148,9 @@ classes:
     mixin: true
     attributes:
       aggregation_duration:
-        range: string
+        range: TimeFrequencyEnum
       time_reference_position:
-        range: string
+        range: TimeMetadataMixinReferenceEnum
 
   MeasurementTimeseriesTVPObservation:
     is_a: Observation
@@ -174,14 +181,18 @@ classes:
       vertical_position:
         range: DepthCoordinate
       representative_point_type:
-        range: string
+        range: RepresentativePointEnum
 
   DepthCoordinate:
     is_a: VerticalCoordinate
     description: "A depth vertical position (i.e., the height or depth from the specified reference position)The reference frame or system is specified."
     attributes:
+    slot_usage:
+      datum:
+        range: DepthCoordinateDatumEnum
 
   Coordinate:
+    class_uri: sorep:Coordinate
     is_a: Base
     description: "Top level coordinate class that holds :class:`AbsoluteCoordinate` or :class:`RepresentativeCoordinate`"
     attributes:
@@ -201,17 +212,18 @@ classes:
         multivalued: true
 
   VerticalCoordinate:
+    class_uri: sorepscd:VerticalCoordinate
     is_a: Base
     description: "The vertical position of the feature (altitudes or depths).The reference frame or system is specified."
     attributes:
       encoding_method:
-        range: string
+        range: VerticalCoordinateEncodingEnum
       value:
         range: float
       distance_units:
-        range: string
+        range: VerticalCoordinateDistanceEnum
       type:
-        range: string
+        range: VerticalCoordinateTypeEnum
       datum:
         range: string
       resolution:
@@ -222,7 +234,7 @@ classes:
     description: "An altitudinal vertical position (i.e., distance from sea level).The reference frame or system is specified. The term'altitude' is used instead of the common term 'elevation' to conform to the terminologyin Federal Information Processing Standards 70-1 and 173."
     attributes:
       datum:
-        range: string
+        range: AltitudeCoordinateDatumEnum
 
   MeasurementMetadataMixin:
     description: "Metadata attributes for Observations type Measurement"
@@ -252,6 +264,8 @@ classes:
   JSONSerializable:
     description: "Make a Data class serializable to json"
     attributes:
+    comments:
+      - this is translated directly from models.py, but this is not really a very LinkML-ish root class
 
   Base:
     is_a: JSONSerializable
@@ -274,13 +288,22 @@ classes:
         range: string
 
   HorizontalCoordinate:
+    class_uri: sorepscd:HorizontalCoordinate
     is_a: Base
     attributes:
       type:
-        range: string
+        range: HorizontalCoordinateTypeEnum
       datum:
-        range: string
+        range: HorizontalCoordinateDatumEnum
       x:
         range: float
+        aliases:
+          - longitude
+        comments:
+          - in models.py this is a float but tuples appear to be allowed
       y:
         range: float
+        aliases:
+          - latitude
+        comments:
+          - in models.py this is a float but tuples appear to be allowed
